@@ -1,1 +1,1 @@
-# Kdata_Advanced_Data_Analytics_Semi_Professional
+# "Advanced Data Analytics Semi-Professional (ADsP)" certificate by KData
