@@ -1,19 +1,181 @@
 ---
-title: "R Notebook"
+title: "Part 1: 데이터의 이해 (Understanding Data)"
 output: rmarkdown::github_document
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+# Table of Contents
+- **Chapter 1 - 데이터와 정보 (Data and Information)**
+  - 데이터의 정의와 특성
+  - 데이터의 유형
+  - 지식 경영
+  - 데이터와 정보의 관계
+    
+- **Chapter 2 - 데이터베이스 정의와 특징 (Database Definition and Characteristics)** 
+  - 용어의 연혁
+  - 데이터베이스 정의
+  - 데이터베이스의 특정
+  
+- **Chapter 3 - 데이터베이스 활용 (Database Application)**
+  - 기업 내부 데이터베이스
+  
+# Chapter 1 - 데이터와 정보 (Data and Information)
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+## 1. 데이터의 정의와 특성  
+#### 가. 데이터의 정의
 
-```{r}
-plot(cars)
-```
+- 데이터는 추론과 추정의 근거를 이루는 사실이다. (옥스퍼드 대사전)  
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+#### 나. 데이터의 특성  
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+- **존재적 특성:** 객관적 사실 (fact)  
+-> 개별로는 의미가 중요하지 않음  
+- **당위적 특성:** 추론, 예측전망, 추정을 위한 근거 (basis)  
+-> 다른 객체와의 상호 관계 속에서 가치를 갖음  
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
+## 2. 데이터의 유형  
+#### 정성적 데이터 (Qualitative Data)  
+
+- 언어, 문자 등으로 기술
+- 비정형 데이터 (Unstructured Data)
+- 저장, 분석에 시간과 비용이 필요
+- 주관적 내용
+- 통계분석이 어려움
+
+#### 정량적 데이터 (Quantitative Data)
+
+- 수치, 기호, 도형으로 표시
+- 정형 데이터 (Structured Data)
+- 저장, 분석이 용이
+- 객관적 내용
+- 통계분석이 용이함
+
+**예상문제**  
+1. 다음 중 데이터에 대한 설명으로 가장 적절하지 않는 것은 무엇인가?     
+(1) 양질의 데이터를 확보하지 못하면 잘못된 분석 결과를 얻음  
+(2) 창의적인 데이터 매시업(Mashup)은 기존에 풀기 어려웠던 문제를 해결에 도움  
+(3) 비정형 데이터는 데이터 내부에 메타 데이터를 갖고 있으며 일반적으로 파일 형태로 저장  
+(4) 공공부문에서 개방하고 있는 대표적인 데이터는 교통 데이터, 물가 데이터, 의료 데이터이다.  
+
+정답: 3번  
+설명: 메타 데이터를 활용해 분석하는 데이터는 반정형 데이터(Semi-structured Data)로 따로 분류  
+
+## 3. 지식 경영  
+
+#### 지식경영 = 암묵지 + 형식지의 상호작용 속에서 지식이 공유되며 생성
+
+#### 암묵지 (tacit knowledge)
+
+- 학습과 체험을 통하여 개인에게 습득
+- 겉으로 드러나지 않음 (무형 지식)
+- 관찰, 모방, 현장 작업과 같은 경험을 통해 획득
+
+#### 형식지 (explicit knowledge)
+
+- 문서나 메뉴얼 처럼 외부로 표출 (형상화된 지식)
+- 전달과 공유가 용이함
+- 책, 설계도 등 체계화된 재료 등을 통해 획득
+
+#### SECI 모델  
+
+- (1)공통화(**S**ocialization): 암묵적 지식 노하우를 다른 사람에게 알려주는 것
+- (2)표출화(**E**xternalization): 암묵적 지식 노하우를 책이나 교본 등 형식지로 만드는 것
+- (3)연결화(**C**ombination): 책이나 교본(형식지)에 자신이 알고 있는 새로운 지식(형식지)를 추가하는 것
+- (4)내면화(**I**nternalization): 만들어진 책이나 교본(형식지)을 보고 다른 직원들이 암묵적 지식(노하우)을 습득  
+
+## 4. 데이터와 정보의 관계  
+
+#### DIKW 피라미드
+
+Top   
+
+- **(4)Wisdom:** understanding, integrated, actionable  
+  - 근본 원리에 대한 깊은 이해를 바탕으로 도출되는 아이디어
+    - A마트의 다른 상품들도 B마트보다 쌀 것이라고 판단
+- **(3)Knoweldge:** contextual, synthesized, learning
+  - 상호 연결된 정보 패턴을 이해하여 이를 토대로 예측한 결과물
+    - 상대적으로 저렴한 A마트에서 연핀을 사야겠다
+- **(2)Information:** useful, organized, structured
+  - 데이터의 가공 및 상관관계 간 이해를 통해 패턴을 인식하고 의미를 부여
+    - A마트의 연필 가격이 더 싸다
+- **(1)Data:** signals, know nothing
+  - 존재 형식 불문, 타 데이터와 상관관계가 없는 가공 전의 순수한 수치나 기호
+    - A 마트 100원, B 마트 200원에 연필을 판매  
+    
+Bottom
+
+# Chapter 2 - 데이터베이스 정의와 특징 (Database Definition and Characteristics)  
+
+## 1. 용어의 연혁
+
+- **1950년대:** 미국에서 군대의 군비상황을 집중 관리하기 위하여 컴퓨터 도서관을 설립하면서 데이터(data)의 기지(base)라는 뜻의 데이터베이스가 탄생
+- **1970년대:** 미국의 CAC가 한국과학기술정보센터(KORSTIC)을 통해 서비스되면서 우리나라에서 데이터베이스 이용이 도입
+- **1980년대:** 국내 데이터베이스 관련 기술의 연구, 개발
+
+## 2. 데이터베이스 정의  
+
+- 동시에 복수의 적용 업무를 지원할 수 있도록 복수 이용자의 요구에 대응해서 데이터를 받아들이고 저장, 공급하기 위하여 일정한 구조에 따라서 편성된 데이터의 집합
+- 관련된 레코드의 집합, 소프트웨어로는 데이터베이스 관리시스템(DBMS)을 의미
+
+**관계형 데이터베이스 관리시스템 (RDBMS) vs 객체 지향 데이터베이스 관리시스템 (ODBMS )**  
+
+- **Relational Database Management System:** 일련의 정형화된 테이블로 구성된 데이터 항목들의 집합체로서, 그 데이터들은 데이터베이스 테이블을 재구성하지 않더라도 다양한 방법으로 접근하거나 조합이 가능
+
+- **Object-Oriented Database Management System:** 객체들을 생성하여 계층에서 체계적으로 정리하고, 다시 계층들을 하위 계층이 상위 계층으로부터 속성과 방법들을 물려받을 수 있는 계승 가능한 구조로 구성됨
+
+## 3. 데이터베이스의 특징
+
+#### 가. 데이터베이스 특징
+
+- **통합된 데이터 (integrated data):** 동일한 내용의 데이터가 중복되어 있지 않다는 것을 의미
+- **저장된 데이터 (stored data):** 컴퓨터가 접근할 수 있는 저장매체에 저장되는 것을 의미 
+- **공용 데이터 (shared data):** 여러 사용자가 서로 다른 목적으로 데이터베이스의 데이터를 공동 이용
+- **변회되는 데이터 (changable data):** 새로운 데이터의 추가, 기존 데이터의 삭제, 갱신으로 항상 변화하면서도 항상 현재의 정확한 데이터를 유지해야 한다는 것을 의미
+
+#### 나. 데이터베이스 특성
+
+- **정보의 축적 및 전달 측면:** 대량의 정보를 정보처리기기가 읽고 쓸 수 있는 기계가 독성과 필요한 정보를 검색할 수 있는 검색 가능성, 정보통신망을 이용하여 원거리에서도 온라인으로 이용할 수 있는 원격 조작성을 갖는다
+- **정보이용 측면:** 이용자의 정보 요구에 따라 다양한 정보를 신속하게 획득하고, 원하는 정보를 경제적으로 찾아 낼 수 있다
+- **정보관리 측면:** 방대한 양의 정보를 체계적으로 축적하고 새로운 내용 추가나 갱신이 용이
+- **정보기술발전 측면:** 데이터베이스는 정보처리, 검색, 관리 소프트웨어 등 네트워크 발전 기술을 견인할 수 있다
+- **경제/산업적 측면:** 데이터베이스는 인프라로서 특성을 가지고 있어 경제, 산업, 사회 활동의 효율성을 제고하고 국민의 편의를 증진하는 수단으로 의미를 가진다
+
+# Chapter 3 - 데이터베이스의 활용 (Database Application)
+
+## 1. 기업 내부 데이터베이스
+
+#### 가. 1980년대 기업내부 데이터베이스
+
+- **OLTP (On-Line Transaction Processing) 온라인 거래처리** 
+  - 호스트 컴퓨터와 온라인으로 접속된 여러 사용자 단말에서 발생한 트랜잭션을 호스트 컴퓨터가 데이터베이스를 액세스하여 처리
+  - 그 결과를 즉석에서 사용자에게 되돌려보내 주는 처리 형태
+  - 즉, 데이터베이스의 데이터를 수시로 갱신하는 프로세싱을 의미 
+- **OLAP (On-Line Analytical Processing) 온라인 분석처리**
+  - 다양한 비지니스 관점에서 쉽고 빠르게 다차원적인 데이터에 접근하여 의사 결정에 활용할 수 있는 정보를 얻을 수 있게 해주는 기술
+  - OLTP에서 처리된 트랜잭션 데이터를 분석해 통계적인 요약 정보 제공
+  - 데이터 조회 위주
+  
+#### 나. 2000년대 기업내부 데이터베이스
+
+- **CRM (Customer Relationship Management)**
+- **SCM (Supply Chain Management)**
+
+#### 다. 각 분야별 내부 데이터베이스 
+
+- **1. 분야별 데이터베이스 개념**  
+
+  - 가) 제조 부문  
+
+  - 나) 금융 부문  
+
+  - 다) 유통부문  
+
+- **2. 분야별 데이터베이스 소개**
+
+#### 라. 사회기반구조로서의 데이터베이스  
+
+- **1. 개념**  
+
+- **2. 종류**  
+
+- **3. 분야별 사회기반 구조의 데이터베이스**  
