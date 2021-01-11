@@ -1,19 +1,90 @@
 ---
-title: "Part 3: Data Science for Value Creation and Strategic Insight"
+title: "Part 3: 가치창조를 위한 데이터 사이언스와 전략 인사이트 (Data Science for Value Creation and Strategic Insight)"
 output: rmarkdown::github_document
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+# Table of Contents
+- **Chapter 1 - 빅데이터 분석과 전략 인사이트 (Big Data Analytics and Strategic Insight)**
+  - 빅데이터 열풍과 회의론
+  - 빅데이터 회의론의 원인 및 진단
+  - 빅데이터 분석, 'Big'이 핵심이 아니다
+  - 전략적 통찰이 없는 분석의 함정
+  - 일차원적인 분석 vs 전략도출 위한 가치기반 분석
+    
+- **Chapter 2 - 전략 인사이트 도출을 위한 필요 역량 (Competence Needed for Drawing Strategic Insights)** 
+  - 데이터 사이언스의 의미와 역할
+  - 데이터 사이언스의 구성요소
+  - 데이터 사이언티스트의 요구 역량
+  - 데이터 사이언스: 과학과 인문의 교차로
+  - 전략적 통찰력과 인문학의 부활
+  
+- **Chapter 3 - 빅데이터 그리고 데이터 사이언스의 미래 (The Future of Big Data and Data Science)**
+  - 빅데이터의 시대
+  - 빅데이터 회의론을 넘어 가치 패러다임의 변화
+  - 데이터 사이언스의 한계와 인문학
+  
+# Chapter 1 - 빅데이터 분석과 전략 인사이트 (Big Data Analytics and Strategic Insight)
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+## 1. 빅데이터 열풍과 회의론  
 
-```{r}
-plot(cars)
-```
+## 2. 빅데이터 회의론의 원인 및 진단  
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+#### 가.   
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+#### 나.  
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+## 3. 빅데이터 분석, 'Big'이 핵심이 아니다  
 
+#### 가.  
+
+#### 나.  
+
+#### 다.  
+
+## 4. 전략적 통찰이 없는 분석의 함정  
+
+## 5. 일차원적인 분석 vs 전략도출 위한 가치기반 분석  
+
+#### 가.  
+
+#### 나.  
+
+#### 다.  
+ 
+
+# Chapter 2 - 전략 인사이트 도출을 위한 필요 역량 (Competence Needed for Drawing Strategic Insights)
+
+## 1. 데이터 사이언스의 의미와 역할  
+
+#### 가.  
+
+#### 나.  
+
+## 2. 데이터 사이언스의 구성요소  
+
+#### 가.  
+
+#### 나.  
+
+## 3. 데이터 사이언티스트의 요구 역량  
+
+## 4. 데이터 사이언스: 과학과 인문의 교차로  
+
+## 5. 전략적 통찰력과 인문학의 부활  
+
+#### 가.  
+
+#### 나.  
+
+
+# Chapter 3 - 빅데이터 그리고 데이터 사이언스의 미래 (The Future of Big Data and Data Science)
+
+## 1. 빅데이터의 시대  
+
+## 2. 빅데이터 회의론을 넘어 가치 패러다임의 변화  
+
+## 3. 데이터 사이언스의 한계와 인문학 
+
+#### 가.  
+
+#### 나.  
