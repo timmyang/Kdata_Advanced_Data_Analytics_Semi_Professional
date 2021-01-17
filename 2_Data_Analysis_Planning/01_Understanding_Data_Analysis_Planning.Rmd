@@ -18,7 +18,7 @@ output: rmarkdown::github_document
   - KDD와 CRISP-DM의 비교
   - 빅데이터 분석 방법론
   
-- **Chapter 3 - 분석 과제 발굴 (Discovering the Subject of Analysis)**
+- **Chapter 3 - 분석 과제 발굴 (Discovering a Subject for Analysis)**
   - 분석과제 발굴 방법론
 
 - **Chapter 4 - 분석 프로젝트 관리 방안 (Management Plans for Analysis Projects)**
@@ -348,7 +348,7 @@ Business Understanding <=> Data Understanding -> Data Preparation <=> Modeling -
 - **데이터 분석 (Analyzing)**
   - **분석용 데이터 준비**
     - 비즈니스 룰 확인
-    - 분석용 데이터넷 준비
+    - 분석용 데이터셋 준비
   - **텍스트 분석**
     - 텍스트 데이터 확인 및 추출
     - 덱스트 데이터 분석
@@ -408,17 +408,107 @@ Business Understanding <=> Data Understanding -> Data Preparation <=> Modeling -
 
 (정답): 3
 
-# Chapter 3 - 분석 과제 발굴 (Discovering the Subject of Analysis)
+# Chapter 3 - 분석 과제 발굴 (Discovering a Subject for Analysis)
 
 ## 1. 분석과제 발굴 방법론
 
 #### 가. 개요
 
+- 분석 과제는 풀어야 할 다양한 문제를 데이터 분석 문제로 변환한 후 관계자들이 이해하고 프로젝트로 수행할 수 있는 **과제 정의서 형태로 도촐** 된다
+- 크게 **하양식 접근 방법 (Top Down Approach)** 과 **상향식 접근 방법 (Bottom Up Approach)** 이 있다
+- 분석의 가치를 높일 수 있는 **최적의 의사결정** 은 **두 접근 방식이 상호 보완 관계** 에 있을 떄 가능하다
+- **디자인 사고 (Design Thinking)**
+  - 상향식 접근 방식의 발산 단계와 하향식 접근 방식의 수렴단계를 반복적으로 수행하는 식의 상호 보완적인 동적 환경을 통해 분석의 가치를 높일 수 있는 최적의 의사결정 방식
+  
+- **하양식 접근 방법:** Optimization (Known-Known) -> Solution (Known-Unknown)
+- **상향식 접근 방법:** Discovery (Unknown-unknown) -> Insight (Unknown-Known)
+
 #### 나. 하양식 접근법 (Top Down Approach)
+
+- 문제 탐색 (Problem Discovery) -> 문제 정의 (Problem Definition) -> 해결방안탐색 (Solution Search)  
+   -> 타당성검토 (Feasibility Study)
+   
+- **문제 탐색 (Problem Discovery)** **<span style="color: red;">중요!!</span>**
+
+  - 과제 발굴 단계에서는 세부적인 구현 및 솔루션에 초첨을 맞추는게 아니라, **문제를 해결** 함으로써 **발생하는 가치에 중점** 을 두는 것이 중요
+  - **비즈니스 모델 기반 문제 탐색**
+    - 비즈니스모델 켄버스의 9가지 블록을 단순화 하여 업무, 제품, 고객 단위로 문제를 발굴, 이를 관리하는 규제와 감사, 지원 인프라 영역으로 기회를 추가 도출
+    - **업무 (Operation)**
+    - **제품 (Product)**
+    - **고객 (Customer)**
+    - **규제와 감사 (Regulation & Audit)**
+    - **지원 인프라 (IT & Human Resource)**
+    - 새로운 유형의 분석 기회 및 주제 발굴을 수행해야 함
+  - **분석 기회 발굴의 범위 확장**
+    - 거시적 관점의 메가트랜드
+      - STEEP 영역으로 폭넓게 기획 탐색 수행
+      - **사회 (Social)**
+      - **기술 (Technological)**
+      - **경제 (Economic)**
+      - **환경 (Environmental)**
+      - **정치 (Political)**
+    - 경쟁자 확대 관점
+      - **대체제 (Substitute)**
+      - **경쟁자 (Competitor)**
+      - **신규 진입자 (New Entrant)**
+    - 시장의 니즈 탐색 관점
+      - **고객 (Customer)**
+      - **채널 (Channel)**
+      - **영향자들 (Influencer)**
+    - 역량의 재해석 관점
+      - **내부 역량 (Competency)**
+      - **파트너와 네트워크 (Partners & Network)**
+  - **외부 참조 모델 기반 문제 탐색**
+    - 유사/동종 사례 벤치마킹을 통한 분석기회 발굴은 제공되는 산업별, 업무 서비스별 분석 테마 후보 그룹을 통해 **Quick & Easy** 방식으로 필요한 분석기회가 무엇인지에 대한 아이디어를 얻고, 기업에 적용할 분석테마 후보 목록을 워크숍 형태의 **브레인스토밍(Brain storming)** 을 통해 빠르게 도출하는 방법
+    - 현재 환경에서는 데이터를 활용하지 않은 업종 및 업무 서비스가 사실상 존재하지 않기 때문에 업무에 활용되는 사례들을 발굴하여 자사의 업종 및 업무 서비스에 적용할 수 있음
+  - **분석 유즈 케이스 (Analytics Use Case)**
+    - 풀어야 할 문제에 대한 상세한 설명 및 해당 문제를 해결했을 때 발생하는 효과를 명시함으로써 향후 데이터 분석 문제로의 전환 및 적합성 평가에 활용
+
+- **문제 정의 (Problem Definition)**
+
+- **해결 방안 탐색 (Solution Search)**
+
+- **타당성 검토 (Feasibility Study)**
+
+
 
 #### 다. 상향식 접근법 (Bottom Up Apporach)
 
 #### 라. 분석과제 정의
+
+
+**기출문제**  
+**29. 다음 중 분석과제 발굴에 대한 설명으로 가장 부적절한 것은?**  
+
+1. 분석해야 할 대상이 명확하다면 상향식 접근방식이 적절하다
+2. 문제가 주어지고 이에 대한 해법을 찾기 위하여 각 과정이 체계적으로 단계화되어 수행되는 방식이 하향식 접근 방식이다
+3. 데이터를 활용하여 인사이트를 도출하는 상향식 접근 방식의 유용성이 점차 증가되고 있다
+4. 디자인 사고 프로세스는 분석과제 발굴에 유용하게 활용될 수 있다
+
+(정답): 1번
+
+**30-1. 하향식 데이터 분석 기획에서 문제 탐색 단계에 대한 설명으로 가장 부적절한 것은?**
+
+1. 빠짐없이 문제를 도출하고 식별하는 것이 중요  
+2. 문제를 해결함으로써 발생하는 가치에 중점을 두는 것이 중요  
+3. 비즈니스 모델 캔버스는 문제 탐색 도구로 활용  
+4. 문제 탐색은 유스케이스 활용보다는 새로운 이슈탐색이 우선
+
+(정답): 4번  
+
+**31. 아래 (ㄱ), (ㄴ), (ㄷ) 안에 들어갈 용어를 순서대로 기입하시오.**    
+비즈니스 모델 캔버스는 9가지 블록을 단순화하여 (ㄱ), (ㄴ), 고객 단위로 문제를 발굴하고 이를 관리하는 규제와 감사, (ㄷ) 영역으로 나눠 분석 기회를 도출한다.  
+
+(정답): 업무, 제품, 지원 인프라  
+
+**1. 다음 중 분석기회 발굴을 위한 범위 확장에서 경쟁사 확대 관점에 포함되지 않는 영역은?**  
+
+1. 대체제 영역  
+2. 경쟁자 영역  
+3. 신규 진입자 영역  
+4. 경쟁 채널 영역
+
+(정답): 4번  
 
 
 
