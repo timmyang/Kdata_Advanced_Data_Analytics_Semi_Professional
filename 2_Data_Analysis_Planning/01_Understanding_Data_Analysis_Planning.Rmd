@@ -269,7 +269,7 @@ Business Understanding <=> Data Understanding -> Data Preparation <=> Modeling -
   - **[수행업무]:** **분석결과 평가, 모델링 과정 평가, 모델 적용성 평가**
   
 - **전개 (Deployment)**
-  - 모델링과 평과 단계를 통하여 완성된 모델을 **실 업무에 적용** 하기 위한 계획을 수립하는 단계
+  - 모델링과 평가 단계를 통하여 완성된 모델을 **실 업무에 적용** 하기 위한 계획을 수립하는 단계
   - 모니터링과 모델의 **유지보수 계획** 마련
   - CRISP-DM의 마지막 단계, 프로젝트 종료 관련 프로세스를 수항하여 프로젝트 마무리
   - **[수행업무]:** 전개 계획 수립, 모니터링과 유지보수 계획 수립, 프로젝트 종료보고서 작성, 프로젝트 리뷰
@@ -312,7 +312,7 @@ Business Understanding <=> Data Understanding -> Data Preparation <=> Modeling -
   - 각 단계는 여러 개의 테스크(Task)로 구성
   - 각 테스크는 단계를 구성하는 단위 활동이며, 물리적 또는 논리적 단위로 품질 검토의 항목이 될 수 있음
 - 3. **스텝 (Step)**
-  - WBS(Work Breakdown Structure)의 워크 패키지(Work Package)에 해당되고 입력 자료(Input), 처리 및 도구(Process & Tool), 출력자료(Output)로 구성된 **단위 프로세스(Unit Process)**이다
+  - WBS(Work Breakdown Structure)의 워크 패키지(Work Package)에 해당되고 입력 자료(Input), 처리 및 도구(Process & Tool), 출력자료(Output)로 구성된 **단위 프로세스(Unit Process)** 이다
 
 #### 나. 빅데이터 분석 방법론 - 5단계
 
@@ -352,7 +352,7 @@ Business Understanding <=> Data Understanding -> Data Preparation <=> Modeling -
     - 분석용 데이터셋 준비
   - **텍스트 분석**
     - 텍스트 데이터 확인 및 추출
-    - 덱스트 데이터 분석
+    - 텍스트 데이터 분석
   - **탐색적 분석**
     - 탐색적 데이터 분석
     - 데이터 시각화
