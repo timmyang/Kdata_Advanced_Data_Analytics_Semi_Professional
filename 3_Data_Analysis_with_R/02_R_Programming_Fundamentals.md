@@ -449,3 +449,15 @@ n <- 5
       - || vs |
   - **인자의 개수를 정확히 사용할 것**
       - mean(9, 10, 11)
+
+**기출문제**  
+**52. Carseats 데이터프레임은 400개 상점에서 판매 중인 유아용 카시트의 재료이고, Sales 변수는 해당 상점에서
+판매된 카시트의 수를 나타낸다. 다음 중 R패키지에서 Sales 변수의 표준편차를 계산하기 위한 식으로 가장 부적절한
+것은?**
+
+1.  stdev(Carseats$Sales)  
+2.  sd(Carseats$Sales)  
+3.  sqrt(var(Carseats$Sales))  
+4.  var(Carseats$Sales)^(1/2)
+
+정답: 1번
