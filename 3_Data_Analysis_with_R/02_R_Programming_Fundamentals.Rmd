@@ -8,16 +8,39 @@ output: rmarkdown::github_document
 - **Chapter 1 - R 소개 (Introduction to R)**
   - 데이터 분석 도구의 현황
   
-- **Chapter 2 - R 기초 - 1 (R Basics - 1)**
+- **Chapter 2 - R 기초-1 (R Basics-1)**
   - 통계 패키지 R
   - 변수와 벡터 생성
 
-- **Chapter 3 - R 기초 - 2 (R Basics - 2)**
+- **Chapter 2 - R 기초-2 (R Basics-2)**
   - R 기초 중의 기초
   - R 프로그램 소개
   - 백터의 연산
   - 백터의 기초통계
   - R 프로그래밍시 자주하는 실수
+  
+- **Chapter 3 - 입력과 출력 (Input and Output)**
+  - 데이터 분석 과정
+  - R에서의 데이터 입력과 출력
+  
+- **Chapter 4 - 데이터 구조와 데이터 프레임-1 (Data Structure and Data Frame-1)**
+  - 벡터(Vector)
+  - 리스트(Lists)
+  - R에서의 자료형태(mode)
+  - 데이터 프레임(data frames
+  - 그 밖의 데이터 구조들
+  - 벡터, 리스트, 행렬 다루기
+  
+- **Chapter 4 - 데이터 구조와 데이터 프레임-2 (Data Structure and Data Frame-2)**
+  - 데이터 프레임
+  - 자료형 데이터 구조 변환
+  - 데이터 구조 변경
+  - 벡터의 기본 연산
+  - 그 외에 간단한 함수
+  
+- **Chapter 5 - 데이터 변형 (Data Transformation)**
+  - 주요 코드
+  - 문자열 날짜 다루기
   
 
 # Chapter 1 - R 소개 (Introduction to R)
@@ -110,7 +133,7 @@ output: rmarkdown::github_document
     - 8TB 까지 지원
 
 
-# Chapter 2 - R 기초 - 1 (R Basics - 1)
+# Chapter 2 - R 기초-1 (R Basics-1)
 
 ## 1. 통계 패키지 R
 
@@ -189,7 +212,7 @@ output: rmarkdown::github_document
     - "a"," abc"
 
 
-# Chapter 3 - R 기초 - 2 (R Basics - 2)
+# Chapter 2 - R 기초-2 (R Basics-2)
 
 #### 1. R 기초 중에 기초
 
@@ -420,3 +443,427 @@ n <- 5
 4. var(Carseats$Sales)^(1/2)
 
 정답: 1번
+
+
+# Chapter 3 - 입력과 출력 (Input and Output)
+
+## 1. 데이터 분석 과정
+
+- 분석자가 분석 목적에 맞는 적절한 분석 방법론을 선택해서 정확한 분석을 통해 얻은 결과를 통찰력을 가지고 해석함으로써 분석 과정을 마치게 왼다
+- 이렇게 데이터를 분석하기 위해서는 분석자가 분석을 위해 설계된 방향으로 데이터를 정확하게 입력받는 것에서부터 시작될 수 있다
+- 그리고 입력된 데이터는 다양한 전처리 작업을 거쳐 분석이 가능한 형태로 재정리되며 이것을 데이터 핸들링이라고도 한다
+- 또한 분석된 결과를 이해하기 쉽고 잘 해석할 수 있도록 생산하는 부분을 데이터 출력이라고 할 수 있다
+- 출력된 결과는 보고서의 형태로 정리되어 최종 의사결정자와 고객에게 전달되게 됨으로써 통계분석 과정은 종료된다고 할 수 있다
+
+
+## 2. R에서의 데이터 입력과 출력
+
+- R에서 다룰 수 있는 파일 타입
+  - Tab-delimited text
+  - Comma-separated text
+  - Excel file
+  - JSON file
+  - HTML/XML file
+  - Database
+  - (Other) Statistical SW's file
+  
+- **키보드로 데이터를 입력**
+  - 데이터 양이 적어 직접 입력
+    - c( ): combine 함수
+  - 데이터 편집기를 활용하기
+    - 빈데이터 프레임을 생성 -> 편집기를 불러와서 편집하고 데이터 프레임에 덮어 씌우기
+- **출력할 내용의 자리수 정의**
+  - R의 부동소수점 표현: 7자리로 표시
+    - print(pi, digits = num)
+    - cat(format(pi, digits = num), "₩n")
+    - options(digits = num)
+- **파일에 출력하기**
+  - cat("출력할 내용", 변수, "₩n", file = "파일이름", append = T)
+  - sink("파일이름")
+  - ... 출력할 내용 ...
+  - sink( )
+- **파일 목록 보기**
+  - list.files( )
+  - list.files(recursive = T, all.files = T)
+- **Cannot Open File 해결하기**
+  - 파일 위치: c:₩data₩sample.txt
+  - R에서는 c:datasample.txt로 인식
+    - 역슬래쉬를 슬래쉬로 바꾼다
+      - c:/data/sample.txt
+    - 역슬래쉬를 쌍으로 표현한다
+      - c:₩₩data₩₩sample.txt
+- **고정자리수 데이터 파일(fixed-width file) 읽기**
+  - read.fwf("파일이름", widths = c(w1, w1, ..., wn))
+- **테이블로 된 데이터 파일 읽기 (변수 구분자 포함)**
+  - read.table("파일이름", sep = "구분자")
+    - 주의1
+      - 주소, 이름, 성 등의 텍스트를 요인으로 인식함
+    - 해결1
+      - read.table("파일이름", sep = "구분자", stringASFactor = F)
+    - 주의2
+      - 결측치를 NA가 아닌 다른 문자열로 표현할 때(SAS.)
+    - 해결2
+      - read.table("파일이름", sep = "구분자", na.strings = ".")
+    - 주의3
+      - 파일의 첫행을 변수명으로 인식하고자 할 때
+    - 해결3
+      - read.table("파일이름", sep = "구분자", header = T)
+- **CSV 데이터 파일 읽기 (변수 구분자는 쉼표)**
+  - read.csv("파일이름", header = T)
+    - 주의1
+      - 주소, 이름, 성 등의 텍스트를 요인으로 인식함
+    - 해결1
+      - read.csv("파일이름", header = T, as.is = T)
+- **CSV 데이터 파일로 출력 (변수 구분자는 쉼표)**
+  - write.csv(행렬 또는 데이터프레임, "파일이름", row.names = F)
+    - 주의1
+      - 1행이 변수명으로 자동 인식하지만 변수명이 아닐 경우
+    - 해결1
+      - write.csv(dfm, "파일이름", colnames = F)
+    - 주의2
+      - 1열에 레코드 번호를 자동 생성 하지만 레코드 번호를 생성하지 않을 경우
+    - 해결2
+      - write.csv(dfm, "파일이름", row.names = F)
+- **웹에서 데이터 파일을 읽어 올 때 (변수 구분자는 쉼표)**
+  - read.csv("http://www.example.com/download/data.csv")
+  - read.table("http://www.example.com/download/data.txt")
+    - what = numeric(0)
+      - 토큰을 숫자로 해석
+    - what = integer(0)
+      - 토큰을 정수로 해석
+    - what = complex(0)
+      - 토큰을 복소수로 해석
+    - what = character(0)
+      - 토큰을 문자로 해석
+    - what = logical(0)
+      - 토큰을 논리값으로 해석
+- **html에서 테이블 읽어 올 때**
+  - library(XML)
+  - url <- "http://www.example.com/data/table.html"
+  - t <- readHTMLTable(url)
+- **복잡한 구조의 파일 (웹 테이블) 읽기**
+  - lines <- readLines("a.txt", n = num)
+  - token <- scan("a.txt", what = numeric(0))
+  - token <- scan("a.txt", what = list(v1 = character(0), v2 = numeric(0)))
+  - token <- scan("a.txt", what - list(v1 = character(0), v2 = numeric(0), n = num, 
+  nlines = num, skip = num, na,strings = list))
+
+
+# Chapter 4 - 데이터 구조와 데이터 프레임-1 (Data Structure and Data Frame-1)
+
+## 1. 벡터(Vector)
+
+#### 가. 백터들은 동질적이다
+
+- 한 벡터의 모든 원소는 같은 자료형 또는 같은 모드(mode)를 가진다
+
+#### 나. 벡터는 위치로 인덱스 된다
+
+- V[2]는 v벡터의 2번째 원소이다
+
+#### 다. 벡터는 인덱스를 통해 여러 개의 원소로 구성된 하위 벡터를 반환할 수 있다
+
+- V[c(2, 3)]은 v벡터의 2번째, 3번째 원소로 구성된 하위벡터이다
+
+#### 라. 벡터 원소들은 이름을 가질 수 있다
+
+- V <- c(10, 20, 30)
+- names(V) <- c("Moe", "Larry", "Curly")
+- V["Larry"]
+- [1] Larry  
+\ \ \ \ \ \ \ \ \ 20
+
+
+## 2. 리스트(Lists)
+
+#### 가. 리스트는 이질적이다
+
+- 여러 자료형의 원소들이 포함될 수 있다
+
+#### 나. 리스트는 위치로 인덱스된다
+
+- L[[2]]는 L 리스트의 2번째 원소이다
+
+#### 다. 리스트에서 하위 리스트를 추출할 수 있다
+
+- L[c(2, 3)]은 L 리스트의 2번째, 3번째 원소로 이루어진 하위 리스트이다
+
+#### 라. 리스트이 원소들은 이름을 가질 수 있다
+
+- L[["Moe"]]와 L$Moe는 둘다 "Moe"라는 이름의 원소를 지칭 한다
+
+## 3. R에서의 자료형태(mode)
+
+- **숫자**
+  - 3.1415 
+  - 수치형, numeric
+- **숫자 벡터**
+  - c(2, 3, 4, 5.5)
+  - 수치형, numeric
+- **문자열**
+  - "Tom"
+  - 문자형, character
+- **문자열 벡터**
+  - c("Tom", "Yoon", "Kim")
+  - 문자형, character
+- **요인**
+  - factor(c("A", "B", "C))
+  - 수치형, numeric
+- **리스트**
+  - list("Tom", "Yoon", "Kim")
+  - 리스트, list
+- **데이터 프레임**
+  - data.frame(x = 1:3, y = c("Tom", "Yoon", "Kim))
+  - 리스트, list
+- **함수**
+  - print
+  - 함수, function
+
+## 4. 데이터 프레임(data frames)
+
+#### 가. 특징
+
+- 데이터 프레임은 강력하고 유연한 구조. SAS의 데이터셋을 모방해서 만들어진다
+- 데이터 프레임의 리스트의 원소는 벡터 또은 요인이다
+- 그 벡터와 요인은 데이터 프레임의 열이다
+- 벡터와 요인들은 동일한 길이이다
+- 데이터 프레임은 표 형태의 데이터 구조이며, 각 열은 서로 다른 데이터 형식을 가질 수 있다
+- 열에는 이름이 있어야 한다
+
+#### 나. 데이터 프레임의 원소에 대한 접근방법
+```{r}
+b <- data.frame(empno = 1:2, bar = c(T, F))
+
+b[1]
+b["empno"]
+b[[1]]
+b[["empno"]]
+b$empno
+```
+
+
+## 5. 그 밖의 데이터 구조들
+
+#### 가. 단일값(Scalars)
+
+- R에서는 원소가 하나인 벡터로 인식/처리
+```{r}
+pi
+length(pi)
+```
+
+#### 나. 행렬(Matrix)
+
+- R에서는 차원을 가진 벡터로 인식
+```{r}
+a <- 1:9
+
+dim(a) <- c(3, 3)
+
+a
+```
+
+#### 다. 배열(Arrays)
+
+- 행렬에 3차원 또는 n차원까지 확장된 형태
+- 주어진 벡터에 더 많은 차원을 부여하여 배열을 생성
+```{r}
+b <- 1:12
+
+dim(b) <- c(2, 3, 2)
+
+b
+```
+
+#### 라. 요인(Factors)
+
+- 벡터처럼 생겼지만, R에서는 벡터에 있는 고유값(unique value)의 정보를 얻어내는데, 이 고유값들을 요인의 수준(level)이라고 한다
+- 요인의 두가지 주된 사용처로 범주형 변수, 집단분류가 있다
+
+
+## 6. 벡터, 리스트, 행렬 다루기
+
+- 행렬(Matrix)는 R에서 차원을 가진 벡터이며, 텍스트마이닝과 소셜네트워크 분석 등에 활용된다
+- 재활용 규칙(Recycling Rule)
+  - 길이가 서로 다른 두 벡터에 대해 연산을 할 때, R은 짧은 벡터의 처음으로 돌아가 연산이 끝날때까지 원소들을 재활용 한다
+```{r}
+a <- seq(1, 6)
+b <- seq(7, 9)
+
+a + b
+cbind(a, b)
+```
+
+- **벡터에 데이터 추가**
+```{r}
+v <- c(1, 2, 3, 4, 5)
+newItems <- c(11, 12, 13)
+
+v <- c(v, newItems)
+v[length(v) + 1] <- 14
+
+v
+```
+
+- **벡터에 데이터 삽입**
+```{r}
+append(v, 99, after = 9)
+```
+
+- **요인 생성**
+```{r}
+f <- factor(c("yes", "no", "yes", "no"), levels = c("yes", "no"))
+f
+
+fs <- factor(c(1, 2, 3, 1, 2, 3), levels = c(1, 2, 3))
+fs
+```
+
+- **여러 벡터를 합쳐 하나의 벡터와 요인으로 만들기**
+```{r}
+stack(list(v1 = 1, v2= 2, v3 = 3))
+```
+
+- **벡터 내 값 조회**
+```{r}
+v[c(1, 3, 5, 7)]
+v[-c(2, 4)]
+```
+
+- **리스트**
+```{r}
+list(1, "a", pi)
+
+```
+
+- **리스트 생성하기**
+```{r}
+L <- list(name1 = 1, name2 = c("a", "b", "c"), name3 = TRUE)
+```
+
+- **리스트 원소 선택**
+```{r}
+L[[1]]
+L[c(1, 3)]
+```
+
+- **이름으로 리스트 원소 선택**
+```{r}
+L[["name1"]]
+L$name1
+```
+
+- **리스트에서 원소 제거**
+```{r}
+L[["name1"]] <- NULL
+L
+```
+
+- **NULL 원소를 리스트에서 제거**
+```{r}
+L[sapply(L, is.null)] <- NULL
+L[is.na(L)] <- NULL
+
+L
+```
+
+- **행렬**
+```{r}
+a <- matrix(1:6, 2, 3)
+b <- matrix(0, 4, 5)
+
+a
+b
+```
+
+- **차원**
+```{r}
+dim(a)
+```
+
+- **대각(diagonal)**
+```{r}
+diag(a)
+```
+
+- **전치(transpose)**
+```{r}
+t(a)
+```
+
+- **역**
+```{r}
+c <- matrix(c(1, 8, 1, 4, 15, 9, 0 , 3, 2), 3, 3)
+c
+solve(c)
+```
+
+- **행렬의 곱**
+```{r}
+c %*% t(c)
+```
+
+- **행 이름 부여**
+```{r}
+rownames(a) <- c("row1", "row2")
+a
+```
+
+- **열 이름 부여**
+```{r}
+colnames(a) <- c("col1", "col2", "col3")
+a
+```
+
+- **행렬의 연산 +, -**
+```{r}
+a + a
+a - a
+a + 1 
+a - 1
+```
+
+- **행렬의 연산 (곱하기)**
+```{r}
+c%*%c
+c * 3
+```
+
+- **행렬에서 행, 열 선택하기**
+```{r}
+a[1, ]
+a[, 3]
+```
+
+
+**기출문제**  
+**53. 아래의 이것이 지칭하는 것으로 적절한 것은?**
+
+<아래> 이것은 R에서 사용되는 Object의 하나이며 테이블과 같은 사각형의 데이터 구조로 행과 열로 이루어져 있으며, 행렬(Matrix)이 아닌 리스트(List)로 구현되어 있어 데이터를 읽어 들여 가공한 다음 파일로 저장하여 사용이 가능하다. 특히 sqldf를 이용할 때, RDBMS의 테이블처럼 또는 엑셀의 피벗처럼 사용할 수 있다.
+
+1. Vector  
+2. Factor  
+3. Array  
+4. Data Frame
+
+(정답): 4번
+
+**54-1. R에서 y = c(1, 2, 3, NA)일 때, 3 * y 의 실행 결과는?**
+
+1. 에러가 발생하고 결과가 출력되지 않는다  
+2. 3 6 9 0  
+3. 3 6 9 3  
+4. 3 6 9 NA
+
+(정답): 4번
+
+**55. 다음 중 아래의 R코드를 수행한 결과에 대한 설명으로 옳은 것은?**
+
+<아래> c(2, 4, 6, 8) + c(1, 3, 5, 7, 9)
+
+1. 경고 메시지와 함께 결과가 출력된다  
+2. 4개의 숫자로 이루어진 벡터가 출력된다  
+3. 9개의 숫자로 이루어진 벡터가 출력된다  
+4. 에러 메시지가 출력되고, 명령 수행이 중단된다
+
+(정답): 1번
