@@ -1203,3 +1203,826 @@ a[, 3]
 4.  에러 메시지가 출력되고, 명령 수행이 중단된다
 
 (정답): 1번
+
+# Chapter 4 - 데이터 구조와 데이터 프레임-2 (Data Structure and Data Frame-2)
+
+## 1\. 데이터 프레임
+
+  - **데이터프레임**
+      - 벡터들로 데이터셋 생성
+
+<!-- end list -->
+
+``` r
+data.frame(num = c(1, 2, 3), char = c("a", "b", "c"), logic = c(TRUE, FALSE, TRUE))
+```
+
+    ##   num char logic
+    ## 1   1    a  TRUE
+    ## 2   2    b FALSE
+    ## 3   3    c  TRUE
+
+  - **레코드 생성**
+      - 레코드 생성시 숫자, 문자를 함께 사용 가능
+
+<!-- end list -->
+
+``` r
+data.frame(a = 1, b = 2, c = 3, d = "a")
+```
+
+    ##   a b c d
+    ## 1 1 2 3 a
+
+  - **열 데이터(변수)로 데이터 프레임 만들기**
+
+<!-- end list -->
+
+``` r
+v1 = c(1, 2, 3)
+v2 = c("a", "b", "c")
+v3 = c(TRUE, FALSE, TRUE)
+
+data.frame(v1, v2, v3)
+```
+
+    ##   v1 v2    v3
+    ## 1  1  a  TRUE
+    ## 2  2  b FALSE
+    ## 3  3  c  TRUE
+
+``` r
+L = list(v1, v2, v3)
+L
+```
+
+    ## [[1]]
+    ## [1] 1 2 3
+    ## 
+    ## [[2]]
+    ## [1] "a" "b" "c"
+    ## 
+    ## [[3]]
+    ## [1]  TRUE FALSE  TRUE
+
+``` r
+data.frame(L)
+```
+
+    ##   c.1..2..3. c..a....b....c.. c.TRUE..FALSE..TRUE.
+    ## 1          1                a                 TRUE
+    ## 2          2                b                FALSE
+    ## 3          3                c                 TRUE
+
+  - **데이터셋 행결합**
+      - 두 데이터프레임을 행으로 결합
+
+<!-- end list -->
+
+``` r
+df1 = data.frame(num = c(1, 2, 3), char = c("a", "b", "c"), logic = c(TRUE, FALSE, TRUE))
+df2 = data.frame(num = c(4, 5, 6), char = c("d", "e", "f"), logic = c(FALSE, TRUE, FALSE))
+
+rbind(df1, df2)
+```
+
+    ##   num char logic
+    ## 1   1    a  TRUE
+    ## 2   2    b FALSE
+    ## 3   3    c  TRUE
+    ## 4   4    d FALSE
+    ## 5   5    e  TRUE
+    ## 6   6    f FALSE
+
+  - **데이터셋 열결합**
+      - 두 데이터 프레임을 열로 결합
+
+<!-- end list -->
+
+``` r
+cbind(df1, df2)
+```
+
+    ##   num char logic num char logic
+    ## 1   1    a  TRUE   4    d FALSE
+    ## 2   2    b FALSE   5    e  TRUE
+    ## 3   3    c  TRUE   6    f FALSE
+
+  - **데이터 프레임 할당**
+
+<!-- end list -->
+
+``` r
+df <- data.frame(dosage = c(1:10), lab = c(rep("a", each = 10)), gender = c(rep(c("m", "f"), each = 5)), val = c(rep(c(10), each = 10)))
+
+df
+```
+
+    ##    dosage lab gender val
+    ## 1       1   a      m  10
+    ## 2       2   a      m  10
+    ## 3       3   a      m  10
+    ## 4       4   a      m  10
+    ## 5       5   a      m  10
+    ## 6       6   a      f  10
+    ## 7       7   a      f  10
+    ## 8       8   a      f  10
+    ## 9       9   a      f  10
+    ## 10     10   a      f  10
+
+  - **데이터 프레임 조회1**
+      - 데이터셋 내 셩별 남성만 조회
+
+<!-- end list -->
+
+``` r
+df[df$gender == "m", ]
+```
+
+    ##   dosage lab gender val
+    ## 1      1   a      m  10
+    ## 2      2   a      m  10
+    ## 3      3   a      m  10
+    ## 4      4   a      m  10
+    ## 5      5   a      m  10
+
+  - **데이터 프레임 조회2**
+      - 데이터셋의 변수1과 변수2의 조건에 만족하는 레코드의 변수 3과 변수4 만을 선택
+
+<!-- end list -->
+
+``` r
+df[df$dosage > 4 & df$lab == "a", c("gender", "val")]
+```
+
+    ##    gender val
+    ## 5       m  10
+    ## 6       f  10
+    ## 7       f  10
+    ## 8       f  10
+    ## 9       f  10
+    ## 10      f  10
+
+  - **데이터셋 조회**
+      - 데이터셋의 특정변수의 값이 조건에 맞는 변수셋 조회
+      - subset은 벡터와 리스트에서도 선택 가능
+
+<!-- end list -->
+
+``` r
+subset(df, df$dosage > 4, select = "gender")
+```
+
+    ##    gender
+    ## 5       m
+    ## 6       f
+    ## 7       f
+    ## 8       f
+    ## 9       f
+    ## 10      f
+
+  - **데이터 선택**
+
+<!-- end list -->
+
+``` r
+L = list(v1, v2, v3)
+L
+```
+
+    ## [[1]]
+    ## [1] 1 2 3
+    ## 
+    ## [[2]]
+    ## [1] "a" "b" "c"
+    ## 
+    ## [[3]]
+    ## [1]  TRUE FALSE  TRUE
+
+``` r
+L[[2]]
+```
+
+    ## [1] "a" "b" "c"
+
+``` r
+L[2]
+```
+
+    ## [[1]]
+    ## [1] "a" "b" "c"
+
+``` r
+df[2, ]
+```
+
+    ##   dosage lab gender val
+    ## 2      2   a      m  10
+
+``` r
+df[, 2]
+```
+
+    ##  [1] "a" "a" "a" "a" "a" "a" "a" "a" "a" "a"
+
+``` r
+df[c("dosage", "gender")]
+```
+
+    ##    dosage gender
+    ## 1       1      m
+    ## 2       2      m
+    ## 3       3      m
+    ## 4       4      m
+    ## 5       5      m
+    ## 6       6      f
+    ## 7       7      f
+    ## 8       8      f
+    ## 9       9      f
+    ## 10     10      f
+
+  - **데이터 병합**
+      - 공통변수로 데이터셋 병합
+
+<!-- end list -->
+
+``` r
+df1 = data.frame(num = c(1, 2, 3), char = c("a", "b", "c"), logic = c(TRUE, FALSE, TRUE))
+df2 = data.frame(num = c(1, 2, 3), char = c("d", "e", "f"), logic = c(FALSE, TRUE, FALSE))
+
+merge(df1, df2, by = "num")
+```
+
+    ##   num char.x logic.x char.y logic.y
+    ## 1   1      a    TRUE      d   FALSE
+    ## 2   2      b   FALSE      e    TRUE
+    ## 3   3      c    TRUE      f   FALSE
+
+  - **열 네임 조회**
+
+<!-- end list -->
+
+``` r
+colnames(df)
+```
+
+    ## [1] "dosage" "lab"    "gender" "val"
+
+  - **행, 열 선택**
+
+<!-- end list -->
+
+``` r
+subset(df, select = dosage)
+```
+
+    ##    dosage
+    ## 1       1
+    ## 2       2
+    ## 3       3
+    ## 4       4
+    ## 5       5
+    ## 6       6
+    ## 7       7
+    ## 8       8
+    ## 9       9
+    ## 10     10
+
+``` r
+subset(df, select = c(dosage, lab))
+```
+
+    ##    dosage lab
+    ## 1       1   a
+    ## 2       2   a
+    ## 3       3   a
+    ## 4       4   a
+    ## 5       5   a
+    ## 6       6   a
+    ## 7       7   a
+    ## 8       8   a
+    ## 9       9   a
+    ## 10     10   a
+
+``` r
+subset(df, select = dosage, subset = (gender == "m"))
+```
+
+    ##   dosage
+    ## 1      1
+    ## 2      2
+    ## 3      3
+    ## 4      4
+    ## 5      5
+
+  - **이름으로 열 제거**
+
+<!-- end list -->
+
+``` r
+subset(df, select = -val)
+```
+
+    ##    dosage lab gender
+    ## 1       1   a      m
+    ## 2       2   a      m
+    ## 3       3   a      m
+    ## 4       4   a      m
+    ## 5       5   a      m
+    ## 6       6   a      f
+    ## 7       7   a      f
+    ## 8       8   a      f
+    ## 9       9   a      f
+    ## 10     10   a      f
+
+  - **열 이름 바꾸기**
+
+<!-- end list -->
+
+``` r
+colnames(df) <- c("dos", "lab", "gen", "val")
+```
+
+  - **NA 있는 행 삭제**
+
+<!-- end list -->
+
+``` r
+na.omit(df)
+```
+
+    ##    dos lab gen val
+    ## 1    1   a   m  10
+    ## 2    2   a   m  10
+    ## 3    3   a   m  10
+    ## 4    4   a   m  10
+    ## 5    5   a   m  10
+    ## 6    6   a   f  10
+    ## 7    7   a   f  10
+    ## 8    8   a   f  10
+    ## 9    9   a   f  10
+    ## 10  10   a   f  10
+
+  - **데이터 프레임 두 개 합치기**
+
+<!-- end list -->
+
+``` r
+rbind(df1, df2)
+```
+
+    ##   num char logic
+    ## 1   1    a  TRUE
+    ## 2   2    b FALSE
+    ## 3   3    c  TRUE
+    ## 4   1    d FALSE
+    ## 5   2    e  TRUE
+    ## 6   3    f FALSE
+
+``` r
+cbind(df1, df2)
+```
+
+    ##   num char logic num char logic
+    ## 1   1    a  TRUE   1    d FALSE
+    ## 2   2    b FALSE   2    e  TRUE
+    ## 3   3    c  TRUE   3    f FALSE
+
+  - **두 개의 데이터 프레임을 동일한 변수 기준으로 합치기**
+
+<!-- end list -->
+
+``` r
+merge(df1, df2, by = "num")
+```
+
+    ##   num char.x logic.x char.y logic.y
+    ## 1   1      a    TRUE      d   FALSE
+    ## 2   2      b   FALSE      e    TRUE
+    ## 3   3      c    TRUE      f   FALSE
+
+## 2\. 자료형 데이터 구조 변환
+
+  - **데이터 프레임의 내용에 쉽게 접근하기**
+      - with(df, expr)
+      - attach(df)
+      - detach(df)
+  - **자료형 변환하기**
+      - as.character()
+      - as.complex()
+      - as.numeric() 또는 as.double()
+      - as.integer()
+      - as.logical()
+  - **데이터 구조 변환하기**
+      - as.data.frame()
+      - as.list()
+      - as.matrix()
+      - as.vector()
+
+## 3\. 데이터 구조 변경
+
+  - **vector -\> list**
+      - as.list(v)
+  - **vector -\> matrix**
+      - 1열(col) 짜리 행열
+          - cbind(v) 또는 as.matrix(v)
+      - 1행(row) 짜리 행렬
+          - rbind(v)
+      - n X m 행렬
+          - matrix(v, n, m)
+  - **vector -\> data frame**
+      - 1열(col) 짜리 데이터프레임
+          - as.data.frame(v)
+      - 1행(row) 짜리 데이터프레임
+          - as.data.frame(rbind(v))
+  - **list -\> vector**
+      - unlist(L)
+  - **list -\> matrix**
+      - 1열(col) 짜리 행렬
+          - as.matrix(L)
+      - 1행(row) 짜리 행렬
+          - as.matrix(rbind(L))
+      - n X m 행렬
+          - matrix(L, n, m)
+  - **list -\> data frame**
+      - 리스트 원소들이 데이터의 열(col)이면
+          - as.data.frame(L)
+      - 리스트 원소들이 데이터의 행(row)이면
+          - rbind(L\[\[1\]\], L\[\[2\]\])
+  - **matrix -\> vector**
+      - as.vector(m)
+  - **matrix -\> list**
+      - as.list(m)
+  - **matrix -\> data frame**
+      - as.data.frame(m)
+  - **data frame -\> vector**
+      - 1열(col) 짜리 데이터 프레임
+          - df\[\[1\]\] or df\[, 1\]
+      - 1행(row)짜리 데이터 프레임
+          - df\[1, \]
+  - **data frame -\> list**
+      - as.list(df)
+  - **data frame -\> matrix**
+      - as.matrix(df)
+
+## 4\. 벡터의 기본 연산
+
+  - **벡터 연산**
+      - v1 + v2
+      - v1 - v2
+      - v1 \* v2
+      - v1 ^ v2
+  - **함수 적용**
+      - sapply(colname1, func())
+  - **파일 저장1**
+      - write.csv(a, “a.csv”)
+  - **파일 저장2**
+      - write.csv(a, file = “a.Rdata”)
+  - **파일 읽기**
+      - read.csv(“a.csv”)
+  - **파일 불러오기**
+      - load(“a.R”)
+      - source(“a.R”)
+  - **데이터 삭제**
+      - rm(a)
+      - rm(list = ls())
+      - rm(list = ls(all = TRUE))
+
+## 5\. 그 외에 간단한 함수
+
+  - **데이터 불러오기**
+      - data()
+  - **데이터셋 요약**
+      - summary()
+  - **데이터셋 조회**
+      - head()
+  - **패키지 설치**
+      - install.packages("")
+  - **패키지 불러오기**
+      - library("")
+  - **작업 종료**
+      - q()
+  - **워킹디렉토리 지정**
+      - setwd(“\~/”)
+
+# Chapter 5 - 데이터 변형 (Data Transformation)
+
+## 1\. 주요 코드
+
+  - **요인으로 집단 정의**
+
+<!-- end list -->
+
+``` r
+v <- c(24, 23, 52, 46, 75, 25)
+w <- c(87, 86, 92, 84, 77, 68)
+f <- factor(c("A", "A", "B", "B", "C", "A"))
+```
+
+  - **벡터를 여러 집단으로 분할 (벡터의 길이만 같으면 됨)**
+      - 두 함수 모두 벡터로 된 리스트를 반환
+
+<!-- end list -->
+
+``` r
+split(v, f)
+```
+
+    ## $A
+    ## [1] 24 23 25
+    ## 
+    ## $B
+    ## [1] 52 46
+    ## 
+    ## $C
+    ## [1] 75
+
+``` r
+split(w, f)
+```
+
+    ## $A
+    ## [1] 87 86 68
+    ## 
+    ## $B
+    ## [1] 92 84
+    ## 
+    ## $C
+    ## [1] 77
+
+``` r
+unstack(data.frame(v, f))
+```
+
+    ## $A
+    ## [1] 24 23 25
+    ## 
+    ## $B
+    ## [1] 52 46
+    ## 
+    ## $C
+    ## [1] 75
+
+  - **데이터 프레임을 여러집단으로 분할**
+      - MASS 패키지, Cars93 데이터 셋 활용
+
+<!-- end list -->
+
+``` r
+library(MASS)
+sp <- split(Cars93$MPG.city, Cars93$Origin)
+sp
+```
+
+    ## $USA
+    ##  [1] 22 19 16 19 16 16 25 25 19 21 18 15 17 17 20 23 20 29 23 22 17 21 18 29 20
+    ## [26] 31 23 22 22 24 15 21 18 17 18 23 19 24 23 18 19 23 31 23 19 19 19 28
+    ## 
+    ## $`non-USA`
+    ##  [1] 25 18 20 19 22 46 30 24 42 24 29 22 26 20 17 18 18 29 28 26 18 17 20 19 29
+    ## [26] 18 29 24 17 21 20 33 25 23 39 32 25 22 18 25 17 21 18 21 20
+
+``` r
+median(sp[[1]])
+```
+
+    ## [1] 20
+
+  - **리스트의 각 원소에 함수 적용**
+      - lapply
+          - 결과를 list 형태로 반환
+      - sapply
+          - 결과를 list 형태로 반환
+  - **행렬에 함수 적용**
+      - apply(m, 1, func)
+      - apply(m, 2, func)
+  - **데이터프레임에 함수 적용**
+      - lapply(df, func)
+      - sapply(df, func)
+      - apply(df, func)
+          - 데이터프레임이 동질적(모두 문자, 숫자)인 경우만 활용 가능
+          - 데이터프레임을 행렬로 변환 후 함수 적용
+  - **대용량 데이터의 함수적용**
+      - cors \<- sapply(df, cor, y = targetVar)
+      - mask \<- rank(-abs(cors)) \<= 10
+      - best.pred \<- df\[, mask\]
+      - lm(targetVar \~ best.pred)
+          - **많은 변수가 있는 데이터에서의 다중회귀분석**
+          - \[1\] 데이터 프레임에서 타켓 변수를 정한다
+          - \[2\] 타겟변수와 상관계수를 구한다
+          - \[3\] 상관계수가 높은 상위 10개의 변수를 입력변수로 선정
+          - \[4\] 타켓변수와 입력변수로 다중회귀분석을 실시한다
+  - **집단별 함수 적용**
+      - tapply(vec, factor, func)
+          - 데이터가 집단(factors)에 속해 있을 때 합계/평균 구하기s
+  - **행집단 함수 적용**
+      - by(drm, factor, func)
+      - 요인별 선형회귀선 구하기
+      - model(df, factor, function(df) lm(y \~ x1 + x2 + … + xk, data =
+        df))
+  - **병력 벡터, 리스트들 함수 적용**
+      - mapply(factor, v1, v2, v3, …, vk)
+      - mapply(factor, L1, L2, L3, …, LK)
+
+## 2\. 문자열 날짜 다루기
+
+  - **문자열 길이**
+      - nchar(“단어”)
+          - 단어나 문장 또는 벡터 내 원소의 문자열 길이를 반환
+          - \[주의\] length(v) 문자열의 길이가 아닌 벡터의 길이를 반환
+
+<!-- end list -->
+
+``` r
+v <- c("hello", "my", "name", "is")
+
+nchar("hello")
+```
+
+    ## [1] 5
+
+``` r
+length(v)
+```
+
+    ## [1] 4
+
+  - **문자열 연결**
+
+<!-- end list -->
+
+``` r
+paste("Hello", "my", sep = " ")
+```
+
+    ## [1] "Hello my"
+
+``` r
+paste("Pi is approximately", pi)
+```
+
+    ## [1] "Pi is approximately 3.14159265358979"
+
+``` r
+paste(c("Hi", "Good morning", "Good bye"), "John", collapse = ", ")
+```
+
+    ## [1] "Hi John, Good morning John, Good bye John"
+
+  - **하위문자열 추출**
+
+<!-- end list -->
+
+``` r
+substr("statistics", 1, 4)
+```
+
+    ## [1] "stat"
+
+  - **구분자로 문자열 추출**
+
+<!-- end list -->
+
+``` r
+strsplit("statistics", "t")
+```
+
+    ## [[1]]
+    ## [1] "s"   "a"   "is"  "ics"
+
+  - **하위 문자열 대체**
+
+<!-- end list -->
+
+``` r
+sub("t", "*", "statistics")
+```
+
+    ## [1] "s*atistics"
+
+``` r
+gsub("t", "*", "statistics")
+```
+
+    ## [1] "s*a*is*ics"
+
+  - **쌍별 조합**
+
+<!-- end list -->
+
+``` r
+outer("Hello", "my", paste, sep = "")
+```
+
+    ##      [,1]     
+    ## [1,] "Hellomy"
+
+  - **날짜 변환1**
+
+<!-- end list -->
+
+``` r
+today <- Sys.Date()
+today
+```
+
+    ## [1] "2021-01-30"
+
+``` r
+as.Date(today)
+```
+
+    ## [1] "2021-01-30"
+
+  - **날짜 변환2**
+
+<!-- end list -->
+
+``` r
+format(today, format="%B %d %Y")
+```
+
+    ## [1] "January 30 2021"
+
+  - **날짜 조회**
+
+<!-- end list -->
+
+``` r
+format(today, "%a") # 요일
+```
+
+    ## [1] "Sat"
+
+``` r
+format(today, "%b") # 축약된 월 이름
+```
+
+    ## [1] "Jan"
+
+``` r
+format(today, "%B") # 전체 월 이름
+```
+
+    ## [1] "January"
+
+``` r
+format(today, "%d") # 두자리 숫자의 일
+```
+
+    ## [1] "30"
+
+``` r
+format(today, "%m") # 두자리 숫자의 월
+```
+
+    ## [1] "01"
+
+``` r
+format(today, "%y") # 두자리 숫자의 연도
+```
+
+    ## [1] "21"
+
+``` r
+format(today, "%Y") # 네자리 숫자의 연도
+```
+
+    ## [1] "2021"
+
+  - **날짜 일부 추출**
+
+<!-- end list -->
+
+``` r
+d <- as.Date("2014-12-25")
+d
+```
+
+    ## [1] "2014-12-25"
+
+``` r
+p <- as.POSIXlt(d)
+p
+```
+
+    ## [1] "2014-12-25 UTC"
+
+``` r
+p$yday
+```
+
+    ## [1] 358
+
+``` r
+start <- as.Date("2014-12-01")
+end <- as.Date("2014-12-25")
+
+seq(from = start, to = end, by = 1)
+```
+
+    ##  [1] "2014-12-01" "2014-12-02" "2014-12-03" "2014-12-04" "2014-12-05"
+    ##  [6] "2014-12-06" "2014-12-07" "2014-12-08" "2014-12-09" "2014-12-10"
+    ## [11] "2014-12-11" "2014-12-12" "2014-12-13" "2014-12-14" "2014-12-15"
+    ## [16] "2014-12-16" "2014-12-17" "2014-12-18" "2014-12-19" "2014-12-20"
+    ## [21] "2014-12-21" "2014-12-22" "2014-12-23" "2014-12-24" "2014-12-25"
