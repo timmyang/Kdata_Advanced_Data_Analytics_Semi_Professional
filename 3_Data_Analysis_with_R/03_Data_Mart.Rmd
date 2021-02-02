@@ -116,11 +116,66 @@ output: rmarkdown::github_document
 
 #### 라. reshape의 활용
 
+```{r}
+# install.packages("reshape")
+# packageVersion("reshape")
+library(reshape)
+```
+
 - reshape 패키지에는 **melt()와 cast()** 라는 2개의 핵심 함수가 있다 (철을 녹이고 다시 틀에 넣어 모양을 만드는 과정에 비유하여, **녹이는 함수를 melt(), 모양을 만드는 함수를 cast()** 로 사용한다)
 - **melt():** 원데이터 형태로 만드는 함수
 - **cast():** 요약 형태로 만드는 함수
 - 다음의 예시는 reshape 패키지의 주요 기능인 melt를 이용해 airquality 데이터의 Month, id를 기준으로 모든 데이터를 표준형식으로 변환한다
-- 변수를 조합해 변수명을 만들고 변수들을 시간, 상품 등의 차원에 결합해 다양한 요약변수와 파생변수를 쉽게 생성ㅇ하여 데이터마트를 구성할 수 있게 한다
+- 변수를 조합해 변수명을 만들고 변수들을 시간, 상품 등의 차원에 결합해 다양한 요약변수와 파생변수를 쉽게 생성하여 데이터마트를 구성할 수 있게 한다
+
+
+
+```{r}
+str(airquality)
+head(airquality)
+summary(airquality)
+```
+
+- **melt() 함수**
+  - Melt an object into a form suitable for easy casting
+
+```{r}
+str(melt)
+
+m <- melt(airquality, id = c("Month", "Day"), na.rm = T)
+head(m)
+```
+
+- **cast() 함수**
+  - Cast a molten data frame into the reshaped or aggregarted form you want
+
+```{r}
+str(cast)
+
+head(cast(m, Day ~ Month ~ variable))
+```
+
+With aggregation
+```{r}
+cast(m, Month ~ variable, mean)
+
+head(cast(m, Day ~ variable, mean))
+
+b <- cast(m, Month ~ Day, mean)
+b[, 1:9]
+```
+
+Without aggregation
+
+```{r}
+head(cast(m, Month + Day ~ variable))
+
+a <- cast(m, Month + variable ~ Day)
+a[ , 1:10]
+
+b <- cast(m, Month ~ variable + Day)
+b[ , 1:10]
+```
 
 
 **기출문제**  
@@ -132,10 +187,7 @@ output: rmarkdown::github_document
 4. BI
 
 (정답): 1번  
-(해설): 
-
-- **데이터 웨어하우스** 는 정보(data)와 창고(warehouse)의 합성어로 데이터베이스 시스템에서 의사결정에 필요한 데이터를 미리 추출하여, 이를 원하는 형태로 변환하고 통합한 읽기 전용의 데이터 저장소다
-- **데이터 웨어하우스** 는 데이터베이스 시스템 하나를 대상으로 할 수도 있고 여러 개를 대상으로 할 수도 있다
+(해설): **데이터 웨어하우스** 는 정보(data)와 창고(warehouse)의 합성어로 데이터베이스 시스템에서 의사결정에 필요한 데이터를 미리 추출하여, 이를 원하는 형태로 변환하고 통합한 읽기 전용의 데이터 저장소다. **데이터 웨어하우스** 는 데이터베이스 시스템 하나를 대상으로 할 수도 있고 여러 개를 대상으로 할 수도 있다
 
 **58. 고객 데이터 마트에서 가장 기본적인 변수로, 고객-상품-채널을 종합(Aggregation)한 변수를 무엇이라고 하는가?**
 
@@ -148,19 +200,141 @@ output: rmarkdown::github_document
 3. 파생변수는 재활용성이 높다  
 4. 파생변수는 다양한 모델을 개발해야 하는 경우, 효율적으로 사용할 수 있다
 
+(정답): 1번
 
 ## 2. sqldf를 이용한 데이터 분석
 
+```{r warning = FALSE}
+# install.packages("sqldf")
+# packageVersion("sqldf")
+library(sqldf)
+library(RSQLite)
+```
+
+- sqldf는 R에서 sql의 명령어를 사용 가능하게 해주는 패키지이다
+- SAS에서의 proc sql와 같은 역할을 하는 패키지이다
+- <예시1>
+- **SQL:** SELECT * FROM [Data frame]
+  - **R:** sqldf("SELECT * FROM [Data frame]")
+- **SQL:** SELECT * FROM [Data frame] **numrows** 10
+  - **R:** sqldf("SELECT * FROM [Data frame] **limit** 10)
+- **SQL:** SELECT * FROM [Data frame] WHERE [col] **=** 'char%'
+  - **R:** sqldf("SELECT * FROM [Data frame] WHERE [col] **like** 'char%' ")
+- <예시2>
+- **head([df])**
+  - sqldf("SELECT * FROM [df] limit 6")
+- **subset([df], grep1("qn%, [col]))**
+  - sqldf("SELECT * FROM [df] WHERe [col] like 'qn%' ")
+- **subset([df], [col] %in% c("BF", "HF"))**
+  - sqldf("SELECT * FROM [df] WHERE [col] in("BF", "HF")")
+- **rbind([df1], [df2])**
+  - sqldf("SELECT * FROM [df1] UNION ALL SELECT * FROM [df2]")
+- **merge([df1], [df2])**
+  - sqldf("SELECT * FROM [df1], [df2]")
+- **df[order([df]$[col], decreasing = T), ]**
+  - sqldf("SELECT * FROM [df] ORDER BY [col] desc")
+- <예시3>
+```{r}
+str(iris)
+
+sqldf("SELECT * FROM iris limit 6")
+```
+
+**기출문제**  
+**61-1. 다음 중 데이터베이스와 통신을 위해 고안된 언어는 무엇인가?**
+
+1. JAVA  
+2. R  
+3. Python  
+4. SQL
+
+(정답): 4번
+
+
 ## 3. plyr을 이용한 데이터 분석
 
-## 4. 데이터 테이블
+```{r}
+# install.packages("plyr")
+# packageVersion("plyr")
+library(plyr)
+```
+
+- plyr은 apply 함수에 기반해 데이터 출력변수를 동시에 배열로 치환하여 처리하는 패키지이다
+- split-apply-combine: 데이터를 분리하고 처리한 다음, 다시 결합하는 등 필수적인 데이터 처리 기능을 제공한다
+
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ **array** \ \ \ \ \ **data frame** \ \ \ \ \ **list** \ \ \ \ \ **nothing**  
+**Array** \ \ \ \ \ \ \ \ \ \ \ \ aaply \ \ \ \ \ adply \ \ \ \ \ \ \ \ \ \ \ \ \ \ alply \ \ \ \ \ \ a_ply  
+**Data frame** \ \ daply \ \ \ \ \ ddply \ \ \ \ \ \ \ \ \ \ \ \ \ \ dlply \ \ \ \ \ \ d_ply  
+**List** \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ laply \ \ \ \ \ \ ldply \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ llply \ \ \ \ \ \ \  l_ply  
+**N replicates** \ raply \ \ \ \ \ rdply \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rlply \ \ \ \ \ \ \ r_ply  
+**Function** \ \ \ \ \ \ maply \ \ \ \ mdply \ \ \ \ \ \ \ \ \ \ \ \ \ mlply \ \ \ \ \ m_ply  
+**arguments**
+
+- test data 불러오기
+```{r}
+test.data <- data.frame(year = c(rep(2011, 5), rep(2012, 5)), value = c(31, 84, 66, 31, 84, 95, 83, 91, 95, 83))
+test.data
+```
+
+- test.data를 이용하여 sd와 mean의 비율인 변동계수 CV(Coefficient of Variation)를 산출
+```{r}
+str(ddply)
+
+dd.test <- ddply(test.data, "year", function(x) {
+  m.value <- mean(x$value)
+  sd.value <- sd(x$value)
+  cv <- round(sd.value / m.value, 4)
+  data.frame(cv.value = cv)
+})
+
+dd.test
+```
+
+**기출문제**  
+**63. Chickwts 데이터프레임은 여섯 가지 종류의 닭 사료 첨가물(feed)과 각 사료를 먹인 닭의 무게 (weight)를 변수로 가진다. 아래의 (1)의 기초통계량과 각 feed별 weight의 평균을 계산하여, 아래 (2)와 같은 결과물을 만들기 위한 코드로 다음 중 가장 적절한 것은?**
+
+1. ddply(chickwts, ~feed, groupmean = mean(weight))  
+2. **ddply(chickwts, ~feed, summarize, groupmean = mean(weight))**
+
+## 4. 데이터 테이블 (data.table)
+
+```{r}
+# install.packages("data.table")
+# packageVersion("data.table")
+library(data.table)
+```
+
+- data.table 패키지는 R에서 **가장 많이 사용하는 데이터 핸들링 패키지** 중 하나이다
+- data.table은 큰 데이터를 **탐색, 연산, 병합 하는데 아주 유용** 하다
+- 기존 data.frame 방식보다 **월등히 빠른 속도** 이다
+- 특정 column을 key 값으로 색인을 지정한 후 데이터를 처리한다
+- **빠른 grouping과 ordering, 짧은 문장 지원 측면에서 데이터프레임보다 유용** 하다(*속도차 큼*)
+
+```{r}
+DF <- data.frame(x = runif(2.6e+07), y = rep(LETTERS, each = 10000))
+df <- data.frame(x = runif(2.6e+07), y = rep(letters, each = 10000))
+
+system.time(x <- DF[DF$y == "C", ])
+
+DT <- as.data.table(DF)
+setkey(DT, y)
+system.time(x <- DT[J("C"), ])
+```
+
+**기출문제**  
+**64. R에서 제공하는 데이터 가공, 처리를 위한 패키지의 설명으로 가장 부적절한 것은?**
+
+1. **data.table 패키지는 데이터 프레임 처리함수인 ddply 함수를 제공한다**  
+2. reshape 패키지는 melt와 cast를 이용하여 데이터를 재구성할 수 있다  
+3. sqldf 패키지는 R에서 표준 SQL 명령을 실행하고 결과를 가져올 수 있다  
+4. plyr 패키지는 데이터의 분리, 결합 등 필수적인 데이터 처리기능을 제공한다
 
 
 # Chapter 2 - 데이터 가공 (Data Processing)
 
 ## 1. Data Exploration
 
-## 2.변수 중요도
+## 2. 변수 중요도
 
 ## 3. 변수의 구간화
   
