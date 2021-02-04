@@ -584,7 +584,7 @@ system.time(x <- DF[DF$y == "C", ])
 ```
 
     ##    user  system elapsed 
-    ##   0.258   0.040   0.301
+    ##   0.276   0.041   0.321
 
 ``` r
 DT <- as.data.table(DF)
@@ -593,7 +593,7 @@ system.time(x <- DT[J("C"), ])
 ```
 
     ##    user  system elapsed 
-    ##   0.024   0.007   0.031
+    ##   0.024   0.006   0.030
 
 **기출문제**  
 **64. R에서 제공하는 데이터 가공, 처리를 위한 패키지의 설명으로 가장 부적절한 것은?**
@@ -688,7 +688,7 @@ summary(dia.data)
       - **greedy.wilks( ):**
           - 세분화를 위한 stepwise forward 변수선택을 위한 패키지
           - 종속변수에 가장 영향력을 미치는 변수를 wilks lambda를 활용하여 변수의 중요도를 정리
-              - **Wilk’s Lambda = 집단내분산/총분산)**
+              - **Wilk’s Lambda = 집단내분산/총분산**
 
 <!-- end list -->
 
@@ -815,8 +815,8 @@ mean(x, na.rm = T)
   - **Complete Analysis**
       - 결측값이 존재하는 레코드를 **삭제** 한다
   - **평균대치법 (Mean Imputation)**
-      - 관측 또는 실험을 통해 얻어진 **데이터으이 평균으로 대치** 한다
-      - **비조건부** 평균 대치법: 관측데이터의 평ㅇ균으로 대치
+      - 관측 또는 실험을 통해 얻어진 **데이터의 평균으로 대치** 한다
+      - **비조건부** 평균 대치법: 관측데이터의 평균으로 대치
       - **조건부** 평균 대치법(Regression Imputation): 회귀분석을 활용한 대치법
   - **단순확률 대치법 (Single Stochastic Imputation)**
       - 평균대치법에서 추정량 표준 오차의 과소 추정문제를 보완하고자 고안된 방법으로 Hot-deck 방법,

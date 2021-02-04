@@ -370,7 +370,7 @@ summary(dia.data)
   - **greedy.wilks( ):** 
     - 세분화를 위한 stepwise forward 변수선택을 위한 패키지
     - 종속변수에 가장 영향력을 미치는 변수를 wilks lambda를 활용하여 변수의 중요도를 정리
-      - **Wilk's Lambda = 집단내분산/총분산)**
+      - **Wilk's Lambda = 집단내분산/총분산**
 
 ```{r}
 # install.packages("dplyr")
@@ -451,8 +451,8 @@ mean(x, na.rm = T)
   - 결측값이 존재하는 레코드를 **삭제** 한다
 
 - **평균대치법 (Mean Imputation)**
-  - 관측 또는 실험을 통해 얻어진 **데이터으이 평균으로 대치** 한다
-  - **비조건부** 평균 대치법: 관측데이터의 평ㅇ균으로 대치
+  - 관측 또는 실험을 통해 얻어진 **데이터의 평균으로 대치** 한다
+  - **비조건부** 평균 대치법: 관측데이터의 평균으로 대치
   - **조건부** 평균 대치법(Regression Imputation): 회귀분석을 활용한 대치법
 
 - **단순확률 대치법 (Single Stochastic Imputation)**
