@@ -6,10 +6,10 @@ output: rmarkdown::github_document
 # Table of Contents
 
 - **Chapter 1 - 데이터 변경 및 요약 (Data Change and Summary)**
-  - R reshape를 이용ㅇ한 데이터 마트 개발
+  - R reshape를 이용한 데이터 마트 개발
   - sqldf를 이용한 데이터 분석
   - plyr을 이용한 데이터 분석
-  - 데이터 테이블s
+  - 데이터 테이블
 
 - **Chapter 2 - 데이터 가공 (Data Processing)**
   - Data Exploration

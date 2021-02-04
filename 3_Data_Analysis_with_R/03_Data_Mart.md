@@ -4,10 +4,10 @@ Part 3: Data Mart
 # Table of Contents
 
   - **Chapter 1 - 데이터 변경 및 요약 (Data Change and Summary)**
-      - R reshape를 이용ㅇ한 데이터 마트 개발
+      - R reshape를 이용한 데이터 마트 개발
       - sqldf를 이용한 데이터 분석
       - plyr을 이용한 데이터 분석
-      - 데이터 테이블s
+      - 데이터 테이블
   - **Chapter 2 - 데이터 가공 (Data Processing)**
       - Data Exploration
       - 변수 중요도
@@ -584,7 +584,7 @@ system.time(x <- DF[DF$y == "C", ])
 ```
 
     ##    user  system elapsed 
-    ##   0.248   0.037   0.285
+    ##   0.258   0.040   0.301
 
 ``` r
 DT <- as.data.table(DF)
@@ -593,7 +593,7 @@ system.time(x <- DT[J("C"), ])
 ```
 
     ##    user  system elapsed 
-    ##   0.023   0.003   0.026
+    ##   0.024   0.007   0.031
 
 **기출문제**  
 **64. R에서 제공하는 데이터 가공, 처리를 위한 패키지의 설명으로 가장 부적절한 것은?**
