@@ -169,9 +169,7 @@ Part 4: Statistical Analysis
       - 특히, 2차 중심적률
         <img src="https://render.githubusercontent.com/render/math?math=$E(X - \mu ) ^{2} = \sigma ^{2}$">:
         모분산(populatino variance)
-          - 기대값의 선형성을 이용하면 \<img
-            src="<https://render.githubusercontent.com/render/math?math=$\sigma>
-            ^{2} = E(X - ) ^{2}$
+          - 기대값의 선형성을 이용하면 \({\sigma}^{2} = E(X- \mu)^{2}\)
           - <img src="https://render.githubusercontent.com/render/math?math=$= E(X^2 -2 \mu X + \mu ^{2})$">
           - <img src="https://render.githubusercontent.com/render/math?math=$= E(X^2) - 2 \mu E(X) + \mu ^{2}$">
           - <img src="https://render.githubusercontent.com/render/math?math=$= E(X^2) - \mu ^{2}$">
@@ -179,21 +177,24 @@ Part 4: Statistical Analysis
           - <img src="https://render.githubusercontent.com/render/math?math=$E(aX + b) = aE(X) + b$">
           - <img src="https://render.githubusercontent.com/render/math?math=$Var(aX + b) = a^2 Var(X)$">
       - 덧셈정리(배반이 아닐 때)
-          - 사건 A와 사건B가 동시에 일어날 수 있들 때(교집합이 성립할 때),
-            <img src="https://render.githubusercontent.com/render/math?math=$일어날 확률 P(A 또는 B)는 P(A \cup B) = P(A) + P(B) - P(A \cap B)$">
+          - 사건 A와 사건B가 동시에 일어날 수 있들 때(교집합이 성립할 때), 일어날 확률 P(A 또는 B)는
+            <img src="https://render.githubusercontent.com/render/math?math=$P(A \cup B)$">
+            = P(A) + P(B) -
+            <img src="https://render.githubusercontent.com/render/math?math=$P(A \cap B)$">
             로 표현된다
-          - <img src="https://render.githubusercontent.com/render/math?math=$사건 B가 주어졌을 때 사건 A의 조건부 확률은 P(A|B) = P(A \cap B / P(B)$">
-            로 표현된다
-      - 덧셈정리(배반사건이리 때)
-          - 사건 A와 사건 B가 동시에 일어나지 않을 때, 즉
-            <img src="https://render.githubusercontent.com/render/math?math=$사건 A 또는 사건 B 중 어느 한 쪽만 일어날 확률은 P(A \cup B) = P(A) + P(B)$">
-            로 표현된다
+          - 사건 B가 주어졌을 때 사건 A의 조건부 확률은 P(A|B) =
+            <img src="https://render.githubusercontent.com/render/math?math=$P(A \cap B)$">
+            / P(B) 로 표현된다
+      - 덧셈정리(배반사건일 때)
+          - 사건 A와 사건 B가 동시에 일어나지 않을 때, 즉 사건 A 또는 사건 B 중 어느 한 쪽만 일어날 확률은
+            <img src="https://render.githubusercontent.com/render/math?math=$P(A \cup B)$">
+            = P(A) + P(B) 로 표현된다
       - 곱셈정리
-          - 사건 A와 B가 서로 무관계하게 나타날 때, 즉
-            <img src="https://render.githubusercontent.com/render/math?math=$독립사건일 때 A와 B가 동시에 나타날 확률은 P(A 또는 B)는 P(A \cap = P(A) x P(B)$">
-            로 표현되고
-          - <img src="https://render.githubusercontent.com/render/math?math=$사건 B가 주어졌을 때 사건 A의 조건부 확률은 P(A|B) = P(A)$">
-            로 표현된다
+          - 사건 A와 B가 서로 무관계하게 나타날 때, 즉, 독립사건일 때 A와 B가 동시에 나타날 확률은 P(A 또는
+            B)는
+            <img src="https://render.githubusercontent.com/render/math?math=$P(A \cap B)=$">
+            P(A) x P(B) 로 표현되고
+          - 사건 B가 주어졌을 때 사건 A의 조건부 확률은 P(A|B) = P(A) 로 표현된다
 
 #### 나. 확률분포
 
@@ -258,7 +259,10 @@ Part 4: Statistical Analysis
           - 어떤 사건이 발생할 때까지 경과 시간에 대한 연속확률분포이다
           - <예시> 전자레인지의 수명시간, 콜센터에 전화가 걸려올 때까지의 시간, 은행에 고객이 내방하는데 걸리는
             시간, 정류소에서 보스가 올 때까지의 시간
-          - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = e^{-x} (지수분포밀도함수 \lambda = 1)$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = e^{-x}$">
+            (지수분포밀도함수
+            <img src="https://render.githubusercontent.com/render/math?math=$\lambda$">
+            = 1
           - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = 1/2 * e^{-2/x}$">
       - **라) t-분포(t-distribution)**
           - 표준정규분포와 같이 평균이 0을 중심으로 좌우가 동일한 분포를 따른다
