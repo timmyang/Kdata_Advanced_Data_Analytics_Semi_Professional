@@ -246,7 +246,7 @@ Part 4: Statistical Analysis
       - <img src="https://render.githubusercontent.com/render/math?math=$f(x) >= 0, \int_{-\infty}^{\infty} f(x) dx = 1$">
       - **가) 균일분포(일양분포, Uniform distribution)**
           - 모든 확률변수 X가 균일한 확률을 가지는 확률분포(다트의 확률분포)
-          - E(X) = (a + b)/2, Var(X) = \[(b - a)^2\]/12
+          - <img src="https://render.githubusercontent.com/render/math?math=$E(X) = (a + b)/2, Var(X) = (b - a)^2/12$">
       - **나) 정규분포(Normal distribution)**
           - 평균이
             <img src="https://render.githubusercontent.com/render/math?math=$\mu$">
@@ -262,7 +262,7 @@ Part 4: Statistical Analysis
           - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = e^{-x}$">
             (지수분포밀도함수
             <img src="https://render.githubusercontent.com/render/math?math=$\lambda$">
-            = 1
+            = 1)
           - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = 1/2 * e^{-2/x}$">
       - **라) t-분포(t-distribution)**
           - 표준정규분포와 같이 평균이 0을 중심으로 좌우가 동일한 분포를 따른다
@@ -343,15 +343,20 @@ TRUE
           - <참고>
           - 95% 신뢰수준 하에서 모평균의 신뢰구간
               - **모분산
-                <img src="https://render.githubusercontent.com/render/math?math=$sigma^{2}$">이
+                <img src="https://render.githubusercontent.com/render/math?math=$\sigma^{2}$">이
                 알려져 있는 경우**
-                  - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 1.96 (\sigma / \sqrt{n}), Xbar + 1.96 * \sigma / \sqrt{n})$">
+                  - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 1.96 (\sigma / \sqrt{n})$">,
+                    Xbar + 1.96 \*
+                    <img src="https://render.githubusercontent.com/render/math?math=$\sigma / \sqrt{n})$">
                   - 표준정규분포 N(0, 1)를 따르는 Z = (Xbar - mu)/(sigma /
                     sqrt(n)) 통계량 이용
               - **모분산
                 <img src="https://render.githubusercontent.com/render/math?math=$\sigma^2$">이
                 알려져 있지 않은 경우** 모분산 대신 표본분산을 사용
-                  - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 2.26 * S / \sqrt{n}, Xbar + 2.26 * S/ \sqrt{n}$">
+                  - Xbar - 2.26 \* S /
+                    <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">,
+                    Xbar + 2.26 \* S/
+                    <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">
                   - 자유도가 n - 1인 t-분포를 따르는
                     <img src="https://render.githubusercontent.com/render/math?math=$T = (Xbar - \mu) / (S / \sqrt{n})$">
                     통계량 이용

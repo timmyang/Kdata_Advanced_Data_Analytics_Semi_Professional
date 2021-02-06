@@ -200,7 +200,7 @@ output: rmarkdown::github_document
   - <img src="https://render.githubusercontent.com/render/math?math=$f(x) >= 0, \int_{-\infty}^{\infty} f(x) dx = 1$">
   - **가) 균일분포(일양분포, Uniform distribution)**
     - 모든 확률변수 X가 균일한 확률을 가지는 확률분포(다트의 확률분포)
-    - E(X) = (a + b)/2, Var(X) = [(b - a)^2]/12
+    - <img src="https://render.githubusercontent.com/render/math?math=$E(X) = (a + b)/2, Var(X) = (b - a)^2/12$">
   - **나) 정규분포(Normal distribution)**
     - 평균이 <img src="https://render.githubusercontent.com/render/math?math=$\mu$"> 이고, 표준편차가 <img src="https://render.githubusercontent.com/render/math?math=$\sigma$">인 x의 확률밀도함수
     - 표준편차가 클 경우 퍼져보이는 그래프가 나타난다
@@ -208,7 +208,7 @@ output: rmarkdown::github_document
   - **다) 지수분포(Exponential distribution)**
     - 어떤 사건이 발생할 때까지 경과 시간에 대한 연속확률분포이다
     - <예시> 전자레인지의 수명시간, 콜센터에 전화가 걸려올 때까지의 시간, 은행에 고객이 내방하는데 걸리는 시간, 정류소에서 보스가 올 때까지의 시간
-    - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = e^{-x}$"> (지수분포밀도함수 <img src="https://render.githubusercontent.com/render/math?math=$\lambda$"> = 1
+    - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = e^{-x}$"> (지수분포밀도함수 <img src="https://render.githubusercontent.com/render/math?math=$\lambda$"> = 1)
     - <img src="https://render.githubusercontent.com/render/math?math=$f(x) = 1/2 * e^{-2/x}$">
   - **라) t-분포(t-distribution)**
     - 표준정규분포와 같이 평균이 0을 중심으로 좌우가 동일한 분포를 따른다
@@ -282,11 +282,11 @@ TRUE
     - 항상 추정량의 분포에 대한 전제가 주어져야 하고, 구해진 구간 안에 모수가 있을 가능성의 크기(신뢰수준, Confidence Interval)가 주어져야 한다
     - <참고>
     - 95% 신뢰수준 하에서 모평균의 신뢰구간
-      - **모분산 <img src="https://render.githubusercontent.com/render/math?math=$sigma^{2}$">이 알려져 있는 경우**
-        - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 1.96 (\sigma / \sqrt{n}), Xbar + 1.96 * \sigma / \sqrt{n})$">
+      - **모분산 <img src="https://render.githubusercontent.com/render/math?math=$\sigma^{2}$">이 알려져 있는 경우**
+        - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 1.96 (\sigma / \sqrt{n})$">, Xbar + 1.96 * <img src="https://render.githubusercontent.com/render/math?math=$\sigma / \sqrt{n})$">
         - 표준정규분포 N(0, 1)를 따르는 Z = (Xbar - mu)/(sigma / sqrt(n)) 통계량 이용
       - **모분산 <img src="https://render.githubusercontent.com/render/math?math=$\sigma^2$">이 알려져 있지 않은 경우** 모분산 대신 표본분산을 사용
-        - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 2.26 * S / \sqrt{n}, Xbar + 2.26 * S/ \sqrt{n}$">
+        - Xbar - 2.26 * S / <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">, Xbar + 2.26 * S/ <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">
         - 자유도가 n - 1인 t-분포를 따르는 <img src="https://render.githubusercontent.com/render/math?math=$T = (Xbar - \mu) / (S / \sqrt{n})$"> 통계량 이용
     
 #### 나. 가설검정
