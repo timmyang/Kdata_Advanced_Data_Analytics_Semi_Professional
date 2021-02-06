@@ -348,8 +348,9 @@ TRUE
                   - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 1.96 (\sigma / \sqrt{n})$">,
                     Xbar + 1.96 \*
                     <img src="https://render.githubusercontent.com/render/math?math=$\sigma / \sqrt{n})$">
-                  - 표준정규분포 N(0, 1)를 따르는 Z = (Xbar - mu)/(sigma /
-                    sqrt(n)) 통계량 이용
+                  - 표준정규분포 N(0, 1)를 따르는
+                    <img src="https://render.githubusercontent.com/render/math?math=$Z = (Xbar - \mu)/(\sigma / \sqrt{n})$">
+                    통계량 이용
               - **모분산
                 <img src="https://render.githubusercontent.com/render/math?math=$\sigma^2$">이
                 알려져 있지 않은 경우** 모분산 대신 표본분산을 사용
