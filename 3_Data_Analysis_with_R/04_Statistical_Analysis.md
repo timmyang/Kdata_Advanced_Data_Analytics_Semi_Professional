@@ -488,10 +488,259 @@ TRUE
             <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X} \overline{X} + n \overline{X}^{2})$">  
             <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X}^{2} \ + n \overline{X}^{2})$">  
             <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) (\Sigma_{i = 1}^{n} X_i^{2} - n \overline{X}^{2})$">
+      - 나) 표준편차
+          - <img src="https://render.githubusercontent.com/render/math?math=$S = \sqrt{S^2} = \sqrt{1/(n -1) \Sigma_{i = 1}^{n} (X_i - \overline{X})^{2}}$">
+      - 다) 사분위범위(interquartile range)
+          - IQR = Q3 - Q1
+      - 라) 사분위수
+          - 제 1사분위수(Q1)
+              - 25백분위수
+          - 제 2사위수(Q2)
+              - 50백분위수
+          - 제 3사분위수(Q3)
+              - 75백분위수
+      - 마) 백분위수(percentile)
+          - (n - 1)p / (100 + 1) 번째 값
+      - 바) 변동계수(coefficient of variation)
+          - V = S /
+            <img src="https://render.githubusercontent.com/render/math?math=$\overline{X}$">
+      - 사) 평균의 표준오차
+          - SE(X) = S/
+            <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">
+  - **\[3\] 분포의 형태에 관한 측도**
+      - 가) 왜도(Skewness)
+          - 분포의 비대칭정도를 나타내는 측도이다
+          - <img src="https://render.githubusercontent.com/render/math?math=$m_3 = E ((X - \mu) / \sigma)^{3} = \mu_3 / \sigma_3$">
+          - m3 \> 0
+              - 오른쪽 긴 꼬리를 갖는 분포
+          - m3 = 0
+              - 좌우가 대칭인 분포
+          - m3
+              - 왼쪽으로 긴 꼬리를 갖는 분포
+      - 나) 첨도(Kurtosis)
+          - 분포의 중심에서 뾰족한 정도를 나타내는 측도이다
+          - <img src="https://render.githubusercontent.com/render/math?math=$m_4 = E ((X - \mu) / \sigma)^{4} - 3 = \mu_4 / \sigma_4 - 3$">
+          - m4 \> 0
+              - 표준정규분포 보다 더 뾰족함
+          - m4 = 0
+              - 표준정규분포와 유사한 뾰족함
+          - m4 \< 0
+              - 표준정규분포 보다 덜 뾰족함
+
+#### 다. 그래프를 이용한 자료 정리
+
+  - **\[1\] 히스토그램**
+      - 표로 되어 있는 도수 분포를 그림으로 나타낸 것으로, 도수분포표를 그래프로 나타낸 것이다
+  - **\[2\] 막대그래프와 히스토그램의 비교**
+      - 가) 막대그래프
+          - **범주(category)형** 으로 구분된 데이터(예: 직업, 종교, 음식 등)를 표현하며 범주의 순서를
+            위도에 따라 바꿀 수 있다
+      - 나) 히스토그램
+          - **연속(continuous)형** 으로 표시된 데이터(예: 몸무게, 성적, 연봉 등)를 표현하며 임의로
+            순서를 바꿀 수 없고 막대의 간격이 없다
+  - **\[3\] 히스토그램의 생성**
+      - 데이터의 수를 활용해서 계급의 수와 계급간격을 계산하여 도수분포표를 만들고 히스토그램을 생성한다
+      - 계급의 수는
+        <img src="https://render.githubusercontent.com/render/math?math=$2^{k} \geq n$">을
+        만족하는 최소의 정수
+        <img src="https://render.githubusercontent.com/render/math?math=$log_2 n = k$">에서
+        최소의 정수이다 (k는 계급 수, n은 데이터 수)
+      - 계급의 간격은 (최댓값 - 최소값)/계급수로 파악할 수 있다
+      - 계급의 수와 간격이 변하면 히스토그램의 모양이 변한다
+  - **\[4\] 줄기-잎 그림(stem and leaf plot)**
+      - 데이터를 줄기와 잎의 모양으로 그린 그림
+  - **\[5\] 상자그림(Box plot)**
+      - 다섯 숫자 요약을 통해 그림으로 표현(최소값, Q1, Q2, Q3, 최대값)
+      - 사분위수범위(IQR)
+          - Q3 - Q1
+      - 안울타리(Inner fence)
+          - Q1 - 1.5 x IQR 또는 Q3 + 1.5 x IQR
+      - 바깥울타리(Outer fence)
+          - Q1 - 3 x IQR 또는 Q3 + 3 x IQR
+      - 보통이상점(Mild doutlier)
+          - 안쪽 울타리와 바깥 울타리 사이(밖)에 있는 자료
+      - 극단이상점(Extreme outlier)
+          - 바깥울타리 밖의 자료
+
+**기출문제**  
+**83. 아래의 데이터는 두 가지 종류의 수면유도제(group)에 대한 랜덤으로 선정된 두 그룹의 환자들을 대상으로 수면시간의
+증감(extra)을 측정한 자료이다. 다음의 결과에 대한 설명 중 부적절한 것은?**
+
+1.  **수면유도제 2에 의한 수면증가량의 분포는 왼쪽으로 꼬리가 긴 형태이다**  
+2.  수면유도제 1은 적어도 25%의 환자의 수면시간을 오히려 감소시켰다  
+3.  이상치는 두 그룹 모두에서 존재하지 않는다  
+4.  수면유도제 2가 수면유도제 1보다 효과적인 것으로 추정할 수 있으나 그 통계적 유의성은 판단 할 수 없다
+
+**84. 아래 그림에서 (a), (b), (c)에 해당하는 통계량으로 적절한 것은?**
+
+2.  **(a) 최빈값, (b) 중앙값, (c) 평균**
+
+**85. 첨도에 대한 설명으로 틀린 것은?**
+
+1.  첨도 값이 0보다 크면 표준정규분포 보다 더 뾰족하다  
+2.  첨도 값이 0보다 작으면 표준정규분포 보다 덜 뾰족하다  
+3.  **첨도 값이 0이면 표준정규분포 보다 더 뾰족하다**  
+4.  첨도는 분포의 중심에서 뾰족한 정도를 나타내는 측도이다
 
 ## 2\. 인과관계의 이해
 
+#### 가. 용어
+
+  - **\[1\] 종속변수(반응변수, y)**
+      - 다른 변수의 영향을 받는 변수
+  - **\[2\] 독립변수(설명변수, x)**
+      - 영향을 주는 변수
+  - **\[3\] 산점도(scatter plot)**
+      - 좌표평면 위에 점들로 표현한 그래프
+
+#### 나. 공분산(covariance)
+
+  - 두 확률변수 X, Y의 방향의 조합(선형성)이다
+      - <img src="https://render.githubusercontent.com/render/math?math=$Cov(X, Y) = E(X - \mu_X)(Y - \mu_Y)$">
+  - 공분산의 부호만으로 두 변수간의 방향성을 확인할 수 있다
+  - 공분산의 부호가 + 이면 두 변수는 양의 방향성, - 이면 음의 방향성을 가진다
+  - X, Y가 서로 독립이면, Cov(X, Y) = 0 이다
+      - <img src="https://render.githubusercontent.com/render/math?math=$Cov(X, Y) = \sigma_{XY} = E(XY) - E(X)E(Y)$">
+
 ## 3\. 상관분석(Correlation Analysis)
+
+#### 가. 상관분석의 정의
+
+  - 두 변수 간의 관계의 정도를 알아보기 위한 분석방법이다
+  - 두 변수의 상관관계를 알아보기 위해 상관계수(Correlation coefficient)를 이용하며, 그 공식은 아래와
+    같다
+      - <img src="https://render.githubusercontent.com/render/math?math=$r = cov(x, y)/(S_x * S_y)$">  
+        <img src="https://render.githubusercontent.com/render/math?math=$\Sigma_{i = 1}^{n}((x - \overline{x})(y - \overline{y}))/n(S_x *S_y)$">
+
+#### 나. 상관관계의 특성
+
+  - **0.7 \< r \<= 1**
+      - 강한 양(+)의 상관이 있다
+  - **0.3 \< r \<= 0.7**
+      - 약한 양(+)의 상관이 있다
+  - **0 \< r \<= 0.3**
+      - 거의 상관이 없다
+  - **r = 0**
+      - 상관관계(선형, 직선)가 존재하지 않는다
+  - **-0.3 \<= r \< 0**
+      - 거의 상관이 없다
+  - **-0.7 \<= r \< -0.3**
+      - 약한 음(-)의 상관이 있다
+  - **-1 \<= r \< -0.7**
+      - 강한 음(-)의 상관이 있다
+
+#### 다. 상관분석의 유형
+
+  - **개념**
+      - **피어슨**
+          - 등간척도 이상으로 측정된 두 변수들의 상관 관계 측정 방식
+      - **스피어만**
+          - 서열척도인 두 변수들의 상관관계 측정 방식
+  - **특징**
+      - **피어슨**
+          - 연속형 변수, 정규성 가정
+          - 대부분 많이 사용
+      - **스피어만**
+          - 순서형 변수, 비모수적 방법
+          - 순위를 기준으로 상관관계 측정
+  - **상관계수**
+      - **피어슨**
+          - 피어슨 (r, 적률상관계수)
+      - **스피어만**
+          - 순위상관계수(p, 로우)
+
+#### 라. 상관분석을 위한 R 코드
+
+  - **분산**
+      - var(x, y = NULL, na.rm = FALSE)
+  - **공분산**
+      - cov(x, y = NULL, use = “everything”, method = c(“pearson”,
+        “kendall”, "spearman))
+  - **상관관계**
+      - cor(x, y = NULL, use = “everything”, method = c(“pearson”,
+        “kendall”, “spearman”))
+      - Hmisc 패키지의 rcorr 사용
+          - rcorr(matrix(data\_name), type = c(“pearson”, “kendall”,
+            “spearman”))
+
+#### 마. 상관분석의 가설 검정
+
+  - 상관계수 r이 0이면 입력변수 x와 출력변수 y 사이에는 아무런 관계가 없다
+      - 귀무가설(H0): r = 0
+      - 대립가설(H1): r \!= 0
+  - t 검정통계량을 통해 얻은 p-value 값이 0.05 이하인 경우, 대립가설을 채택하게 되어 우리가 데이터를 통해 구한
+    상관계수를 활용할 수 있게 된다
+
+#### 바. 상관분석 예제
+
+  - datasets 패키지의 “mtcars” 라는 데이터셋의 mpg, hp의 상관관계 분석을 실시한다
+
+<!-- end list -->
+
+``` r
+data(mtcars) # loads the dataset
+str(mtcars)
+```
+
+    ## 'data.frame':    32 obs. of  11 variables:
+    ##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+    ##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+    ##  $ disp: num  160 160 108 258 360 ...
+    ##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+    ##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+    ##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+    ##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+    ##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+    ##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+    ##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+    ##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+
+``` r
+a <- mtcars$mpg
+b <- mtcars$hp
+```
+
+``` r
+cor(a, b)
+```
+
+    ## [1] -0.7761684
+
+``` r
+cov(a, b)
+```
+
+    ## [1] -320.7321
+
+``` r
+cor.test(a, b, method = "pearson")
+```
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  a and b
+    ## t = -6.7424, df = 30, p-value = 1.788e-07
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.8852686 -0.5860994
+    ## sample estimates:
+    ##        cor 
+    ## -0.7761684
+
+  - mtcars 데이터셋의 mpg와 hp를 각각 a, b에 저장하여 mpg와 hp의 상관계수, 공분산을 구한 결과, 상관계수는
+    -0.7761684, 공분산은 -320.7321로 나타났다
+  - 따라서, mpg와 hp는 상관계수로 강한 음의 상관관계가 있음을 알 수 있고, 공분산으로 음의 방향성을 가짐을 알 수 있다
+  - cor.test를 이용해 mpg와 hp의 상관관계 분석을 실행한 결과, p-value가 1.788e-07로 유의 수준
+    0.05보다 작게 나타나므로 mpg와 hp가 상관관계가 있다고 할 수 있다
+
+**기출문제**  
+**87. 다음 중 피어슨(r) 상관계수에 대한 설명으로 부적절한 것을 고르시오**
+
+1.  질적척도의 경우 피어슨 상관관계는 나타내지 못한다  
+2.  **두 변수를 순위로 변환하여 피어슨 상관계수로 정의한다**  
+3.  \-1과 1 사이의 값을 가진다  
+4.  0은 상관관계가 없음을 의미한다
 
 # Chapter 3 - 회귀분석
 
