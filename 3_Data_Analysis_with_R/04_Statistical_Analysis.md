@@ -295,7 +295,7 @@ Z = (X - m)/sigma, m = 평균, sigma = 표준편차
 **78. 아래의 통계량이 따르는 분포는 무엇인가? (단, \(Xbar\) 는 표본평균, \(\mu\)는 모평균, S는
 표본표준편차, n은 표본크기를 나타낸다)**  
 <아래>
-<img src="https://render.githubusercontent.com/render/math?math=$(Xbar - \mu)/(S / \sqrt{n})$">
+<img src="https://render.githubusercontent.com/render/math?math=$(\overline{X} - \mu)/(S / \sqrt{n})$">
 
 1.  정규분포  
 2.  **t분포**  
@@ -331,10 +331,10 @@ TRUE
               - 추정량은 모수에 대하여 모든 정보를 제공한다
           - **표본평균(Sample mean)**
               - 모집단의 평균(모평균)을 추정하기 위한 추정량. 확률표본의 평균값
-              - <img src="https://render.githubusercontent.com/render/math?math=$Xbar = 1/n \Sigma_{i = 1}^{n} X_i$">
+              - <img src="https://render.githubusercontent.com/render/math?math=$\overline{X} = 1/n \Sigma_{i = 1}^{n} X_i$">
           - **표본분산(Sample variance)**
               - 모집단의 분산(모분산)을 추정하기 위한 추정량
-              - <img src="https://render.githubusercontent.com/render/math?math=$s^2 = 1/(n - 1) \Sigma_{i = 1}^{n} (X_i - Xbar)^2$">
+              - <img src="https://render.githubusercontent.com/render/math?math=$s^2 = 1/(n - 1) \Sigma_{i = 1}^{n} (X_i - \overline{X})^2$">
       - **나) 구간추정(Interval estimation)**
           - 점추정의 정확성을 보완하기 위해 확률로 표현된 믿음의 정도 하에서 **모수가 특정한 구간에 있을 것이라고
             선언** 하는 것이다
@@ -345,21 +345,22 @@ TRUE
               - **모분산
                 <img src="https://render.githubusercontent.com/render/math?math=$\sigma^{2}$">이
                 알려져 있는 경우**
-                  - <img src="https://render.githubusercontent.com/render/math?math=$Xbar - 1.96 (\sigma / \sqrt{n})$">,
-                    Xbar + 1.96 \*
+                  - <img src="https://render.githubusercontent.com/render/math?math=$\overline{X} - 1.96 (\sigma / \sqrt{n}), \overline{X}$">
+                    + 1.96 \*
                     <img src="https://render.githubusercontent.com/render/math?math=$\sigma / \sqrt{n})$">
                   - 표준정규분포 N(0, 1)를 따르는
-                    <img src="https://render.githubusercontent.com/render/math?math=$Z = (Xbar - \mu)/(\sigma / \sqrt{n})$">
+                    <img src="https://render.githubusercontent.com/render/math?math=$Z = (\overline{X} - \mu)/(\sigma / \sqrt{n})$">
                     통계량 이용
               - **모분산
                 <img src="https://render.githubusercontent.com/render/math?math=$\sigma^2$">이
                 알려져 있지 않은 경우** 모분산 대신 표본분산을 사용
-                  - Xbar - 2.26 \* S /
-                    <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">,
-                    Xbar + 2.26 \* S/
+                  - <img src="https://render.githubusercontent.com/render/math?math=$\overline{X}$">
+                    - 2.26 \* S /
+                    <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}, \overline{X}$">
+                    + 2.26 \* S/
                     <img src="https://render.githubusercontent.com/render/math?math=$\sqrt{n}$">
                   - 자유도가 n - 1인 t-분포를 따르는
-                    <img src="https://render.githubusercontent.com/render/math?math=$T = (Xbar - \mu) / (S / \sqrt{n})$">
+                    <img src="https://render.githubusercontent.com/render/math?math=$T = (\overline{X} - \mu) / (S / \sqrt{n})$">
                     통계량 이용
 
 #### 나. 가설검정
@@ -454,3 +455,54 @@ TRUE
 2.  관측된 자료가 특정분포를 따른다고 가정할 수 없는 경우에 이용된다  
 3.  분포의 모수에 대한 가설을 설정하지 않고 분포의 형태에 대해 가설을 설정한다  
 4.  **비모수 검정에서는 관측값의 절대적 크기에 의존하여 평균, 분산 등을 이용해 검정을 실시한다**
+
+# Chapter 2 - 기초 통계분석 (Introductory Statistical Analysis)
+
+## 1\. 기술통계(Descriptive Statistics)
+
+#### 가. 기술통계의 정의
+
+  - 자료의 특성을 표, 그림, 통계량 등을 사용하여 쉽게 파악할 수 있도록 정리/요약하는 것이다
+  - 자료를 요약하는 기초적 통계를 의미한다
+  - 데이터 분석에 앞서 데이터의 대략적인 통계적 수치를 계산해봄으로써 데이터에 대한 대략적인 이해와 앞으로 분석에 대한
+    통찰력을 얻기에 유리하다
+  - <예시> N, 최소값, 최대값, 평균, 표준편차, 분산
+
+#### 나. 통계량에 의한 자료 정리
+
+  - **\[1\] 중심위치의 측도**
+      - 가) 자료(데이터)
+          - <img src="https://render.githubusercontent.com/render/math?math=$X_1, X_2, ..., X_n$">
+      - 나) 표본평균(sample mean)
+          - <img src="https://render.githubusercontent.com/render/math?math=$\overline{X} = 1/n(X_1 + X_2 + ... + X_n) = \Sigma_{i = 1}^{n} X_i/n$">
+      - 다) 중앙값(median)
+          - 자료를 크기순으로 나열할 때 중앙에 위치하는 자료값이다
+          - n이 홀수인 경우 (n + 1)/2
+          - n이 짝수인 경우 n/2 번째 값과 n/2 + 1 번째 값의 평균
+  - **\[2\] 산포의 측도**
+      - 대표적인 산포도(dispersion)는 분산, 표준편차, 범위 및 사분위수범위
+      - 가) 분산
+          - <img src="https://render.githubusercontent.com/render/math?math=$S^2 = {1\over(n - 1)} \Sigma_{i = 1}^{n}(X_i - \overline{X})^{2}$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)}\Sigma_{i = 1}^{n} (X_i^{2} - 2X_i \overline{X} + \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ -2 \Sigma_{i = 1}^{n} X_i \overline{X} \ + \Sigma_{i = 1}^{n} \overline{X}^{2} )$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= {1 \over (n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X} \overline{X} \ + n \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$=  {1 \over (n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X}^{2} \ + n \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)}(\Sigma_{i = 1}^{n} X_i^{2} - n \overline{X}^{2})$">
+
+## 2\. 인과관계의 이해
+
+## 3\. 상관분석(Correlation Analysis)
+
+# Chapter 3 - 회귀분석
+
+## 1\. 회귀분석의 정의
+
+## 2\. 단순선형회귀분석
+
+## 3\. 다중선형회귀분석
+
+## 4\. 회귀분석의 종류
+
+## 5\. 회귀분석 사례
+
+## 6\. 최적회귀방정식
