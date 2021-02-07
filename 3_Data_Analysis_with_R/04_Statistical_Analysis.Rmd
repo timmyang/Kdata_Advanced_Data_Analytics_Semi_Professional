@@ -392,7 +392,7 @@ TRUE
   - 가) 자료(데이터)
     - <img src="https://render.githubusercontent.com/render/math?math=$X_1, X_2, ..., X_n$">
   - 나) 표본평균(sample mean)
-    - <img src="https://render.githubusercontent.com/render/math?math=$\overline{X} = 1/n(X_1 + X_2 + ... + X_n) = \Sigma_{i = 1}^{n} X_i/n$">
+    - <img src="https://render.githubusercontent.com/render/math?math=$\overline{X} = 1/n(X_1 \verb!+! X_2 \verb!+! ... \verb!+! X_n) = \Sigma_{i = 1}^{n} X_i/n$">
   - 다) 중앙값(median)
     - 자료를 크기순으로 나열할 때 중앙에 위치하는 자료값이다
     - n이 홀수인 경우 (n + 1)/2
@@ -401,12 +401,12 @@ TRUE
 - **[2] 산포의 측도**
   - 대표적인 산포도(dispersion)는 분산, 표준편차, 범위 및 사분위수범위
   - 가) 분산
-    - <img src="https://render.githubusercontent.com/render/math?math=$S^2 = {1\over(n - 1)} \Sigma_{i = 1}^{n}(X_i - \overline{X})^{2}$">
-    - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)}\Sigma_{i = 1}^{n} (X_i^{2} - 2X_i \overline{X} + \overline{X}^{2})$"> 
-    - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ -2 \Sigma_{i = 1}^{n} X_i \overline{X} \ + \Sigma_{i = 1}^{n} \overline{X}^{2} )$">
-    - <img src="https://render.githubusercontent.com/render/math?math=$= {1 \over (n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X} \overline{X} \ + n \overline{X}^{2})$"> 
-    - <img src="https://render.githubusercontent.com/render/math?math=$=  {1 \over (n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X}^{2} \ + n \overline{X}^{2})$"> 
-    - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)}(\Sigma_{i = 1}^{n} X_i^{2} - n \overline{X}^{2})$">
+    - <img src="https://render.githubusercontent.com/render/math?math=$S^2 = 1/(n - 1) \Sigma_{i = 1}^{n}(X_i - \overline{X})^{2}$">
+    - <img src="https://render.githubusercontent.com/render/math?math=$= 1/(n - 1) \Sigma_{i = 1}^{n} (X_i^{2} - 2X_i \overline{X} \verb!+! \overline{X}^{2})$"> 
+    - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ -2 \Sigma_{i = 1}^{n} X_i \overline{X} \ \verb!+! \Sigma_{i = 1}^{n} \overline{X}^{2} )$">
+    - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X} \overline{X} \ \verb!+! n \overline{X}^{2})$"> 
+    - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X}^{2} \ \verb!+! n \overline{X}^{2})$"> 
+    - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) (\Sigma_{i = 1}^{n} X_i^{2} - n \overline{X}^{2})$">
 
 ## 2. 인과관계의 이해
 ## 3. 상관분석(Correlation Analysis)

@@ -482,12 +482,12 @@ TRUE
   - **\[2\] 산포의 측도**
       - 대표적인 산포도(dispersion)는 분산, 표준편차, 범위 및 사분위수범위
       - 가) 분산
-          - <img src="https://render.githubusercontent.com/render/math?math=$S^2 = {1\over(n - 1)} \Sigma_{i = 1}^{n}(X_i - \overline{X})^{2}$">
-          - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)}\Sigma_{i = 1}^{n} (X_i^{2} - 2X_i \overline{X} + \overline{X}^{2})$">
-          - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ -2 \Sigma_{i = 1}^{n} X_i \overline{X} \ + \Sigma_{i = 1}^{n} \overline{X}^{2} )$">
-          - <img src="https://render.githubusercontent.com/render/math?math=$= {1 \over (n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X} \overline{X} \ + n \overline{X}^{2})$">
-          - <img src="https://render.githubusercontent.com/render/math?math=$=  {1 \over (n - 1)} ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X}^{2} \ + n \overline{X}^{2})$">
-          - <img src="https://render.githubusercontent.com/render/math?math=$= {1\over(n - 1)}(\Sigma_{i = 1}^{n} X_i^{2} - n \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$S^2 = 1/(n - 1) \Sigma_{i = 1}^{n}(X_i - \overline{X})^{2}$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= 1/(n - 1) \Sigma_{i = 1}^{n} (X_i^{2} - 2X_i \overline{X} \verb!+! \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ -2 \Sigma_{i = 1}^{n} X_i \overline{X} \ \verb!+! \Sigma_{i = 1}^{n} \overline{X}^{2} )$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X} \overline{X} \ \verb!+! n \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) ( \Sigma_{i = 1}^{n} X_i^{2} \ - 2n \overline{X}^{2} \ \verb!+! n \overline{X}^{2})$">
+          - <img src="https://render.githubusercontent.com/render/math?math=$= 1 /(n - 1) (\Sigma_{i = 1}^{n} X_i^{2} - n \overline{X}^{2})$">
 
 ## 2\. 인과관계의 이해
 
