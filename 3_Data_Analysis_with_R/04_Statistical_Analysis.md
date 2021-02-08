@@ -746,12 +746,310 @@ cor.test(a, b, method = "pearson")
 
 ## 1\. 회귀분석의 정의
 
+#### 가. 회귀분석의 정의
+
+  - 하나 또는 그 이상의 독립변수들이 종속변수에 미치는 영향을 추정할 수 있는 통계기법이다
+  - 변수들 사이의 인과관계를 밝히고 모형을 적합하여 관심있는 변수를 예측하거나 추론하기 위한 분석방법이다
+  - 독립변수의 개수가 하나이면 단순선형회귀분석, 독립변수의 개수가 두 개 이상이면 다중선형 회귀분석으로 분석할 수 있다
+
+#### 나. 회귀분석의 변수
+
+  - 영향을 받는 변수(y)
+      - 반응변수(response variable)
+      - 종속변수(dependent variable)
+      - 결과변수(outcome variable)
+  - 영향을 주는 변수(x)
+      - 설명변수(explanatory variable)
+      - 독립변수(independent variable)
+      - 예측변수(predictor variable)
+
+#### 다. 선형회귀분석의 가정
+
+  - **\[선형성\] linearity**
+      - 입력변수와 출력변수의 관계가 선형이다 (선형회귀분석에서 가장 중요한 가정)
+  - **\[등분산성\] homoscedasticity**
+      - 오차의 분산이 입력변수와 무관하게 일정하다
+      - 잔차플롯(산점도, scatter plot)을 활용하여 잔차(residual)와 입력변수간에 아무런 관련성이 없게
+        무작위적으로 고루 분포되어야 등분산성 가정을 만족하게 된다
+  - **\[독립성\] independence**
+      - 입력변수와 오차는 관련이 없다
+      - 자기상관(독립성)을 알아보기 위해 Durbin-Waston 통계량을 사용하며 주로 시계열 데이터에서 많이 활용한다
+  - **\[비상관성\] no auto-correlation**
+      - 오차들끼리 상관이 없다
+  - **\[정상성(정규성)\] normality**
+      - 오차의 분포가 정규분포를 따른다
+      - Q-Q plot, Kolmogolov-Smirnov 검정, Shapiro-Wilk 검정 등을 활용하여 정규성을
+        확인한다
+
+#### 라. 그래프를 활용한 선형회귀분석의 가정 검토
+
+  - **선형성**
+      - 설명변수(x)와 반응변수(y)가 선형적 관계에 있음이 전제되어야 한다
+  - **등분산성**
+      - 가) 등분산성을 만족하는 경우
+          - 설명변수(x)에 대한 잔차(residuals)의 산점도(scatter plot)를 그렸을 때, x값에
+            관계없이 잔차(residuals)들의 변동성(분산)이 일정한 형태를 보이면 선형회귀분석의 가정
+            중 등분산성을 만족한다고 볼 수 있다
+      - 나) 등분산성을 만족하지 못하는 경우
+          - (a): 설명변수(x)가 커질수록 잔차의 분산이 줄어드는 이분산의 형태
+          - (b): 2차항 설명변수가 필요
+          - (c): 새로운 설명변수가 필요
+  - **정규성**
+      - Q-Q plot을 출력했을 때, 잔차(residuals)가 대각방향의 직선의 형태를 지니고 있으면 잔차는 정규분포를
+        따른다고 할 수 있다
+
+#### 마. 가정에 대한 검증
+
+  - **\[1\] 단순선형회귀분석**
+      - 입력변수와 출력변수간의 선형성을 점검하기 위해 산점도(scatter plot)를 확인한다
+  - **\[2\] 다중선형회귀분석**
+      - 선형회귀분석의 가정인 선형성, 등분산성, 독립성, 정상성이 모두 만족하는지 확인해야 한다
+
 ## 2\. 단순선형회귀분석
+
+  - 하나의 독립변수가 종속변수에 미치는 영향을 추정할 수 있는 통계기법이다  
+    <img src="https://render.githubusercontent.com/render/math?math=$y_i = \beta_0 + \beta_1 x_i + \epsilon_i, i = 1, 2, ..., n \ \ \epsilon_i \sim N(0, \sigma^{2})$">
+  - yi = i번째 종속변수 값
+  - xi = i번째 독립변수 값
+  - B0 = 선형 회귀식의 절편
+  - B1 = 선형 회귀식의 기울기
+  - Ei = 오차항, 독립적이며 N(0, sigma^2)의 분포를 이룬다
+
+#### 가. 회귀분석에서의 검토사항
+
+  - **\[1\] 회귀계수들이 유의미한가?**
+      - 해당 계수의 t 통계량의 p 값이 0.05보다 작으면 해당 회귀계수가 통계적으로 유의하다고 볼 수 있다
+  - **\[2\] 모형이 얼마나 설명력을 갖는가?**
+      - 결정계수(R^2)를 확인한다. 결정계수는 0 \~ 1 값을 가지며, 높은 값을 가질수록 추정된 회귀식의 설명력이
+        높다
+  - **\[3\] 모형이 데이터를 잘 적합하고 있는가?**
+      - 잔차(residuals)를 그래프로 그리고 회귀진단을 한다
+
+#### 나. 회귀계수의 추정(최소제곱법, 최소자승법)
+
+  - 측정값을 기초로 하여 적당한 제곱합을 만들고 그것을 최소로 하는 값을 구하여 측정결과를 처리하는 방법으로
+    잔차(residuals)제곱이 가장 작은 선을 구하는 것을 의미하다
+
+<img src="https://render.githubusercontent.com/render/math?math=$y_i = \beta_0 + \beta_1 x_i + \epsilon_i, \ i = 1, 2, ..., n, \ \epsilon \sim N(0, \sigma^{2})$">  
+<img src="https://render.githubusercontent.com/render/math?math=$\Sigma_{i = 1}^{n} (e_i)^{2} = \Sigma_{i = 1}^{n} (y - (\beta_0 + \beta_1X_i))^{2}$">
+
+#### 다. 회귀분석의 검정
+
+  - **\[1\] 회귀계수의 검정**
+      - 회귀계수 B1이 0이면 입력변수 x와 출력변수 y 사이에는 아무런 인과관계가 없다
+      - 회귀계수 B1이 0이면 적합된 추정식은 아무 의미가 없게 된다
+
+<!-- end list -->
+
+``` r
+x <- c(19, 23, 26, 29, 30, 38, 39, 46, 49)
+y <- c(33, 51, 40, 49, 50, 69, 70, 64, 89)
+
+lm(y ~ x)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ x)
+    ## 
+    ## Coefficients:
+    ## (Intercept)            x  
+    ##       6.409        1.529
+
+``` r
+summary(lm(y ~ x))
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ x)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -12.766  -2.470  -1.764   4.470   9.412 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)   6.4095     8.9272   0.718 0.496033    
+    ## x             1.5295     0.2578   5.932 0.000581 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 7.542 on 7 degrees of freedom
+    ## Multiple R-squared:  0.8341, Adjusted R-squared:  0.8104 
+    ## F-statistic: 35.19 on 1 and 7 DF,  p-value: 0.0005805
+
+  - x의 회귀계순인 t 통계량에 대한 p 값이 0.000581로 나타나, 유의수준인 0.05보다 작으므로 회귀계수의 추정치들이
+    통계적으로 유의하다
+
+  - 결정계수(R^2)는 0.8341으로 높게 나타나 이 회귀식이 데이터를 적절하게 설명하고 있다고는 할 수 있다
+
+  - 결정계수(R^2)가 높아 데이터의 설명력이 높고 회귀분석결과에서 회귀식과 회귀계수들이 통계적으로 유의하므로 에어컨
+    판매대수를 에어컨 예약대수로 추정할 수 있다
+
+  - 회귀분석 결과 “판매대수 = 6.4095 + 1.5295 x 예약대수”의 회귀식을 구할 수 있다
+
+  - **\[2\] 결정계수**
+    
+      - 전체제곱합(SST, Total Sum of Squares)
+          - <img src="https://render.githubusercontent.com/render/math?math=$\Sigma_{i = 1}^{n} (y_i - \overline{y})^{2}$">
+      - 회귀제곱합(SSR, Sum of Squared Residuals)
+          - <img src="https://render.githubusercontent.com/render/math?math=$\Sigma_{i = 1}^{n} (\hat{y}_i - \overline{y})^{2}$">
+      - 오차제곱합(SSE, Sum of Squared Errors)
+          - <img src="https://render.githubusercontent.com/render/math?math=$\Sigma_{i = 1}^{n} (y_i - \hat{y})^{2}$">
+      - 결정계수(R^2)는 SST에서 SSR의 비율 (SST/SSR), 0 \<= R^2 \<= 1 (여기서 SST =
+        SSR + SSE)
+      - 결정계수(R^2)는 전체 데이터를 회귀모형이 설명할 수 있는 설명력을 의미한다 (단순회귀분석에서 결정계수는 상관계수
+        r의 제곱과 같다)
+
+  - **\[3\] 회귀직선의 적합도 검토**
+    
+      - 결정계수(R^2)를 통해 추정된 회귀식이 얼마나 타당한지 검토한다 (결정계수가 1에 가까울수록 회귀모형이 자료를 잘
+        설명함)
+      - 독립변수가 종속변수 변동의 몇 %를 설명하는지 나타내는 지표이다
+      - 다변량 회귀분석에서는 독립변수의 수가 많아지면 결정계수가 높아지므로 독립변수가 유의하든, 유의하지 않든 독립변수의
+        수가 많아지면 결정계수가 높아지는 단점이 있다
+      - 이러한 결정계수의 단점을 보완하기 위해 수정된 결정계수(adjusted R^2)를 활용한다
+      - 수정된 결정계수는 결정계수보다 작은 값으로 산출되는 특징이 있다
+      - 수정된 결정계수  
+        <img src="https://render.githubusercontent.com/render/math?math=$R_a^{2} = 1 - ((n-1)(1-R^{2}))/(n-k-1)$">
+
+<참조> 오차(error)와 잔차(residual)의 차이
+
+  - **오차(Error)**
+      - 모집단에서 실제값이 회귀선과 비교해 볼 때 나타나는 차이 (정확치와 관측치의 차이)
+  - **잔차(Residual)**
+      - 표본에서 나온 관측값이 회귀선과 비교해볼 때 나타나는 차이
 
 ## 3\. 다중선형회귀분석
 
+#### 가. 다중선형회귀분석(다변량회귀분석)
+
+  - **\[1\] 다중회귀식**
+      - <img src="https://render.githubusercontent.com/render/math?math=$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_k X_k + \epsilon$">
+  - **\[2\] 모형의 통계적 유의성(significance)**
+      - 모형의 통계적 유의성은 F 통계량으로 확인하다
+      - 유의수준 5% 하에서 F 통계량의 p 값이 0.05 보다 작으면 추정된 회귀식은 통계적으로 유의하다고 볼 수 있다
+      - F = MSR/MSE
+      - F 통계량이 크면 p 값이 0.05 보다 작앙지고, 이렇게 되면 귀무가설을 기각한다. 즉, 모형이 유의하다고
+        결론지을 수 있다
+  - **\[3\] 회귀계수의 유의성(significance)**
+      - 회귀계수의 유의성은 단변량 회귀분석의 회귀계수 유의성 검토와 같이 t 통계량을 통해 확인한다
+      - 모든 회귀계수의 유의성이 통계적으로 검증되어야 선택된 변수들의 조합으로 모형을 활용할 수 있다
+  - **\[4\] 모형의 설명력**
+      - 결정계수(R^2)나 수정된 결정계수(Ra^2)를 확인한다
+  - **\[5\] 모형의 적합성**
+      - 모형이 데이터를 잘 적합하고 있는지 잔차(residual)와 종속변수(y)의 산점도(scatter plot)를
+        확인한다
+  - **\[6\] 데이터가 전제하는 가정을 만족시키는가?**
+      - 선형성, 독립성, 등분산성, 비상관성, 정상성
+  - **\[7\] 다중공선성(multicollinearity)**
+      - 다중회귀분석에서 설명변수들 사이에 선형관계가 존재하는 회귀계수의 정확한 추정이 곤란하다
+      - 다중공선성 검사 방법
+          - 가) 분상팽창요인(VIF)
+              - 4보다 크면 다중공선성이 존재한다고 볼 수 있고, 10 보다 크면 심각한 문제가 있는 것으로 해석할
+                수 있다
+          - 나) 상태지수
+              - 10 이상이면 문제가 있다고 보고, 30 보다 크면 심각한 문제가 있다고 해석할 수 있다
+                  - 다중선형회귀분석에서 다중공선성의 문제가 발생하면, 문제가 있는 변수를 제거하거나 주성분회귀,
+                    능형회귀 모형을 적용하여 문제를 해결한다
+
 ## 4\. 회귀분석의 종류
 
+  - **단순회기**
+      - 독립변수가 1개이며 종속변수왕의 관계가 직선
+  - **다중회귀**
+      - 독립변수가 k개이며 종속변수와의 관계가 선형(1차 함수)
+  - **로지스틱 회귀**
+      - 종속변수가 범주형(2진 변수)인 경우에 적용되며, 단순 로지스틱 회귀 및 다중, 다항 로지스틱 회귀로 확장할 수
+        있음
+  - **다항회귀**
+      - 독립변수와 종속변수와의 관계가 1차 함수 이상이 단계(단 k = 1이면 2차 함수 이상)
+  - **곡선회귀**
+      - 독립변수가 1개이며 종속변수와의 관계가 곡선
+  - **비선형회귀**
+      - 회귀식의 모양이 미지의 모수들의 선형관계로 이뤄져 있지 않은 모형
+
 ## 5\. 회귀분석 사례
+
+#### 가. R 프로그램을 통한 회귀분석
+
+  - **분석내용**
+      - MASS 패키지의 Cars93 라는 데이터셋의 Price를 종속변수로 선정하고 EngineSize, RPM,
+        Weight를 이용해서 다중회귀분석을 실시한다
+
+<!-- end list -->
+
+``` r
+# install.packages("MASS")
+library(MASS)
+
+data(Cars93)
+head(Cars93)
+```
+
+    ##   Manufacturer   Model    Type Min.Price Price Max.Price MPG.city MPG.highway
+    ## 1        Acura Integra   Small      12.9  15.9      18.8       25          31
+    ## 2        Acura  Legend Midsize      29.2  33.9      38.7       18          25
+    ## 3         Audi      90 Compact      25.9  29.1      32.3       20          26
+    ## 4         Audi     100 Midsize      30.8  37.7      44.6       19          26
+    ## 5          BMW    535i Midsize      23.7  30.0      36.2       22          30
+    ## 6        Buick Century Midsize      14.2  15.7      17.3       22          31
+    ##              AirBags DriveTrain Cylinders EngineSize Horsepower  RPM
+    ## 1               None      Front         4        1.8        140 6300
+    ## 2 Driver & Passenger      Front         6        3.2        200 5500
+    ## 3        Driver only      Front         6        2.8        172 5500
+    ## 4 Driver & Passenger      Front         6        2.8        172 5500
+    ## 5        Driver only       Rear         4        3.5        208 5700
+    ## 6        Driver only      Front         4        2.2        110 5200
+    ##   Rev.per.mile Man.trans.avail Fuel.tank.capacity Passengers Length Wheelbase
+    ## 1         2890             Yes               13.2          5    177       102
+    ## 2         2335             Yes               18.0          5    195       115
+    ## 3         2280             Yes               16.9          5    180       102
+    ## 4         2535             Yes               21.1          6    193       106
+    ## 5         2545             Yes               21.1          4    186       109
+    ## 6         2565              No               16.4          6    189       105
+    ##   Width Turn.circle Rear.seat.room Luggage.room Weight  Origin          Make
+    ## 1    68          37           26.5           11   2705 non-USA Acura Integra
+    ## 2    71          38           30.0           15   3560 non-USA  Acura Legend
+    ## 3    67          37           28.0           14   3375 non-USA       Audi 90
+    ## 4    70          37           31.0           17   3405 non-USA      Audi 100
+    ## 5    69          39           27.0           13   3640 non-USA      BMW 535i
+    ## 6    69          41           28.0           16   2880     USA Buick Century
+
+``` r
+model <- lm(Price ~ EngineSize + RPM + Weight, data = Cars93)
+summary(model)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = Price ~ EngineSize + RPM + Weight, data = Cars93)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -10.511  -3.806  -0.300   1.447  35.255 
+    ## 
+    ## Coefficients:
+    ##               Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) -51.793292   9.106309  -5.688 1.62e-07 ***
+    ## EngineSize    4.305387   1.324961   3.249  0.00163 ** 
+    ## RPM           0.007096   0.001363   5.208 1.22e-06 ***
+    ## Weight        0.007271   0.002157   3.372  0.00111 ** 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 6.504 on 89 degrees of freedom
+    ## Multiple R-squared:  0.5614, Adjusted R-squared:  0.5467 
+    ## F-statistic: 37.98 on 3 and 89 DF,  p-value: 6.746e-16
+
+  - **결과 및 해석**
+      - 여기서 F 통계량은 37.89 이며 유의확률 p 값이 6.746e-16 로 유의수준 5% 하에서 추정된 회귀 모형이
+        통계적으로 매우 유의함(significant)을 알 수 있다
+      - 결정계쑤와 수정된 결정계수는 각각 0.5614, 0.5467로 조금 낮게 나타나 이 회귀식이 데이터를 적절하게
+        설명하고 있다고는 할 수 없다
+      - 회귀계수들의 p 값들이 0.05 보다 작으무로 회귀계수의 추정치들이 통계적으로 유의하다
+      - 결정계수가 낮아 데이터의 설명력은 낮지만 회귀분석 결과에 회귀식과 회귀계수들이 통계적으로 유의하여 자동차의 가격을
+        엔진 크기와 RPM 그리고 무게로 추정할 수 있다
 
 ## 6\. 최적회귀방정식
