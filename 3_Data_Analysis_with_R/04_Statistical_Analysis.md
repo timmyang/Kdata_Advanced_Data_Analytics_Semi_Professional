@@ -1052,4 +1052,443 @@ summary(model)
       - 결정계수가 낮아 데이터의 설명력은 낮지만 회귀분석 결과에 회귀식과 회귀계수들이 통계적으로 유의하여 자동차의 가격을
         엔진 크기와 RPM 그리고 무게로 추정할 수 있다
 
+#### 나. R 프로그램을 통한 로지스틱 회귀분석의 사례
+
+  - **\[1\] 데이터 설명**
+      - 림프절이 전립선 암에 대해 양성인지 여부를 예측하는 데이터
+      - **양성여부(y)**
+          - 전립선 암에 대한 양성 여부
+      - **aged**
+          - 환자의 연령
+      - **stage**
+          - 질병 단계
+          - 질병이 얼마나 진행되어 있는지 나타내는 척도
+      - **grade**
+          - 종양의 등급
+          - 진행의 정도
+      - **xray**
+          - X-선 결과
+      - **acid**
+          - 특정한 부위에 종양이 전이되었을 때 상승되는 혈청의 인산염 값
+  - **\[2\] 분석 결과**
+
+<!-- end list -->
+
+``` r
+library(boot)
+data(nodal)
+
+str(nodal)
+```
+
+    ## 'data.frame':    53 obs. of  7 variables:
+    ##  $ m    : num  1 1 1 1 1 1 1 1 1 1 ...
+    ##  $ r    : num  1 1 1 1 1 0 1 0 0 0 ...
+    ##  $ aged : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ stage: num  1 1 1 1 1 1 0 0 0 0 ...
+    ##  $ grade: num  1 1 1 1 1 1 0 0 0 0 ...
+    ##  $ xray : num  1 1 1 1 1 1 0 0 0 0 ...
+    ##  $ acid : num  1 1 1 1 1 1 1 1 1 1 ...
+
+``` r
+a <- c(2, 4, 6, 7)
+data <- nodal[, a]
+
+glmModel <- glm(r ~ ., data = data, family = "binomial")
+summary(glmModel)
+```
+
+    ## 
+    ## Call:
+    ## glm(formula = r ~ ., family = "binomial", data = data)
+    ## 
+    ## Deviance Residuals: 
+    ##     Min       1Q   Median       3Q      Max  
+    ## -2.1231  -0.6620  -0.3039   0.4710   2.4892  
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -3.0518     0.8420  -3.624  0.00029 ***
+    ## stage         1.6453     0.7297   2.255  0.02414 *  
+    ## xray          1.9116     0.7771   2.460  0.01390 *  
+    ## acid          1.6378     0.7539   2.172  0.02983 *  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## (Dispersion parameter for binomial family taken to be 1)
+    ## 
+    ##     Null deviance: 70.252  on 52  degrees of freedom
+    ## Residual deviance: 49.180  on 49  degrees of freedom
+    ## AIC: 57.18
+    ## 
+    ## Number of Fisher Scoring iterations: 5
+
+  - 2번째 변수인 양성여부를 종속변수로 두고 5개의 변수를 독립변수로 하여 로지스틱 회귀 분석을 실시한 결과 aged와
+    grade는 유의수준 5%하에서 유의하지 않아 이를 제외한 3개 변수 stage, xray와 acid를 활용해서 모형을
+    개발한다
+  - stage, xray와 acid의 추정계수는 유의수준 5% 하에서 유의하게 나타나므로 p(r = 1) = 1/(1 + e
+    - (-3.05 + 1.65 stage + 1.91 xray + 1.64 acid))의 선형식이 가능하다
+
 ## 6\. 최적회귀방정식
+
+#### 가. 최적회귀방정식의 선택
+
+  - **\[1\] 설명변수 선택**
+      - 필요한 편수만 상황에 따라 타협을 통해 선택한다
+      - y에 영향을 미칠 수 있는 모든 설명변수 x들을 y의 값을 예측하는데 참여한다
+      - 데이터에 설명변수 x들의 수가 많아지면 관리하는데 많은 노력이 요구되므로, 가능한 범위 내에서 적은 수의 설명변수를
+        포함한다
+  - **\[2\] 모형선택(exploratory analysis)**
+      - 분석 데이터에 가장 잘 맞는 모형을 찾아내는 방법이다
+      - 모든 가능한 조합의 회귀분석(All possible regression)
+          - 모든 가능한 독립변수들의 조합에 대한 회귀모형을 생성한 뒤 가장 적합한 회귀모형을 선택
+  - **\[3\] 단계적 변수선택(Stepwise Variable Selection)**
+      - 전진선택법(forward selection)
+          - 절편만 있는 상수모형으로부터 시작해 중요하다고 생각되는 설명변수부터 차례로 모형에 추가한다
+      - 후진제거법(backward elimination)
+          - 독립변수 후보 모두를 포함한 모형에서 출발해 가장 적은 영향을 주는 변수부터 하나씩 제거하면서 더 이상
+            제거할 변수가 없을 때의 모형을 선택한다
+      - 단계선택법(stepwise method)
+          - 전진선택법에 의해 변수를 추가하면서 새롭게 추가된 변수에 기인해 기존 변수의 중요도가 약화되면 해당병수를
+            제거하는 등 단계별로 추가 또는 제거되는 변수의 여부를 검토해 더 이상 없을 때 중단한다
+
+#### 나. 벌점화된 선택기준
+
+  - **\[1\] 개요**
+      - 모형의 복잡도에 벌점을 주는 방법으로 AIC 방법과 BIC 방법이 주로 사용된다
+  - **\[2\] 방법**
+      - AIC(Akaike Information Criterion)  
+        <img src="https://render.githubusercontent.com/render/math?math=$AIC = -2 \Sigma_{i = 1}^{n} l (y_i, x_i^{T} \hat{\beta})/ + 2k/n, k$">  
+        k는 모수의 개수, n은 자료의 수
+      - BIC(Bayesian Information Criterion)  
+        <img src="https://render.githubusercontent.com/render/math?math=$BIC =-2 \Sigma_{i = 1}^{n} l (y_i, x_i^{T} \hat{\beta})/n + klog(n)/n$">  
+        k는 모수의 개수, n은 자료의 수
+  - **\[3\] 설명**
+      - 모든 후보 모형들에 대해 AIC 또는 BIC를 계산하고 그 값이 최소가 되는 모형을 선택한다
+      - 모형선택의 일치성(consistency in selection)
+          - 자료의 수가 늘어날 때 참인 모형이 주어진 모형 선택 기준의 최소값을 갖게 되는 성질이다
+      - 이론적으로 AIC에 대해서 일치성이 성립하지 않지만 BIC는 주요 분포에서 이러한 성질이 성립한다
+      - AIC를 활용하는 방법이 보편화된 방법이다
+      - 그 밖의 벌점화 선택기준으로 RIC(Risk Inflation Criterion), CIC(Covariance
+        Inflation Criterion), DIC(Deviation Information Criterion)가 있다
+
+**기출문제**  
+**92. 다음 중 최적회귀방정식을 선택하기 위한 방법에 대한 설명으로 가장 부적절한 것은?**
+
+1.  가능한 범위내에서 적은 수의 설명변수를 포함시킨다  
+2.  AIC나 BIC의 값이 가장 작은 모형을 선택하는 방법으로 모든 가능한 조합의 회귀분석을 실시한다  
+3.  **전진선택법이나 후진선택법은 동일한 최적 모형을 선택하는 변수 선택 방법이다**  
+4.  전진선택법은 설명변수를 추가했을 때 제곱합의 기준으로 가장 설명을 잘하는 변수를 고려하여 그 변수가 유의하면 추가한다
+
+(해설): 다른 방법이기 때문에 최종 결과가 다를 수 있다
+
+#### 다. 최적회귀방정식의 사례
+
+  - **\[1\] 변수 선택법 예제(유의확률 기반)**
+      - x1, x2, x3, x4를 독립변수로 가지고 y를 종속변수로 가지는 선형회귀무형을 생선한 뒤, step() 함수를
+        ㅣㅇ용하지 않고 직접 후진제거법을 적용하는 R코드를 작성하여 변수제거를 수행해보자
+
+<!-- end list -->
+
+``` r
+# 데이터 프레임 생성
+x1 <- c(7, 1, 11, 11, 7, 11, 3, 1, 2, 21, 1, 11, 10)
+x2 <- c(26, 29, 56, 31, 52, 55, 71, 31, 54, 47, 40, 66, 68)
+x3 <- c(6, 15, 8, 8, 6, 9, 17, 22, 18, 4, 23, 9, 8)
+x4 <- c(60, 52, 20, 47, 33, 22, 6, 44, 22, 26, 34, 12, 12)
+
+y <- c(78.5, 74.3, 104.3, 87.6, 95.9, 109.2, 102.7, 72.5, 93.1, 115.9, 83.8, 113.3, 109.4)
+
+df <- data.frame(x1, x2, x3, x4, y)
+head(df)
+```
+
+    ##   x1 x2 x3 x4     y
+    ## 1  7 26  6 60  78.5
+    ## 2  1 29 15 52  74.3
+    ## 3 11 56  8 20 104.3
+    ## 4 11 31  8 47  87.6
+    ## 5  7 52  6 33  95.9
+    ## 6 11 55  9 22 109.2
+
+``` r
+# 회귀모형(a) 생성
+a <- lm(y ~ x1 + x2 + x3 + x4, data = df)
+summary(a)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ x1 + x2 + x3 + x4, data = df)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -3.1750 -1.6709  0.2508  1.3783  3.9254 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)  
+    ## (Intercept)  62.4054    70.0710   0.891   0.3991  
+    ## x1            1.5511     0.7448   2.083   0.0708 .
+    ## x2            0.5102     0.7238   0.705   0.5009  
+    ## x3            0.1019     0.7547   0.135   0.8959  
+    ## x4           -0.1441     0.7091  -0.203   0.8441  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 2.446 on 8 degrees of freedom
+    ## Multiple R-squared:  0.9824, Adjusted R-squared:  0.9736 
+    ## F-statistic: 111.5 on 4 and 8 DF,  p-value: 4.756e-07
+
+  - summary(a)에서 모형의 유의성을 판단하기 위해 F 통계량을 확인한 결과, 111.5로 나타났으며 유의확률이
+    4.756e-07 임으로 통계적으로 유의하게 나타났다. 하지만 각각의 입력변수들의 통계적 유의성을 검토해 본 결과, t
+    통계량을 통한 유의확률이 0.05 보다 작은 변수가 하나도 존재하지 않아 모형을 활용할 수 없다고 판단되었다.
+    적절한 모형을 선정하기 위해 유의확률이 가장 높은 x3을 제외하고 다시 회귀모형을 생성해 보았다
+
+<!-- end list -->
+
+``` r
+# 유의확률이 가장 높은 변수를 제거하고 다시 회귀모형(b)을 생성
+
+b <- lm(y ~ x1 + x2 + x4, data = df)
+summary(b)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ x1 + x2 + x4, data = df)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -3.0919 -1.8016  0.2562  1.2818  3.8982 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)  71.6483    14.1424   5.066 0.000675 ***
+    ## x1            1.4519     0.1170  12.410 5.78e-07 ***
+    ## x2            0.4161     0.1856   2.242 0.051687 .  
+    ## x4           -0.2365     0.1733  -1.365 0.205395    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 2.309 on 9 degrees of freedom
+    ## Multiple R-squared:  0.9823, Adjusted R-squared:  0.9764 
+    ## F-statistic: 166.8 on 3 and 9 DF,  p-value: 3.323e-08
+
+  - x3 변수를 제거한 후, 모형의 유의성을 다시 검토한 결과 F 통계량에 대한 유의확률은 통계적으로 유의하게 나타났다. 모든
+    변수들의 t 통계량에 대한 유의확률이 0.05 보다 낮아야 하지만 x1을 제외한 2개 변수의 유의확률이 0.05 보다 높게
+    나타나 유의하지 않은 결과를 보였다. 따라서 유의확률이 가장 높은 x4 변수를 제외하고 회귀모형을 다시 생성하였다
+
+<!-- end list -->
+
+``` r
+# 유의확률이 가장 높은 변수를 제거하고 다시 회귀모형(c)를 생성
+c <- lm(y ~ x1 + x2, data = df)
+
+summary(c)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ x1 + x2, data = df)
+    ## 
+    ## Residuals:
+    ##    Min     1Q Median     3Q    Max 
+    ## -2.893 -1.574 -1.302  1.363  4.048 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 52.57735    2.28617   23.00 5.46e-10 ***
+    ## x1           1.46831    0.12130   12.11 2.69e-07 ***
+    ## x2           0.66225    0.04585   14.44 5.03e-08 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 2.406 on 10 degrees of freedom
+    ## Multiple R-squared:  0.9787, Adjusted R-squared:  0.9744 
+    ## F-statistic: 229.5 on 2 and 10 DF,  p-value: 4.407e-09
+
+  - F 통계량을 통해 유의수준 0.05 하에서 모형이 통계적으로 유의함을 확인할 수 있다
+
+  - 다변량회귀분석에 선정된 x1, x2 변수에 대한 각각의 유의확률 값이 모두 통계적으로 유의하게 나타났다. 수정된
+    결정계수(Ra^2)는 0.9744로 선정된 다변량회귀식이 전체 데이터의 97.44%를 설명하고 있는 것을
+    확인할 수 있었다
+
+  - 위의 후진제거법을 통해 최종적으로 얻게 된 추정된 회귀식은 y = 52.57735 + 1.46831 x1 + 0.66225
+    x2 이다
+
+  - **\[2\] 변수 선택법 예제(벌점화 전진선택법)**
+    
+      - 이번에는 step 함수를 사용하여 전진선택법을 적용하는 R 코드를 작성하여 변수 제거를 수행해보자
+      - <참고>
+      - step(lm(y \~ x1 + x2 + … + xn, data = dataset), scope =
+        list(lower = \~1, upper = \~ x1 + x2 + … + xn), direction =
+        “변수선택방법”)
+      - scope
+          - 변수선택 과정에서 설정할 수 있는 가장 큰 모형 혹은 가장 작은 모형을 설정
+          - scope가 없을 경우 전진선택법에서는 현재 선택한 모형을 가장 큰 모형으로, 후진제거법에서는 상수항만 있는
+            모형을 가장 작은 모형으로 설정한다
+      - direction
+          - 변수선택법(forward, backward, stepwise)
+      - k
+          - 모형선택 기준에서 AIC, BIC와 같은 옵션을 사용
+          - k = 2 이면 AIC
+          - k = log(자료수) 이면 BIC
+
+<!-- end list -->
+
+``` r
+# step 함수를 이용한 전진선택법의 적용
+step(lm(y ~ 1, data = df), scope = list(lower = ~1, upper = ~x1 + x2 + x3 + x4), direction ="forward")
+```
+
+    ## Start:  AIC=71.44
+    ## y ~ 1
+    ## 
+    ##        Df Sum of Sq     RSS    AIC
+    ## + x4    1   1831.90  883.87 58.852
+    ## + x2    1   1809.43  906.34 59.178
+    ## + x1    1   1450.08 1265.69 63.519
+    ## + x3    1    776.36 1939.40 69.067
+    ## <none>              2715.76 71.444
+    ## 
+    ## Step:  AIC=58.85
+    ## y ~ x4
+    ## 
+    ##        Df Sum of Sq    RSS    AIC
+    ## + x1    1    809.10  74.76 28.742
+    ## + x3    1    708.13 175.74 39.853
+    ## <none>              883.87 58.852
+    ## + x2    1     14.99 868.88 60.629
+    ## 
+    ## Step:  AIC=28.74
+    ## y ~ x4 + x1
+    ## 
+    ##        Df Sum of Sq    RSS    AIC
+    ## + x2    1    26.789 47.973 24.974
+    ## + x3    1    23.926 50.836 25.728
+    ## <none>              74.762 28.742
+    ## 
+    ## Step:  AIC=24.97
+    ## y ~ x4 + x1 + x2
+    ## 
+    ##        Df Sum of Sq    RSS    AIC
+    ## <none>              47.973 24.974
+    ## + x3    1   0.10909 47.864 26.944
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ x4 + x1 + x2, data = df)
+    ## 
+    ## Coefficients:
+    ## (Intercept)           x4           x1           x2  
+    ##     71.6483      -0.2365       1.4519       0.4161
+
+  - 벌점화 방식을 적용한 전진선택법을 실시한 결과, 가장 먼저 선택된 변수는 AIC 값이 58.852 으로 가장 낮은 x4
+    였다.
+
+  - x4 에서 x1 을 추가하였을 때, AIC 값이 28.742 로 낮아지게 되었고
+
+  - x2 를 추가하였을 때 AIC 값이 24.974 으로 최소화되어 더 이상 AIC를 낮출 수 없어 변수 선택을 종료하게
+    되었다
+
+  - 최종적으로 선택된 추정된 회귀식은 y = 71.6483 - 0.2365 x4 + 1.4519 x1 + 0.4161 x2
+    이다
+
+  - **\[3\] 변수 선택법 예제(벌점화 후진제거법)**
+    
+      - 가) 활용데이터
+          - 전립선암 자료(8개의 입력변수와 1개의 출력 변수로 구성)
+          - 마지막 열에 있는 변수는 학습자료인지 예측자료인지 나타내는 변수로 이번 분석에서는 사용하지 않는다
+          - **lcavol**
+              - 종양 부피의 로그
+          - **lweight**
+              - 전립선 무게의 로그
+          - **age**
+              - 환자의 연령
+          - **lbph**
+              - 양성 전립선 증식량의 로그
+          - **svi**
+              - 암이 정낭을 침범할 확률
+          - **lcp**
+              - capsular penetration의 로그값
+          - **gleason**
+              - Gleason 점수
+          - **pgg45**
+              - Gleason 점수가 4 또는 5인 비율
+          - **lpsa**
+              - 전립선 수치의 로그
+
+<!-- end list -->
+
+``` r
+# install.packages("https://cran.r-project.org/src/contrib/Archive/ElemStatLearn/ElemStatLearn_2015.6.26.tar.gz", repos = NULL, type="source")
+# https://cran.r-project.org/src/contrib/Archive/
+library(ElemStatLearn)
+
+Data = prostate
+data.use = Data[, -ncol(Data)]
+
+lm.full.model = lm(lpsa~., data = data.use)
+```
+
+  - 나) 후진제거법에서 AIC를 이용한 변수선택
+
+<!-- end list -->
+
+``` r
+bacward.aic = step(lm.full.model, lpsa ~ 1, direction = "backward")
+```
+
+    ## Start:  AIC=-60.78
+    ## lpsa ~ lcavol + lweight + age + lbph + svi + lcp + gleason + 
+    ##     pgg45
+    ## 
+    ##           Df Sum of Sq    RSS     AIC
+    ## - gleason  1    0.0491 43.108 -62.668
+    ## - pgg45    1    0.5102 43.569 -61.636
+    ## - lcp      1    0.6814 43.740 -61.256
+    ## <none>                 43.058 -60.779
+    ## - lbph     1    1.3646 44.423 -59.753
+    ## - age      1    1.7981 44.857 -58.810
+    ## - lweight  1    4.6907 47.749 -52.749
+    ## - svi      1    4.8803 47.939 -52.364
+    ## - lcavol   1   20.1994 63.258 -25.467
+    ## 
+    ## Step:  AIC=-62.67
+    ## lpsa ~ lcavol + lweight + age + lbph + svi + lcp + pgg45
+    ## 
+    ##           Df Sum of Sq    RSS     AIC
+    ## - lcp      1    0.6684 43.776 -63.176
+    ## <none>                 43.108 -62.668
+    ## - pgg45    1    1.1987 44.306 -62.008
+    ## - lbph     1    1.3844 44.492 -61.602
+    ## - age      1    1.7579 44.865 -60.791
+    ## - lweight  1    4.6429 47.751 -54.746
+    ## - svi      1    4.8333 47.941 -54.360
+    ## - lcavol   1   21.3191 64.427 -25.691
+    ## 
+    ## Step:  AIC=-63.18
+    ## lpsa ~ lcavol + lweight + age + lbph + svi + pgg45
+    ## 
+    ##           Df Sum of Sq    RSS     AIC
+    ## - pgg45    1    0.6607 44.437 -63.723
+    ## <none>                 43.776 -63.176
+    ## - lbph     1    1.3329 45.109 -62.266
+    ## - age      1    1.4878 45.264 -61.934
+    ## - svi      1    4.1766 47.953 -56.336
+    ## - lweight  1    4.6553 48.431 -55.373
+    ## - lcavol   1   22.7555 66.531 -24.572
+    ## 
+    ## Step:  AIC=-63.72
+    ## lpsa ~ lcavol + lweight + age + lbph + svi
+    ## 
+    ##           Df Sum of Sq    RSS     AIC
+    ## <none>                 44.437 -63.723
+    ## - age      1    1.1588 45.595 -63.226
+    ## - lbph     1    1.5087 45.945 -62.484
+    ## - lweight  1    4.3140 48.751 -56.735
+    ## - svi      1    5.8509 50.288 -53.724
+    ## - lcavol   1   25.9427 70.379 -21.119
+
+  - 맨 처음 AIC는 -62.67로 gleason를 제거하고 회귀분석 실시, 그 다음 차례로 lcp, pgg45 순서로
+    제거되어 회귀분석이 실시된다
