@@ -867,7 +867,7 @@ summary(glmModel)
 ```
 - 2번째 변수인 양성여부를 종속변수로 두고 5개의 변수를 독립변수로 하여 로지스틱 회귀 분석을 실시한 결과 aged와 grade는 유의수준 5%하에서 유의하지 않아 이를 제외한 3개 변수 stage, xray와 acid를 활용해서 모형을 개발한다
 
-- stage, xray와 acid의 추정계수는 유의수준 5% 하에서 유의하게 나타나므로 p(r = 1) = 1/(1 + e - (-3.05 + 1.65 stage + 1.91 xray + 1.64 acid))의 선형식이 가능하다
+- stage, xray와 acid의 추정계수는 유의수준 5% 하에서 유의하게 나타나므로 p(r = 1) = 1/(1 + e-(-3.05 + 1.65 stage + 1.91 xray + 1.64 acid))의 선형식이 가능하다
 
 ## 6. 최적회귀방정식
 
@@ -1160,7 +1160,7 @@ alpha_t = 백색잡음과정(white noise process), 시계열 분석에서 오차
 
 - 자기상관계수 함수(ACF)
   - 상관계수 k를 함수 형태로 표시한 것
-  - AR(1): <img src="https://render.githubusercontent.com/render/math?math=$Z_t = \phi Z_{t - 1} + \alpha_t$">, 만일 -1 < \phi < 1 이면 두 지점간의 거리가 멀어질수록(k가 커질수록) ACF는 0에 수렴하게 된다
+  - AR(1): <img src="https://render.githubusercontent.com/render/math?math=$Z_t = \phi Z_{t - 1} + \alpha_t$">, 만일 -1 < phi < 1 이면 두 지점간의 거리가 멀어질수록(k가 커질수록) ACF는 0에 수렴하게 된다
   
 - 부분(편)자기상관계수
   - 서로 다른 두 시점 사이의 관계를 분석할 때 중간에 있는 값들의 영향을 제외시킨 상관관계 개념
