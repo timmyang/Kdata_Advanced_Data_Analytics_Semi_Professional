@@ -1,0 +1,348 @@
+Part 5: Structured Data Mining
+================
+
+# Table of Contents
+
+  - **Chapter 1 - 데이터 마이닝의 개요 (Data Mining Outline)**
+      - 데이터 마이닝
+      - 데이터 마이닝의 분석 방법
+      - 분석 목적에 따른 작업 유형과 기법
+      - 데이터 마이닝 추진단계
+      - 데이터 마이닝을 위한 데이터 분할
+      - 성과 분석
+  - **Chapter 2 - 분류분석 (Classification Analysis)**
+      - 분류분석과 예측분석
+      - 로지스틱 회귀분석 (Logistic Regression)
+      - 의사결정나무
+      - 불순도의 여러 가지 측도
+      - 의사결정나무 알고리즘
+      - 의사결정나무 예시
+  - **Chapter 3 - 앙상블 분석 (Ensemble Analysis)**
+      - 앙상블 (Ensemble)
+  - **Chapter 4 - 인공신경망 분석 (Artificial Neural Network Analysis)**
+      - 인공신경만 분석 (ANN)
+  - **Chapter 5 - 군집분석 (Cluster Analysis)**
+      - 군집분석
+      - 거리
+      - 계층적 군집분석
+      - 비계층적 군집분석
+      - 혼합 분포 군집 (mixture distribution clustering)
+      - SOM (Self Organizing Map)
+      - 최신 군집분석 기법들
+  - **Chapter 6 - 연관분석 (Association Rule)**
+      - 연관규칙
+      - 기존 연관성 분석의 이슈
+      - 최근 연관성 분석 동향
+      - 연관성 분석 활용 방안
+      - 연관성 분석 예제
+
+# Chapter 1 - 데이터 마이닝의 개요 (Data Mining Outline)
+
+## 1\. 데이터 마이닝
+
+#### 가. 개요
+
+  - 데이터 마이닝은 대용량 데이터에서 의미있는 패턴을 파악하거나 예측하여 의사결정에 활용하는 방법이다
+
+#### 나. 통계분석 과의 차이점
+
+  - 통계분석은 가설이나 가정에 따른 분석이나 검증을 하지만 **데이터 마이닝** 은 다양한 수리 알고리즘을 이용해 데이터
+    베이스의 **데이터로부터 의미있는 정보를 찾아내는 방법을 통칭** 한다
+
+#### 다. 종류
+
+  - **정보를 찾는 방법론에 따른 종류**
+      - 인공지능 (Artificial Intelligence)
+      - 의사결정나무 (Decision Tree)
+      - K-평균군집화 (K-means clustering)
+      - 연관분석 (Association Rule)
+      - 회귀분석 (Regression)
+      - 로짓분석 (Logit Analysis)
+      - 최근접이웃 (Nearest Neighborhood)
+  - **분석대상, 활용목적, 표현방법에 따른 분류**
+      - 시각화분석 (Visualization Analysis)
+      - 분류 (Classification)
+      - 군집화 (Clustering)
+      - 포케스팅 (Forecasting)
+
+#### 라. 사용분야
+
+  - 병원에서 환자 데이터를 이용해서 해당 환자에게 발생 가능성이 높은 병을 예측
+  - 기존 환자가 응급실에 왔을 때 어떤 조치를 먼저 해야 하는지를 결정
+  - 고객 데이터를 이용해 해당 고객의 우량/불량을 예측해 대출적격 여부 판단
+  - 세관 검사에서 입국자의 이력과 데이터를 이용해 관세물품 반입 여부를 예측
+
+#### 마. 데이터 마이닝의 최근 환경
+
+  - 데이터 마이닝 도구가 다양하고 체계화되어 환경에 적합한 제품을 선택하여 활용 가능하다
+  - 알고리즘에 대한 깊은 이해가 없어도 분석에 큰 어려움이 없다
+  - 분석 결과의 품질은 분석가의 경험과 역량에 따라 차이가 나기 때문에 분석 과제의 복잡성이나 중요도가 높으면 풍부한 경험을
+    가진 전문가에게 의뢰할 필요가 있다
+  - 국내에서 데이터 마이닝이 적용된 시기는 1990년대 중반이다
+  - 2000년대에 비즈니스 관점에서 데이터 마이닝이 CRM의 중요한 요소로 부각되었다
+  - 대중화를 위해 많은 시도가 있었으나, 통계학 전문가와 대기업 위주로 진행되었다
+
+**기출문제**  
+**94. 다음 중 기업이 보유하고 있는 거래 데이터, 고객 데이터 등과 외부 데이터를 포함하는 모든 데이터를 기반으로 새로운
+규칙 등을 발견하고 이를 비즈니스 의사결정 등에 정보로 활용하고자 하는 일련의 작업을 무엇이라고 하는가?**
+
+1.  회귀분석  
+2.  **데이터 마이닝**  
+3.  데이터 웨어하우징  
+4.  의사결정지원시스템
+
+## 2\. 데이터 마이닝의 분석 방법
+
+  - **지도학습(Supervised Data Prediction)**
+      - 의사결정나무
+      - 인공신경망
+      - 일반화 선형 모형
+      - 회귀분석
+      - 로지스틱 회귀분석
+      - 사례기반 추론
+      - 최근접 이웃법
+  - **비지도학습(Unsupervised Data Prediction)**
+      - OLAP (Online Analytical Processing)
+      - 연관성 규칙발견 (Association Rule Discovery, Market Basket)
+      - 군집분석 (K-means Clustering)
+      - SOM (Self Organizing Map)
+
+**기출문제**  
+**95. 정형데이터 마이닝 중에서 비지도학습 기법을 사용하여 분석을 수행하였다. 가장 적절한 것은?**  
+(a) **고객의 거래 구매 패턴을 분석하여 고객이 구매하지 않은 상품을 추천**  
+(b) 우편물에 인쇄된 우편번호 판별 분석을 통해 우편물을 자동으로 분류  
+(c) 동일 차종의 수리 보고서 데이터를 분석하여 차량 수리에 소요되는 시간을 예측  
+(d) **상품을 구매할 때 그와 유사한 상품을 구매한 고객들의 구매 데이터를 분석하여 제시**
+
+## 3\. 분석 목적에 따른 작업 유형과 기법
+
+  - **예측 (Predictive Modeling)**
+      - **분류 규칙 (Classification)**
+          - 가장 많이 사용되는 작업으로 과거의 데이터부로부터 고객특성을 찾아내어 분류모형을 만들어 이를 토대로 새로운
+            레코드의 결과값을 예측하는 것으로 목표 마케팅 및 고객 신용평가 모형에 활용됨
+          - 회귀분석, 판별분석, 신경망, 의사결정나무
+  - **설명 (Descriptive Modeling)**
+      - **연관 규칙 (Association Rule)**
+          - 데이터 안에 존재하는 항목간의 종속관계를 찾아내는 작업으로, 제품이나 서비스의 교차판매(Cross
+            Selling), 매장진열(Display), 첨부우편(Attached Mailings), 사기적발(Fraud
+            Detection) 등의 다양한 분야에 활용됨
+          - <사용기법> 동시발생 매트릭스
+      - **연속 규칙 (Sequence)**
+          - 연관 규칙에 시간관련 정보가 포함된 형태로, 고객의 구매이력(History) 속성이 반드시 필요하며, 목표
+            마케팅(Target Marketing)이나 일대일 마케팅(One-to-One Marketing)에 활용됨
+          - <사용기법> 동시발생 매트릭스
+      - **데이터 군집화 (Clustering)**
+          - 고객 레코드들을 유사한 특성을 지닌 몇 개의 소그룹으로 분할하는 작업으로 작접의 특성이
+            분류규칙(Classification)과 유사하나 분석대상 데이터에 결과값이 없으며,
+            판촉활동이나 이벤트 대상을 선정하는데 활용됨
+          - <사용기법> K-Means Clustering
+
+## 4\. 데이터 마이닝 추진단계
+
+#### 가. 1단계: 목적 설정
+
+  - 데이터 마이닝을 통해 무엇을 왜 하는지 명확한 목적(이해관계자 모두 동의하고 이해할 수 있는)을 설정한다
+  - 전문가가 참여해 목적에 따라 사용할 모델과 필요한 데이터를 정의한다
+
+#### 나. 2단계: 데이터 준비
+
+  - 고객정보, 거래정보, 상품 마스터정보, 웹로그 데이터, 소셜 네트워크 데이터 등 다양한 데이터를 활용한다
+  - IT 부서와 사전에 협의하고 일정을 조율하여 데이터 접근 부하에 유의하여야 하며, 필요시 다른 서버에 저장하여 운영에
+    지장이 없도록 데이터를 준비한다
+  - 데이터 정제를 통해 데이터의 품질을 보장하고, 필요시 데이터를 보강하여 충분한 양의 데이터를 확보한다
+
+#### 다. 3단계: 가공
+
+  - 모델링 목적에 따라 목적 변수를 정의한다
+  - 필요한 데이터를 데이터 마이닝 스프트웨어에 적용할 수 있는 형식으로 가공한다
+
+#### 라. 4단계: 기법 적용
+
+  - 1단계에서 명확한 목적에 맞게 데이터 마이닝 기법을 적용하여 정보를 추출한다
+
+#### 마. 5단계: 검증
+
+  - 데이터 마이닝으로 추출된 정보를 검증한다
+  - 테스트 데이터와 과거 데이터를 활용하여 최적의 모델을 선정한다
+  - 검증이 완료되면 IT 부서와 협의해 상시 데이터 마이닝 결과를 업무에 적용하고 보고서를 작성항여 추가수익과
+    투자대비성과(ROI) 등으로 기대효과를 전파한다
+
+## 5\. 데이터 마이닝을 위한 데이터 분할
+
+#### 가. 개요
+
+  - 모델 평가용 테스트 데이터와 구축용 데이터로 분할하여, 구축용 데이터로 모형을 생성하고 테스트 데이터로 모형이 얼마나
+    적합한 지를 판단한다
+
+#### 나. 데이터 분할
+
+  - **1) 구축용(training data, 50%)**
+      - 추정용, 훈련용 데이터라고도 불리며 데이터 마이닝 모델을 만드는데 활용한다
+  - **2) 검정용(validation data, 30%)**
+      - 구축된 모형의 과대추정 또는 과소추청을 미세 조정하는 것에 활용한다
+  - **3) 시험용(test data, 20%)**
+      - 테스트 데이터나 과거 데이터를 활용하여 모델의 성능을 검증하는데 활용한다
+  - **4) 데이터의 양이 충분하지 않거나 입력 변수에 대한 설명이 충분한 경우**
+      - 가) 홀드아웃(hold-out) 방법
+          - 주어진 데이터를 랜덤하게 두 개의 데이터로 구분하여 사용하는 방법으로 주로 학습용(training
+            data)과 시험용(test data)로 분리하여 사용한다
+      - 나) 교차확인(cross-validation) 방법
+          - 주어진 데이터를 k개의 하부집단으로 구분하여, k - 1개의 집단을 학습용으로 나머지는 하부집단으로
+            검증용으로 설정하여 학습한다
+          - k번 반복 측정한 결과를 평ㅇ균낸 값을 최종값으로 한다
+          - 주로 10-fold 교차분석을 많이 사용한다
+
+## 6\. 성과분석
+
+  - **Condition Positive + Prediction Positive**
+      - True Positive (TP)
+  - **Condition Positive + Prediction Negative**
+      - False Negative (FN)
+  - **Condition Negative + Prediction Negative**
+      - True Negative (TN)
+  - **Condition Negative + Prediction Positive**
+      - False Positive (FP)
+
+#### 가. 오분류에 대한 추정치
+
+  - **\[1\] 정분류율(Accuracy)**
+      - Accuracy = (TP + TN) / (TP + TN + FP + FN)
+  - **\[2\] 오분류율(Error Rate)**
+      - Error Rate = (FP + FN) / (TP + TN + FP + FN)
+  - **\[3\] 특이도(Specificity) = TNR: True Negative Rate**
+      - Specificity = TN / (TN + FP)
+  - **\[4\] 민감도(Sensitivity) = 재현율(Recall) = TPR: True Positive Rate**
+      - Sensitivity = TP / (TP + FN)
+  - **\[5\] 정확도(Precision)**
+      - Precision = TP / (TP + FP)
+  - **\[6\] F1 Score**
+      - F1 = 2 x (Precision x Recall) / (Precision + Recall)
+
+#### 나. ROCR 패키지로 성과분석
+
+  - **1) ROC Curve (Receiver Operating Characteristic Curve)**
+      - ROC Curve란 가로축을 FPR(False Positive Rate = 1 - TNR(specificity))
+        값으로 두고, 세루축을 TPR(Sensitivity) 값으로 두어 시각화한 그래프이다
+      - 2진 분류(binary classification)에서 모형의 성능을 평가하기 위해 많이 사용되는 척도이다
+      - 그래프가 왼쪽 상단에 가깝게 그려질수록 올바르게 예측한 비율은 높고, 잘못 예측한 비율은 낮음을 의미한다
+      - 따라서 **ROC 곡선 아래의 면적을 의미하는 AUROC(Area Under ROC)** 값이 크면 클수록(1에
+        가까울수록) 모형의 성능이 좋다고 평가한다
+      - TPR(True Positive Rate = Sensitivity)
+          - 1인 케이스에 대한 1로 예측한 비율
+      - FPR(False Positive Rate = 1 - Specificity)
+          - 0인 케이스에 대한 1로 잘못 예측한 비율
+      - AUROC(Area Under ROC)를 이용한 정확도의 판단 기준
+          - **excellent (A)**
+              - 0.9 - 1.0
+          - **good**
+              - 0.8 - 0.9
+          - **fair**
+              - 0.7 - 0.8
+          - **poor**
+              - 0.6 - 0.7
+          - **fail**
+              - 0.5 - 0.6
+  - **2) ROC Curve와 AUROC의 활용 예시**
+      - AUROC = (AR + 1) / 2
+  - **3) R 실습 코드**
+      - ROCR 패키지는 binary classification 만 지원가능
+
+<!-- end list -->
+
+``` r
+library(rpart)
+# install.packages("party")
+library(party)
+# install.packages("ROCR")
+library(ROCR)
+
+x <- kyphosis[sample(1:nrow(kyphosis), nrow(kyphosis), replace = F), ]
+
+x.train <- kyphosis[1:floor(nrow(x) * 0.75), ]
+x.evaluate <- kyphosis[floor(nrow(x) * 0.75):nrow(x), ]
+
+x.model <- cforest(Kyphosis ~ Age + Number + Start, data = x.train)
+
+x.evaluate$prediction <- predict(x.model, newdata = x.evaluate)
+x.evaluate$correct <- x.evaluate$prediction == x.evaluate$Kyphosis
+
+print(paste("% of predicted classification correct", mean(x.evaluate$correct)))
+```
+
+    ## [1] "% of predicted classification correct 0.818181818181818"
+
+``` r
+x.evaluate$probabilities <- 1 - unlist(treeresponse(x.model, newdata = x.evaluate), use.names = F)[seq(1, nrow(x.evaluate) * 2, 2)]
+```
+
+  - 그래프 1
+
+<!-- end list -->
+
+``` r
+pred <- prediction(x.evaluate$probabilities, x.evaluate$Kyphosis)
+perf <- performance(pred, "tpr", "fpr")
+plot(perf, main = "ROC curve", colorize = T)
+```
+
+![](05_Structured_Data_Mining_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+  - 그래프 2
+
+<!-- end list -->
+
+``` r
+perf <- performance(pred, "lift", "rpp")
+plot(perf, main = "lift curve", colorize = T)
+```
+
+![](05_Structured_Data_Mining_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+#### 다. 이익도표(Lift chart)
+
+  - **1) 이익도표의 개념**
+      - 이익도표는 분류모형의 성능을 평가하기 위한 척도로, 분류된 관측치에 대해 얼마나 예측이 잘 이루어졌는지를 나타내기
+        위해 임의로 나눈 각 등급별로 반응검출율, 반응률, 리프트 등의 정보를 산출하여 나타내는 도표이다
+      - 2000명의 전체고객 중 381명이 상품을 구매한 경우에 대해 이익도표를 만드는 과정을 예로 들어보면, 먼저
+        데이터셋의 각 관측치에 대한 예측확률을 내림차순으로 정렬한다
+      - 이후 데이터를 10개의 구간으로 나눈 다음 각 구간의 반응율(% response)을 산출한다
+      - 또한 기본 향상도(baseline lift)에 비해 반응률이 몇 배나 높은지를 계산하는데 이것을
+        향상도(Lift)라고 한다
+      - 이익도표의 각 등급은 예측확률에 따라 매겨진 순위이기 떄문에, 상위 등급에서는 더 높은 반응률을 보이는 것이 좋은
+        모형이라고 평가할 수 있다
+  - **2) 이익도표의 활용 예시**
+      - 전체 2000명 중 381명이 구매
+      - Frequency of “buy”
+          - 2000명 중 실제로 구매한 사람
+      - % Captured Reponse
+          - 반응검출율 = 해당 등급의 실제 구매자 / 전체 구매자
+      - % Response
+          - 반응률 = 해당 등급의 실제 구매자 / 200명
+      - Lift
+          - 향상도 = 반응률 / 기본 향상도
+          - 좋은 모델이라면 Lift가 빠른 속도로 감소해야 한다
+      - 등급별로 향상도가 급격하게 변동할 수록 좋은 모형이라고 할 수 있고, 각 등급별로 향상도가 들쭉날쭉하면 좋은
+        모형이라고 볼 수 없다
+
+#### 참고
+
+  - **과적합/과대적합 (Overfitting)**
+      - 모형이 학습용 데이터(training data)를 과하게 학습하여, 학습 데이터에 대해서는 높은 정확도를 나타내지만
+        테스트 데이터 혹은 다른 데이터에 적용할 때는 성능이 떨어지는 현상을 의미한다
+  - **과소적합 (Underfitting)**
+      - 모형이 너무 단순하여 데이터 속에 내제되어 있는 패턴이나 규칙을 제대로 학습하지 못하는 경우를 의히만다
+
+**기출문제**  
+**1. 오분류표를 사용한 평가 지표 중 아래 설명이 나타내는 지표는 무엇인가?**  
+정확도(precision)와 재현율(recall)은 한 지표의 값이 높아지면 다른 지표의 값이 낮아질 가능성이 높은 관계를 지니고
+있어 이러한 효과를 보정하여 하나의 지표로 만들어 낸 지표
+
+1.  **F1**  
+2.  민감도  
+3.  특이도  
+4.  오즈비
+
+**97-1. 분류모형을 평가할 때 사용되는 지표로 x축에는 (1 - 특이도(specificity))를 나타내며, y축에는
+민감도를 나타내어, 특이도가 어떤 관계를 갖고 변하는지를 이차원 평면상에 표현한 곡선은 무엇인가?**
+
+ROC Curve
