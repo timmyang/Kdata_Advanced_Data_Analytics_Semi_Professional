@@ -400,6 +400,15 @@ ROC Curve
   - k 최근접 이웃(KNN, K-Nearest Neighborhood)
   - 규칙기반의 분류와 사례기반추론(Case-Based Reasoning)
 
+**기출문제**  
+**98. 한 보험회사에서는 자사 고객의 보험갱신 여부를 고객의 연구통계학적 특성, 보험가입 채널, 상품 종류 등의 정보를
+사용하여 예측하려고 한다. 다음 중 가장 적절한 분석 기법은 무엇인가?**
+
+1.  시계열 분석  
+2.  **랜덤포레스트**  
+3.  k-means 군집분석  
+4.  주성분분석
+
 ## 2\. 로지스틱 회귀분석 (Logistic Regression)
 
   - 반응변수가 범주형인 경우에 적용되는 회귀분석모형이다
@@ -600,6 +609,14 @@ ROC Curve
   - 일반적으로 사용되는 방법은 마디에 속하는 **자료가 일정 수 (가령 5)이하** 일 떄 분할을 정지하고 **비용-복잡도
     가지치기(cost complexity pruning)를 이용** 하여 성장시킨 나무를 가지치기하게 된다
 
+**기출문제**  
+**100. 다음 중 의사결정나무의 특성으로 가장 부적절한 것은?**
+
+1.  의사결정나무 무형의 결과는 누구에게나 설명이 용이하다  
+2.  의사결정나무 알고리즘의 모형 정확도는 다른 분류모형에 뒤지지 않는다  
+3.  의사결정나무를 만드는 방법은 계산적으로 복잡하지 않다  
+4.  **의사결정나무 알고리즘은 정상적인 데이터에 대해서만 민감함이 없이 분류할 수 있다**
+
 ## 4\. 불순도의 여러 가지 측도
 
   - 목표변수가 범주형 변수인 의사결정나무의 분류규칙을 선택하기 위해서는 카이제곱 통계량, 지니 지수, 엔트로피 지수를 활용한다
@@ -688,9 +705,9 @@ table(predict(iris.tree), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa         11          0         0
-    ##   versicolor      0         10         1
-    ##   virginica       0          0        18
+    ##   setosa         20          0         0
+    ##   versicolor      0         18         0
+    ##   virginica       0          0        13
 
   - **\[4\] test data 를 적용하여 정확성 확인**
 
@@ -703,6 +720,6 @@ table(test.pre, test.data$Species)
 
     ##             
     ## test.pre     setosa versicolor virginica
-    ##   setosa         37          0         0
-    ##   versicolor      2         38         3
-    ##   virginica       0          2        28
+    ##   setosa         30          0         0
+    ##   versicolor      0         30         4
+    ##   virginica       0          2        33

@@ -338,6 +338,7 @@ plot(perf, main = "lift curve", colorize = T)
 ROC Curve
 
 
+
 # Chapter 2 - 분류분석 (Classification Analysis)
 
 ## 1. 분류분석과 예측분석
@@ -391,6 +392,14 @@ ROC Curve
 - 지지도 벡터기계(SVM, Support Vector Machine)
 - k 최근접 이웃(KNN, K-Nearest Neighborhood)
 - 규칙기반의 분류와 사례기반추론(Case-Based Reasoning)
+
+**기출문제**  
+**98. 한 보험회사에서는 자사 고객의 보험갱신 여부를 고객의 연구통계학적 특성, 보험가입 채널, 상품 종류 등의 정보를 사용하여 예측하려고 한다. 다음 중 가장 적절한 분석 기법은 무엇인가?**
+
+1. 시계열 분석  
+2. **랜덤포레스트**  
+3. k-means 군집분석  
+4. 주성분분석
 
 
 ## 2. 로지스틱 회귀분석 (Logistic Regression)
@@ -568,6 +577,14 @@ ROC Curve
   - 나무의 크기를 모형의 복잡도로 볼 수 있으며 최적의 나무 크기는 자료로부터 추정하게 된다
   - 일반적으로 사용되는 방법은 마디에 속하는 **자료가 일정 수 (가령 5)이하** 일 떄 분할을 정지하고 **비용-복잡도 가지치기(cost complexity pruning)를 이용** 하여 성장시킨 나무를 가지치기하게 된다
 
+**기출문제**  
+**100. 다음 중 의사결정나무의 특성으로 가장 부적절한 것은?**  
+
+1. 의사결정나무 무형의 결과는 누구에게나 설명이 용이하다  
+2. 의사결정나무 알고리즘의 모형 정확도는 다른 분류모형에 뒤지지 않는다  
+3. 의사결정나무를 만드는 방법은 계산적으로 복잡하지 않다  
+4. **의사결정나무 알고리즘은 정상적인 데이터에 대해서만 민감함이 없이 분류할 수 있다**
+
 
 ## 4. 불순도의 여러 가지 측도
 
@@ -649,3 +666,4 @@ table(predict(iris.tree), train.data$Species)
 test.pre <- predict(iris.tree, newdata = test.data)
 table(test.pre, test.data$Species)
 ```
+
