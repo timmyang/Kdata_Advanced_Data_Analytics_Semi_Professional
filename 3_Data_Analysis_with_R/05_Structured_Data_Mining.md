@@ -705,9 +705,9 @@ table(predict(iris.tree), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa         11          0         0
-    ##   versicolor      0         13         0
-    ##   virginica       0          0        16
+    ##   setosa         15          0         0
+    ##   versicolor      0         14         3
+    ##   virginica       0          0        12
 
   - **\[4\] test data 를 적용하여 정확성 확인**
 
@@ -720,9 +720,9 @@ table(test.pre, test.data$Species)
 
     ##             
     ## test.pre     setosa versicolor virginica
-    ##   setosa         37          0         0
-    ##   versicolor      2         35         4
-    ##   virginica       0          2        30
+    ##   setosa         29          0         0
+    ##   versicolor      6         34         3
+    ##   virginica       0          2        32
 
 # Chapter 3 - 앙상블 분석 (Ensemble Analysis)
 
@@ -806,9 +806,9 @@ table(predict(r.f), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa         13          0         0
-    ##   versicolor      1         20         0
-    ##   virginica       0          0        12
+    ##   setosa          8          0         0
+    ##   versicolor      0          5         3
+    ##   virginica       0          2        10
 
     - 그래프 그리기 1
 
@@ -833,9 +833,9 @@ table(pre.rf, test.data$Species)
 
     ##             
     ## pre.rf       setosa versicolor virginica
-    ##   setosa         36          0         0
-    ##   versicolor      0         30        10
-    ##   virginica       0          0        28
+    ##   setosa         42          0         0
+    ##   versicolor      0         42         4
+    ##   virginica       0          1        33
 
     - 그래프 그리기 3
 
@@ -1305,8 +1305,8 @@ table(iris$Species, kc$cluster)
 
     ##             
     ##               1  2  3
-    ##   setosa     33 17  0
-    ##   versicolor  0  4 46
+    ##   setosa     17 33  0
+    ##   versicolor  4  0 46
     ##   virginica   0  0 50
 
   - 다) 군집화 그래프
@@ -1318,3 +1318,317 @@ plot(newiris[c("Sepal.Length", "Sepal.Width")], col = kc$cluster)
 ```
 
 ![](05_Structured_Data_Mining_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+# Chapter 6 - 연관분석 (Association Rule)
+
+## 1\. 연관규칙
+
+#### 가. 연관규칙분석(Association Analysis)의 개념
+
+  - 연관성 분석은 흔히 장바구니분석(Market Basket Analysis) 또는 서열분석(Sequence Analysis)
+    이라고 불린다
+  - 기업의 데이터베이스에서 상품의 구매, 서비스 등 일련의 거래 또는 사건들 간의 **규칙** 을 발견하기 위해 적용한다
+  - 장바구니 분석
+      - 장바구니에 무엇이 같이 들어 있는지에 대한 분석
+  - 서열 분석
+      - A를 산 다음에 B를 산다
+
+#### 나. 연관규칙의 형태
+
+  - 조건과 반응의 형태(if-then)로 이루어져 있다
+      - 만일 A가 일어나면 B가 일어난다
+      - 아메리카노(A)를 마시는 손님 중 10%가 브리우니(B)를 먹는다
+      - 샌드위치(A)를 먹는 고객의 30%가 탄산수(B)를 함께 마신다
+
+#### 다. 연관규칙의 측도
+
+  - 산업의 특성에 따라 지지도, 신뢰도, 향상도 값을 잘 보고 규칙을 선택하야 한다
+  - **\[1\] 지지도(support)**
+      - 전체 거래 중 항목 A와 항목 B를 동시에 포함하는 거래의 비율로 정의한다  
+        지지도 =
+        <img src="https://render.githubusercontent.com/render/math?math=$P(A \cap B) = (A \cap B) / total$">
+  - **\[2\] 신뢰도(confidence)**
+      - 항목 A를 포함한 거래 중에서 항목 A와 항목 B가 같이 포함될 확률이다
+      - 연관성의 정도를 파악할 수 있다  
+        신뢰도 =
+        <img src="https://render.githubusercontent.com/render/math?math=$P(A \cap B) / P(A) = support /P(A)$">
+  - **\[3\] 향상도(lift)**
+      - A 가 구매되지 않았을 때의 품목 B 구매확률에 비해 A가 구매됬을 때의 품목 B의 증가 비이다
+      - 연관규칙 A -\> B는 품목 A와 품목 B의 구매가 서로 관련이 없는 경우에 향상도가 1이 된다  
+        향상도 =
+        <img src="https://render.githubusercontent.com/render/math?math=$P(B|A)/P(B) = P(A \cap B) / (P(A)P(B)) = confidence/P(B)$">
+
+#### 라. 연관규칙의 절차
+
+  - 최소 지지도보다 큰 집합만을 대상으로 늪은 지지도를 갖는 품목 집합을 찾는 것이다
+  - 처음에는 5%로 잡고 규칙이 충분히 도출 되는지를 보고 다양하게 조절하여 시도한다
+  - 처움부터 너무 낮은 최소 지지도를 선정하는 것은 많은 리소스가 소모되므로 적절하지 않다
+  - 절차
+      - 최소 지지도 설정 -\> 품목 중 최소 지지도를 넘는 품목 분류 -\> 2가지 품목 집합 생성 -\> 반복적으로
+        수행해 빈발품목 집합을 찾음
+
+#### 마. 연관규칙의 장점과 단점
+
+  - **장점**
+      - 탐색적인 기법으로 조건 방응으로 표현되는 연관성 분석의 결과를 쉽게 이해할 수 있다
+      - 강력한 비목적성 분석기법으로 분석 방향이나 목적이 특별히 없는 경우 목적변수가 없으므로 유용하게 활용 된다
+      - 사용이 편리한 분석 데이터의 형태로 거래 내용에 대한 데이터를 변환 없이 그 자체로 이용할 수 있는 간단한 자료
+        구조를 갖는다
+      - 분석을 위한 계산이 간단하다
+  - **단점(개선방안)**
+      - 품목수가 증가하면 분석에 필요한 계산은 기하급수적으로 늘어난다
+          - 이를 개선하기 위해 유사한 품목을 한 범주로 일반화 한다
+          - 연관 규칙의 신뢰도 하한을 새롭게 정의해 실제 관찰되는 빈도가 적은 연관규칙은 제외한다
+      - 너무 세분화한 품목을 갖고 연관성 규칙을 찾으면 의미없는 분석이 될 수도 있다
+          - 적절히 구분되는 큰 범주로 구분해 전체 분석에 포함시킨 후 그 결과 중에서 세부적으로 연관규칙을 찾는 작업을
+            수행할 수 있다
+      - 거래량이 적은 품목은 당연히 포함된 거래수가 적을 것이고, 규칙 발견 시 제외하기가 쉽다
+          - 이런 경우, 그 품목이 관련성을 살펴보고자 하는 중요한 품목이라면 유사한 품목들과 함께 범주로 구성하는 방법
+            등을 통해 연관성 규칙의 과정에 포함 시킬 수 있다
+
+#### 바. 순차패턴(Sequence Analysis)
+
+  - 동시에 구매될 가능성이 큰 상품군을 찾아내는 연관성분석에 시간이라는 개념을 포함시켜 순차적으로 구매 가능성이 큰 상품군을
+    찾아내는 것이다
+  - 연관성분석에서의 데이터 형태에서 각각의 고객으로부터 발생한 구매시점에 대한 정보가 포함된다
+
+## 2\. 기존 연관성 분석의 이슈
+
+  - 대용량 데이터에 대한 연관성분석이 불가능하다
+  - 시간이 많이 걸리거나 기존 시스템에서 실행 시 시스템 다운이 되는 현상이 발생할 수 있다
+
+## 3\. 최근 연관성 분석 동향
+
+  - 1세대 알고리즘인 Apriori나 2세대인 FP-Growth에서 발전하여 3세대의 FPV를 이용해 메모리를 효율적으로
+    사용함으로써 SKU 레벨의 연관성 분석을 성공적으로 적용했다
+  - 거래내역에 포함되어 있는 모든 품목의 개수가 n개 일 때, 품목들의 전체집합(item set)에서 추출할 수 있는 품목
+    부분집합의 개수는 2^n - 1 (공집합 제외)개다. 그리고 가능한 모든 연관규칙의 개수는 3^n - 2^(n+1)
+    + 1 개다
+  - 이때 모든 가능한 품목 부분집합의 개수를 줄이는 방식으로 작동하는 것이 Apriori 알고리즘이며, 거래내영ㄱ 안에 포함된
+    품목의 개수를 줄여 비교하는 횟수를 줄이는 방식이 FP-Growth 알고리즘이다
+
+#### 가. Apriori 알고리즘
+
+  - 최소 지지도보다 큰 지지도 값을 갖는 품목의 집합을 빈발항목집합(frequent item set)이라고 한다
+  - Apriori 알고리즘은 모든 품목집합에 대한 지지도를 전부 계산하는 것이 아니라, **최소 지지도 이상의 빈발항목집합을
+    찾은 후** 그것들에 대해서만 연관규칙을 계산하는 것이다
+  - Apriori는 1994년에 발표된 1세대 알고리즘으로 구현과 이해하기가 쉽다는 장점이 있으나, 지지도가 낮은 후보 집합
+    생성 시 아이템의 개수가 많아지면 계산 복잡도가 증가한다는 문제점을 가지고 있다
+
+#### 나. FP-Growth 알고리즘
+
+  - FP-Growth 알고리즘은 **후보 빈발항목집합을 생성하지 않고, FP-Tree(Frequent Pattern
+    Tree)를 만든 후** 분할정복 방식을 통해 Apriori 알고리즘 보다 더 빠르게 빈발항목집합을 추출할 수 있는
+    방법이다
+  - **Apriori 알고리즘의 약점을 보완** 하기 위해 고안된 것으로 데이터베이스를 스캔하는 횟수가 적고, 빠른 속도로
+    분석이 가능하다
+
+## 4\. 연관성 분석 활용 방안
+
+  - 장바구니 분석의 경우는 실시간 상품추천을 통한 교차판매에 응용
+  - 순차패턴 분석은 A를 구매한 사람인데 B를 구매하지 않은 경우, B를 추천하는 교차판매 캠페인에 사용
+
+## 5\. 연관성 분석 예제
+
+  - **\[1\] 분석 내용**
+      - Groceries 데이터셋은 식료품 판매점의 1달 동안의 POS 데이터이며, 총 169개의 제품과 9,835 건의
+        거래건수를 포함하고 있다
+      - 거래내역을 inspect 함수로 확인할 수 있으며, apriori 함수로 최소지지도와 신뢰도는 각각 0.01,
+        0.3으로 설정한 뒤 연관규칙분석을 실시했다
+
+<!-- end list -->
+
+``` r
+# install.packages("arulesViz")
+library(arulesViz) 
+
+data("Groceries") 
+inspect(Groceries[1:3])
+```
+
+    ##     items                
+    ## [1] {citrus fruit,       
+    ##      semi-finished bread,
+    ##      margarine,          
+    ##      ready soups}        
+    ## [2] {tropical fruit,     
+    ##      yogurt,             
+    ##      coffee}             
+    ## [3] {whole milk}
+
+``` r
+rules <- apriori(Groceries, parameter = list(support = 0.01, confidence = 0.3))
+```
+
+    ## Apriori
+    ## 
+    ## Parameter specification:
+    ##  confidence minval smax arem  aval originalSupport maxtime support minlen
+    ##         0.3    0.1    1 none FALSE            TRUE       5    0.01      1
+    ##  maxlen target  ext
+    ##      10  rules TRUE
+    ## 
+    ## Algorithmic control:
+    ##  filter tree heap memopt load sort verbose
+    ##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+    ## 
+    ## Absolute minimum support count: 98 
+    ## 
+    ## set item appearances ...[0 item(s)] done [0.00s].
+    ## set transactions ...[169 item(s), 9835 transaction(s)] done [0.00s].
+    ## sorting and recoding items ... [88 item(s)] done [0.00s].
+    ## creating transaction tree ... done [0.00s].
+    ## checking subsets of size 1 2 3 4 done [0.00s].
+    ## writing ... [125 rule(s)] done [0.00s].
+    ## creating S4 object  ... done [0.00s].
+
+``` r
+inspect(sort(rules, by = c("lift"), decreasing = TRUE)[1:20])
+```
+
+    ##      lhs                                      rhs                support   
+    ## [1]  {citrus fruit,other vegetables}       => {root vegetables}  0.01037112
+    ## [2]  {tropical fruit,other vegetables}     => {root vegetables}  0.01230300
+    ## [3]  {beef}                                => {root vegetables}  0.01738688
+    ## [4]  {citrus fruit,root vegetables}        => {other vegetables} 0.01037112
+    ## [5]  {tropical fruit,root vegetables}      => {other vegetables} 0.01230300
+    ## [6]  {other vegetables,whole milk}         => {root vegetables}  0.02318251
+    ## [7]  {whole milk,curd}                     => {yogurt}           0.01006609
+    ## [8]  {root vegetables,rolls/buns}          => {other vegetables} 0.01220132
+    ## [9]  {root vegetables,yogurt}              => {other vegetables} 0.01291307
+    ## [10] {tropical fruit,whole milk}           => {yogurt}           0.01514997
+    ## [11] {yogurt,whipped/sour cream}           => {other vegetables} 0.01016777
+    ## [12] {other vegetables,whipped/sour cream} => {yogurt}           0.01016777
+    ## [13] {tropical fruit,other vegetables}     => {yogurt}           0.01230300
+    ## [14] {root vegetables,whole milk}          => {other vegetables} 0.02318251
+    ## [15] {whole milk,whipped/sour cream}       => {yogurt}           0.01087951
+    ## [16] {citrus fruit,whole milk}             => {yogurt}           0.01026945
+    ## [17] {onions}                              => {other vegetables} 0.01423488
+    ## [18] {pork,whole milk}                     => {other vegetables} 0.01016777
+    ## [19] {whole milk,whipped/sour cream}       => {other vegetables} 0.01464159
+    ## [20] {curd}                                => {yogurt}           0.01728521
+    ##      confidence coverage   lift     count
+    ## [1]  0.3591549  0.02887646 3.295045 102  
+    ## [2]  0.3427762  0.03589222 3.144780 121  
+    ## [3]  0.3313953  0.05246568 3.040367 171  
+    ## [4]  0.5862069  0.01769192 3.029608 102  
+    ## [5]  0.5845411  0.02104728 3.020999 121  
+    ## [6]  0.3097826  0.07483477 2.842082 228  
+    ## [7]  0.3852140  0.02613116 2.761356  99  
+    ## [8]  0.5020921  0.02430097 2.594890 120  
+    ## [9]  0.5000000  0.02582613 2.584078 127  
+    ## [10] 0.3581731  0.04229792 2.567516 149  
+    ## [11] 0.4901961  0.02074225 2.533410 100  
+    ## [12] 0.3521127  0.02887646 2.524073 100  
+    ## [13] 0.3427762  0.03589222 2.457146 121  
+    ## [14] 0.4740125  0.04890696 2.449770 228  
+    ## [15] 0.3375394  0.03223183 2.419607 107  
+    ## [16] 0.3366667  0.03050330 2.413350 101  
+    ## [17] 0.4590164  0.03101169 2.372268 140  
+    ## [18] 0.4587156  0.02216573 2.370714 100  
+    ## [19] 0.4542587  0.03223183 2.347679 144  
+    ## [20] 0.3244275  0.05327911 2.325615 170
+
+  - **\[2\] 분석 결과**
+
+<!-- end list -->
+
+``` r
+data(Groceries)
+inspect(Groceries[1:3])
+```
+
+    ##     items                
+    ## [1] {citrus fruit,       
+    ##      semi-finished bread,
+    ##      margarine,          
+    ##      ready soups}        
+    ## [2] {tropical fruit,     
+    ##      yogurt,             
+    ##      coffee}             
+    ## [3] {whole milk}
+
+``` r
+apriori(Groceries, parameter = list(support = 0.01, confidence = 0.3))
+```
+
+    ## Apriori
+    ## 
+    ## Parameter specification:
+    ##  confidence minval smax arem  aval originalSupport maxtime support minlen
+    ##         0.3    0.1    1 none FALSE            TRUE       5    0.01      1
+    ##  maxlen target  ext
+    ##      10  rules TRUE
+    ## 
+    ## Algorithmic control:
+    ##  filter tree heap memopt load sort verbose
+    ##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+    ## 
+    ## Absolute minimum support count: 98 
+    ## 
+    ## set item appearances ...[0 item(s)] done [0.00s].
+    ## set transactions ...[169 item(s), 9835 transaction(s)] done [0.00s].
+    ## sorting and recoding items ... [88 item(s)] done [0.00s].
+    ## creating transaction tree ... done [0.00s].
+    ## checking subsets of size 1 2 3 4 done [0.00s].
+    ## writing ... [125 rule(s)] done [0.00s].
+    ## creating S4 object  ... done [0.00s].
+
+    ## set of 125 rules
+
+  - apriori 알고리즘으로 연관규칙분석을 실행한 결과 총 88개의 아이템으로 연관규칙을 만들어냈으며 125개의 Rule이
+    발견되었다
+  - 규칙의 수가 너무 적으면 지지도와 신뢰도를 낮추고, 너무 많으면 지지도와 신뢰도를 높여야 한다
+
+<!-- end list -->
+
+``` r
+inspect(sort(rules, by = c("lift"), decreasing = TRUE)[1:20])
+```
+
+    ##      lhs                                      rhs                support   
+    ## [1]  {citrus fruit,other vegetables}       => {root vegetables}  0.01037112
+    ## [2]  {tropical fruit,other vegetables}     => {root vegetables}  0.01230300
+    ## [3]  {beef}                                => {root vegetables}  0.01738688
+    ## [4]  {citrus fruit,root vegetables}        => {other vegetables} 0.01037112
+    ## [5]  {tropical fruit,root vegetables}      => {other vegetables} 0.01230300
+    ## [6]  {other vegetables,whole milk}         => {root vegetables}  0.02318251
+    ## [7]  {whole milk,curd}                     => {yogurt}           0.01006609
+    ## [8]  {root vegetables,rolls/buns}          => {other vegetables} 0.01220132
+    ## [9]  {root vegetables,yogurt}              => {other vegetables} 0.01291307
+    ## [10] {tropical fruit,whole milk}           => {yogurt}           0.01514997
+    ## [11] {yogurt,whipped/sour cream}           => {other vegetables} 0.01016777
+    ## [12] {other vegetables,whipped/sour cream} => {yogurt}           0.01016777
+    ## [13] {tropical fruit,other vegetables}     => {yogurt}           0.01230300
+    ## [14] {root vegetables,whole milk}          => {other vegetables} 0.02318251
+    ## [15] {whole milk,whipped/sour cream}       => {yogurt}           0.01087951
+    ## [16] {citrus fruit,whole milk}             => {yogurt}           0.01026945
+    ## [17] {onions}                              => {other vegetables} 0.01423488
+    ## [18] {pork,whole milk}                     => {other vegetables} 0.01016777
+    ## [19] {whole milk,whipped/sour cream}       => {other vegetables} 0.01464159
+    ## [20] {curd}                                => {yogurt}           0.01728521
+    ##      confidence coverage   lift     count
+    ## [1]  0.3591549  0.02887646 3.295045 102  
+    ## [2]  0.3427762  0.03589222 3.144780 121  
+    ## [3]  0.3313953  0.05246568 3.040367 171  
+    ## [4]  0.5862069  0.01769192 3.029608 102  
+    ## [5]  0.5845411  0.02104728 3.020999 121  
+    ## [6]  0.3097826  0.07483477 2.842082 228  
+    ## [7]  0.3852140  0.02613116 2.761356  99  
+    ## [8]  0.5020921  0.02430097 2.594890 120  
+    ## [9]  0.5000000  0.02582613 2.584078 127  
+    ## [10] 0.3581731  0.04229792 2.567516 149  
+    ## [11] 0.4901961  0.02074225 2.533410 100  
+    ## [12] 0.3521127  0.02887646 2.524073 100  
+    ## [13] 0.3427762  0.03589222 2.457146 121  
+    ## [14] 0.4740125  0.04890696 2.449770 228  
+    ## [15] 0.3375394  0.03223183 2.419607 107  
+    ## [16] 0.3366667  0.03050330 2.413350 101  
+    ## [17] 0.4590164  0.03101169 2.372268 140  
+    ## [18] 0.4587156  0.02216573 2.370714 100  
+    ## [19] 0.4542587  0.03223183 2.347679 144  
+    ## [20] 0.3244275  0.05327911 2.325615 170
+
+  - 향상도를 기준으로 내림차순으로 정렬한 후 상위 5개의 규칙을 확인해봤을 때, rhs의 제품만 구매할 확률에 비해 lhs의
+    제품을 샀을 때 rhs 제품도 구매할 확률이 약 3배 가량 높다(Lift \> 3)
+  - 따라서 rhs와 lhs 제품들간 결합상품 할인쿠폰 혹은 품목배치 변경 등을 제안할 수 있다
