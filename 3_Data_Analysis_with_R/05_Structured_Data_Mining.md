@@ -189,7 +189,7 @@ Part 5: Structured Data Mining
       - 나) 교차확인(cross-validation) 방법
           - 주어진 데이터를 k개의 하부집단으로 구분하여, k - 1개의 집단을 학습용으로 나머지는 하부집단으로
             검증용으로 설정하여 학습한다
-          - k번 반복 측정한 결과를 평ㅇ균낸 값을 최종값으로 한다
+          - k번 반복 측정한 결과를 평균낸 값을 최종값으로 한다
           - 주로 10-fold 교차분석을 많이 사용한다
 
 ## 6\. 성과분석
@@ -222,7 +222,7 @@ Part 5: Structured Data Mining
 
   - **1) ROC Curve (Receiver Operating Characteristic Curve)**
       - ROC Curve란 가로축을 FPR(False Positive Rate = 1 - TNR(specificity))
-        값으로 두고, 세루축을 TPR(Sensitivity) 값으로 두어 시각화한 그래프이다
+        값으로 두고, 세로축을 TPR(Sensitivity) 값으로 두어 시각화한 그래프이다
       - 2진 분류(binary classification)에서 모형의 성능을 평가하기 위해 많이 사용되는 척도이다
       - 그래프가 왼쪽 상단에 가깝게 그려질수록 올바르게 예측한 비율은 높고, 잘못 예측한 비율은 낮음을 의미한다
       - 따라서 **ROC 곡선 아래의 면적을 의미하는 AUROC(Area Under ROC)** 값이 크면 클수록(1에
@@ -529,7 +529,7 @@ ROC Curve
 #### 라. 의사결정나무의 특징
 
   - **<장점>**
-      - 결과를 누구에가나 설명하기 용이하다
+      - 결과를 누구에게나 설명하기 용이하다
       - 모형을 만드는 방법이 계산적으로 복잡하지 않다
       - 대용량 데이터에서도 빠르게 만들 수 있다
       - 비정상 잡음 데이터에 대해서도 민감함이 없이 분류할 수 있다
@@ -606,7 +606,7 @@ ROC Curve
 
   - 너무 큰 나무모형은 자료를 과대적합하고 너무 작은 나무모형은 과소적합할 위험이 있다
   - 나무의 크기를 모형의 복잡도로 볼 수 있으며 최적의 나무 크기는 자료로부터 추정하게 된다
-  - 일반적으로 사용되는 방법은 마디에 속하는 **자료가 일정 수 (가령 5)이하** 일 떄 분할을 정지하고 **비용-복잡도
+  - 일반적으로 사용되는 방법은 마디에 속하는 **자료가 일정 수 (가령 5)이하** 일 때 분할을 정지하고 **비용-복잡도
     가지치기(cost complexity pruning)를 이용** 하여 성장시킨 나무를 가지치기하게 된다
 
 **기출문제**  
@@ -640,7 +640,7 @@ ROC Curve
 #### 가. CART(Classification and Regression Tree)
 
   - 앞에서 설명한 방식의 가장 많이 활용되는 의사결정나무 알고리즘으로 불순도의 측도로 출력(목적) 변수가 범주형일 경우
-    지니수를 이용, 연속형인 경우 반산을 이용한 이진분리(binary split)를 사용한다
+    지니수를 이용, 연속형인 경우 분산을 이용한 이진분리(binary split)를 사용한다
   - 개별 입력변수 뿐만 아니라 입력변수들의 선형결합들 중에서 최적의 분리를 찾을 수 있다
 
 #### 나. C4.5와 C5.0
@@ -705,9 +705,9 @@ table(predict(iris.tree), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa         15          0         0
-    ##   versicolor      0         14         3
-    ##   virginica       0          0        12
+    ##   setosa         17          0         0
+    ##   versicolor      0         11         0
+    ##   virginica       0          0        11
 
   - **\[4\] test data 를 적용하여 정확성 확인**
 
@@ -720,9 +720,9 @@ table(test.pre, test.data$Species)
 
     ##             
     ## test.pre     setosa versicolor virginica
-    ##   setosa         29          0         0
-    ##   versicolor      6         34         3
-    ##   virginica       0          2        32
+    ##   setosa         31          0         0
+    ##   versicolor      2         35         3
+    ##   virginica       0          4        36
 
 # Chapter 3 - 앙상블 분석 (Ensemble Analysis)
 
@@ -806,9 +806,9 @@ table(predict(r.f), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa          8          0         0
-    ##   versicolor      0          5         3
-    ##   virginica       0          2        10
+    ##   setosa         12          0         0
+    ##   versicolor      0         17         1
+    ##   virginica       0          0        11
 
     - 그래프 그리기 1
 
@@ -833,9 +833,9 @@ table(pre.rf, test.data$Species)
 
     ##             
     ## pre.rf       setosa versicolor virginica
-    ##   setosa         42          0         0
-    ##   versicolor      0         42         4
-    ##   virginica       0          1        33
+    ##   setosa         38          0         0
+    ##   versicolor      0         29         0
+    ##   virginica       0          4        38
 
     - 그래프 그리기 3
 
@@ -1305,9 +1305,9 @@ table(iris$Species, kc$cluster)
 
     ##             
     ##               1  2  3
-    ##   setosa     17 33  0
-    ##   versicolor  4  0 46
-    ##   virginica   0  0 50
+    ##   setosa     17  0 33
+    ##   versicolor  4 46  0
+    ##   virginica   0 50  0
 
   - 다) 군집화 그래프
 
