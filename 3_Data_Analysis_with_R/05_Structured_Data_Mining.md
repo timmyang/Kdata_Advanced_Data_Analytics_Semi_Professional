@@ -29,7 +29,7 @@ Part 5: Structured Data Mining
       - 혼합 분포 군집 (mixture distribution clustering)
       - SOM (Self Organizing Map)
       - 최신 군집분석 기법들
-  - **Chapter 6 - 연관분석 (Association Rule)**
+  - **Chapter 6 - 연관분석 (Association Analysis)**
       - 연관규칙
       - 기존 연관성 분석의 이슈
       - 최근 연관성 분석 동향
@@ -55,7 +55,7 @@ Part 5: Structured Data Mining
       - 인공지능 (Artificial Intelligence)
       - 의사결정나무 (Decision Tree)
       - K-평균군집화 (K-means clustering)
-      - 연관분석 (Association Rule)
+      - 연관분석 (Association Analysis)
       - 회귀분석 (Regression)
       - 로짓분석 (Logit Analysis)
       - 최근접이웃 (Nearest Neighborhood)
@@ -122,7 +122,7 @@ Part 5: Structured Data Mining
             레코드의 결과값을 예측하는 것으로 목표 마케팅 및 고객 신용평가 모형에 활용됨
           - 회귀분석, 판별분석, 신경망, 의사결정나무
   - **설명 (Descriptive Modeling)**
-      - **연관 규칙 (Association Rule)**
+      - **연관 규칙 (Association Analysis)**
           - 데이터 안에 존재하는 항목간의 종속관계를 찾아내는 작업으로, 제품이나 서비스의 교차판매(Cross
             Selling), 매장진열(Display), 첨부우편(Attached Mailings), 사기적발(Fraud
             Detection) 등의 다양한 분야에 활용됨
@@ -509,7 +509,7 @@ ROC Curve
 
   - 기대 집단의 사람들 중 가장 많은 반응을 보일 **고객의 유치방안을 예측** 하고자 하는 경우에는 **예측력에 치중**
     한다
-  - 신용평가에서는 심사 결과 부적격 판정이 나온 경우 고객에게 부적격 **이류를 설명** 해야하므로 **해석력에 치중** 한다
+  - 신용평가에서는 심사 결과 부적격 판정이 나온 경우 고객에게 부적격 **이유를 설명** 해야하므로 **해석력에 치중** 한다
 
 #### 다. 의사결정나무의 활용
 
@@ -705,9 +705,9 @@ table(predict(iris.tree), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa         11          0         0
-    ##   versicolor      0         18         0
-    ##   virginica       0          0        15
+    ##   setosa         16          0         0
+    ##   versicolor      0          9         2
+    ##   virginica       0          0        13
 
   - **\[4\] test data 를 적용하여 정확성 확인**
 
@@ -720,9 +720,9 @@ table(test.pre, test.data$Species)
 
     ##             
     ## test.pre     setosa versicolor virginica
-    ##   setosa         30          0         0
-    ##   versicolor      9         30         4
-    ##   virginica       0          2        31
+    ##   setosa         32          0         0
+    ##   versicolor      2         39         2
+    ##   virginica       0          2        33
 
 # Chapter 3 - 앙상블 분석 (Ensemble Analysis)
 
@@ -738,7 +738,7 @@ table(test.pre, test.data$Species)
 #### 나. 학습방법의 불안정성
 
   - 학습자료의 작은 변화에 의해 예측모형이 크게 변하는 경우, 그 학습방법은 불안정하다
-  - 가장 안정적인 방법으로는 1-nearest neighbor(가장 가까운 자료만 변하지 않으면 예측 모형이 변하지 않음),
+  - 가장 안정적인 방법으로는 k-nearest neighbor(가장 가까운 자료만 변하지 않으면 예측 모형이 변하지 않음),
     선형회귀무형(최소제곱법으로 추정해 모형 결정)이 존재한다
   - 가장 불안정한 방법으로는 의사결정나무가 있다
 
@@ -806,9 +806,9 @@ table(predict(r.f), train.data$Species)
 
     ##             
     ##              setosa versicolor virginica
-    ##   setosa         16          0         0
-    ##   versicolor      0         16         0
-    ##   virginica       0          0        13
+    ##   setosa         14          0         0
+    ##   versicolor      0         12         1
+    ##   virginica       0          1        16
 
     - 그래프 그리기 1
 
@@ -833,9 +833,9 @@ table(pre.rf, test.data$Species)
 
     ##             
     ## pre.rf       setosa versicolor virginica
-    ##   setosa         34          0         0
-    ##   versicolor      0         33         5
-    ##   virginica       0          1        32
+    ##   setosa         36          0         0
+    ##   versicolor      0         34         1
+    ##   virginica       0          3        32
 
     - 그래프 그리기 3
 
@@ -1191,8 +1191,9 @@ n개의 개체를 g개의 군집으로 나눌 수 있는 모든 가능한 방법
     사용될 수 있다
   - E-단계: 잠재변수 Z의 기대치 계산
   - M-단계: 잠재변수 Z의 기대치를 이용하여 파라미터를 추정
-  - E-step(임의의 파라미터 값을 정함 -\> Z 기대치 계산) -\> M-step(Z의 기대치를 이용하여 파라미터 추정
-    -\> Likelihood가 최대화인가?) -\> 파라미터 추정값 도출
+      - \[1\] E-step(임의의 파라미터 값을 정함 -\> Z 기대치 계산)
+      - \[2\] M-step(Z의 기대치를 이용하여 파라미터 추정 -\> Likelihood가 최대화인가?)
+      - \[3\] 파라미터 추정값 도출
 
 #### 라. EM 알고리즘의 진행 과정
 
@@ -1305,9 +1306,9 @@ table(iris$Species, kc$cluster)
 
     ##             
     ##               1  2  3
-    ##   setosa      0 50  0
-    ##   versicolor  2  0 48
-    ##   virginica  36  0 14
+    ##   setosa     50  0  0
+    ##   versicolor  0  2 48
+    ##   virginica   0 36 14
 
   - 다) 군집화 그래프
 
@@ -1319,7 +1320,7 @@ plot(newiris[c("Sepal.Length", "Sepal.Width")], col = kc$cluster)
 
 ![](05_Structured_Data_Mining_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
-# Chapter 6 - 연관분석 (Association Rule)
+# Chapter 6 - 연관분석 (Association Analysis)
 
 ## 1\. 연관규칙
 
