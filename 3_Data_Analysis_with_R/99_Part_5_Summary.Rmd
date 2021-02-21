@@ -25,7 +25,7 @@ output: rmarkdown::github_document
   - 장바구니분석 (Market Basket Analysis)
   - 순차패턴 (Sequence Analysis)
   
--------------
+-----------
 
 #### [1] 분류 분석 (Classification Analysis)
 
