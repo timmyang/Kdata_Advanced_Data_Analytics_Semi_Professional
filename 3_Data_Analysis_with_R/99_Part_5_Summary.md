@@ -10,15 +10,55 @@ Part 5 Summary
   - 시험용 (test data, 20%)
   - 데이터의 양이 충분하지 않거나, 입력 변수에 대한 설명이 부족한 경우
       - 홀드아웃(hold-out) 방법
-          - 데이터를 무작위로 두집단(training, test)으로 분리하여 사용
+          - 데이터를 무작위로 두집단(training 50%, test 50%)으로 분리하여 사용
       - 교차확인(cross-validation) 방법
           - k번 반복 측정한 결과를 평균낸 값을 최종값으로 한다
+
+#### 성과 분석
+
+  - 오분류표(모형의 판별력)
+      - 정분류율(Accuracy)
+      - 오분류율(Error Rate)
+      - 특이도(Specificity)
+      - 민감도(Sensitivity) = Recall
+          - 실제값이 True인 관측치 중, 예측치가 맞는 정도 (= 모형의 완전성 평가)
+          - True Positive / (True Positive + False Negative)
+      - 정확도(Precision)
+      - F1 Score
+          - 2 x (Precision x Recall) / (Precision + Recall)
+      - 요약
+          - When condition is true (TP or FN)
+              - Sensitiviey = Recall
+              - TP / (TP + FN)
+          - When condition is false (TN or FP)
+              - Specificity
+              - TN / (TN + FP)
+          - When prediction is true (TP or FP)
+              - Precision
+              - TP / (TP + FP)
+  - ROC Curve (Receiver Operating Characteristic Curve)
+      - 세로축
+          - Sensitivity
+      - 가로축
+          - 1 - Specificity
+  - 이익도표 (Lift Chart)
+      - 랜덤모델과 비교하여 해당 모델의 성과가 얼마나 예측이 잘 이루어졌는지 등급별로 나타낸 도표 (향상도 곡선, Lift
+        Curve)
+      - 반응률(Response %)
+      - 반응 검출률(Capture Response %)
+          - 목표변수의 특정범주 빈도 / 전체 목표변수의 특정범주 빈도 x 100
+      - 향상도(Lift)
+          - 향상도 = 반응률 / 기본 향상도
+          - 좋은 모델이라면 Lift가 빠른 속도로 감소해야 한다
+
+-----
 
 #### 지도학습
 
   - **\[1\] 분류 분석 (Classification Analysis)**
       - 로지스틱 회귀분석 (Logistic Regression)
       - 의사결정나무 (Decision Tree)
+      - 나이브 베이지안 (Naive Bayes) 분류
   - **\[2\] 앙상블 분석 (Ensemble Analysis)**
       - 배깅 (Bagging)
       - 부스팅 (Boosting)
@@ -45,7 +85,7 @@ Part 5 Summary
       - 하향식 기법
       - 설명변수가 한 개인 경우, (B1 \> 0 이면 S자 모양, B1 \< 0 이면 역 S자 모양)
       - 오즈비 (odds ratio)
-          - 오즈: 성공확률 / 실패확률
+          - 오즈: 성공확률(p) / 실패확률(1 - p)
           - 오즈비: 오즈1 / 오즈2
   - **의사결정나무 (Decision Tree)**
       - 입력값에 대하여 출력값을 예측하는 분류 모형
@@ -53,7 +93,16 @@ Part 5 Summary
       - 뿌리 마디에서 아래로 내려갈수록 각 마디에서의 불순도는 점차 감소한다
       - 과정
           - 성장(growing)
+              - 분리 규칙(splitting rule)
+              - 분리 기준(splitting criterion)
+                  - 카이제곱 통계량
+                  - 지니 지수
+                      - 값이 1에 가까울수록 노드의 불순도가 높음 (안좋음)
+                      - 1 - (x2/x1)^2 - (y2/y1)^2
+                  - 엔트로피 지수
+              - 정지 규칙(stopping rule)
           - 가지치기(pruning)
+              - 분류 오류를 크게 할 위험이 높거나 부적절한 규칙을 가지고 있는 가지를 제거하는 작업
               - 마디 내 자료 수가 일정 수(가령 5) 이하 일때 분할 정지
               - 비용-복잡도 가지치기 (cost-complexity pruning) 이용
               - 가장 어려운 부분
@@ -79,6 +128,7 @@ Part 5 Summary
           - Classification and Regression Tree (CART)
           - C4.5와 C.5.0
           - CHi-squared Automatic Interaction Detection (CHAID)
+  - **나이브 베이지안 (Naive Bayes) 분류**
 
 #### \[2\] 앙상블 분석 (Ensemble Analysis)
 
@@ -87,6 +137,7 @@ Part 5 Summary
   - **배깅 (Bagging)**
     
       - Bootstraping 자료 및 예측모형 생성 후, voting을 통하여 결합 후 최종 모델 생성
+      - 가지치기(purning) X, 최대로 성장한 의사결정나무 활용
 
   - **부스팅 (Boosting)**
     
@@ -108,6 +159,13 @@ Part 5 Summary
   - 가중치를 반복적으로 조정하며 학습
   - 역전파(Back propagation) 알고리즘 등을 이용
   - 지도학습(Supervised Learning) 이다
+  - 변수의 수가 많거나 입출력 변수 간에 복잡한 비선형관계가 존재할 때 유용
+  - 잡음에 대해서도 민감하게 반응하지 않음
+  - 뉴런의 계싼
+      - 활성화 함수를 이용해 출력을 결정하며 입력신호의 가중치 합을 계산하여 임계(threshold)값과 비교한다
+      - 입력변수의 속성에 따라 활성화함수를 선택하지 않는다
+      - 가중치 합(x1 w1 + … + xn wn)이 임계값 보다 작으면 뉴런의 출력은 -1, 같거나 크면 +1 을
+        출력한다
   - 뉴런의 활성화 함수
       - 시그모이드 함수
           - 로지스틱 회귀분석과 유사
@@ -128,31 +186,52 @@ Part 5 Summary
   - 은닉노드(hidden node)
       - 적절히 큰 값으로 놓고 가중치를 감소 시키며 적용 (자동 설정 X)
 
+-----
+
 #### \[4\] 군집 분석 (Cluster Analysis)
 
   - 군집에 속한 객체들의 유사성과 서로 다른 군집에 속한 객체간의 상이성을 규명
-  - 군집의 개수나 구조에 대한 가정 없이, 데이터 사이의 거리를 기준으로 군잡화 유도
+  - 군집의 개수나 구조에 대한 가정 없이, 데이터 사이의 거리를 기준으로 자발적인 군집화 유도
+  - 실루엣 (Shilouette)
+      - 군집분석의 품질을 정량적으로 평가하는 대표적인 지표
+      - 군집 내 데이터의 응집도(cohesion)와 군집간 분리도(seperation)를 계산
+      - 응집도와 분리도가 높을수록 1에 가까워지는 지표
   - 거리 계산법 (연속형)
       - 유클리디안 (Euclidean) 거리
+          - 두 점을 잇는 가장 짧은 직선 거리
+          - 공동으로 점수를 매긴 항목의 거리를 통해 판단하는 측도
+          - sqrt{(x1 - y1)^2 + (x2 - y2)^2}
       - 표준화 (Statistical) 거리
+          - 각 변수를 해당 변수의 표준편차로 변환한 후 유클리드 거리를 계산한 거리
+          - 고로, 척도의 차이, 분산의 차이로 인한 왜곡을 피할 수 있다
       - 마할라노비스 (Mahalanobis) 거리
           - 변수의 표준화와 변수 간의 상관성을 동시에 고려
+          - 두 벡터 사이의 거리를 표본 공분산으로 나눠줌
+          - 하지만 그룹에 대한 사전 지식 없이는 표본 공분산을 계산할 수 없으므로 사용하기 곤란
       - 체비셰프 (Chebychev) 거리
       - 맨하탄 (Manhattan) 거리
+          - 각 방향 직각의 이동 거리 합
+          - |x1 - y1| + |x2 - y2|
       - 캔버리 (Canbberra) 거리
       - 민코우스키 (Minkowski) 거리
   - 거리 계산법 (범주형)
       - 자카드 거리
+          - Boolean 속성으로 이루어진 두 객체 간의 유사도 측정
       - 자카드 계수
       - 코사인 거리
+          - 두 단위 *벡터의 내적* 을 이용하여, 단위 벡터의 내각의 크기로 유사도를 측정
       - 코사인 유사도
   - **계층적 군집 (Hierarchical Clustering)**
       - n 개의 군집으로 시작해 개수를 점점 줄여나가는 방법
       - 최단 연결법 (single linkage, nearest neighbor)
+          - 두 군집 사이의 거리를 각 군집에서 하나의 관측값을 뽑았응ㄹ 때 나타날 수 있는 거리의 최소값 측정
+          - 사슬모양의 군집이 생길 수 있다
       - 최장 연결법 (complete linkage, farthest neighbor)
       - 평균 연결법 (average linkage)
+          - 최단 연결법에 비해 계산량이 많다
       - 와드 연결법 (ward linkage)
-          - 편차들의 제곱합 고려
+          - 오차들의 제곱합 고려
+          - 병합된 군집의 오차제곱합이 병합 이전 군집의 오차제곱 합에 비해 증가한 정도가 작아지는 방향으로 군집 형성
           - 정보의 손실 최소화
       - 군집화
           - 덴드로그램 사용
@@ -162,7 +241,7 @@ Part 5 Summary
       - n 개의 개체를 g 개의 군집으로 나눌 수 있는 모든 가능한 방법 점검 후, 최적화 군집 형성
       - k-means clustering
           - 주어진 데이터를 k 클러스터로 묶는 알고리즘 (사용자가 k 값 지정)
-          - 각 클러스터와 거리 차이의 분산을 최소화
+          - 각 클러스터와 거리 차이의 분산(오차 제곱합)을 최소화
           - 과정
               - 원하는 군집 개수(k)와 초기값(seed) 정하고 seed 중심으로 군집 형성
               - 각 데이터를 가장 가까운 seed가 있는 군집으로 분류
@@ -181,6 +260,8 @@ Part 5 Summary
               - 볼록한 형태 (convex)가 아닐 경우, 성능이 떨어짐
               - 초기 군집수(k) 결정 어려움
               - 이상치 자료에 민감하다
+                  - 이를 보완하기 위해 비계층적 군집 방법 Partitioning Around Medoids
+                    (PAM) 을 사용
   - **혼합 분포 군집 (Mixture Distribution Clustering)**
       - k개의 각 모형은 군집을 의미하며, 각 데이터는 추정된 k개의 모형 중 어느 모형으로부터 나왔을 확률이 높은지에
         따라 군집의 분류가 이루어짐
@@ -205,6 +286,7 @@ Part 5 Summary
               - SOM은 경쟁 학습으로 각각의 뉴런이 입력 벡터와 얼마나 가까운가를 계산하여 연결
                 강도(connection weight)를 반복적으로 재조정하여 학습한다
               - 이 과정을 거치면서 연결강도는 입력 패턴과 가장 유사한 경쟁층 뉴런이 승자가 된다
+              - 이 때 선택된 프로토타입 벡터를 Best-Matching Unit(BMU) 라고 한다
       - 특징
           - 역전파(Back propagation) 알고리즘 등을 이용하는 인공신경망과 달리 단 하나의 전방
             패스(feed-forward flow)를 사용함으로써 속도가 매우 빠르다. 따라서, 실시간 학습처리를
@@ -213,15 +295,19 @@ Part 5 Summary
 #### \[5\] 연관 분석 (Association Analysis)
 
   - 흔히 장바구니분석(Market Basket Analysis) 또는 서열분석(Sequence Analysis) 이라고 불린다
-  - 사건들 간의 규칙을 발견하기 위해 적용한다
+  - 사건들 간의 *규칙* 을 발견하기 위해 적용한다
+  - inspect() 함수를 활용한다
   - 연관규칙의 척도
       - 지지도(Support)
           - 전체 거래 중 항목 A와 항목 B를 동시에 포함하는 거래의 비율로 정의한다
+          - P(A /cap B) / total
       - 신뢰도(Confidence)
           - 항목 A를 포함한 거래 중에서 항목 A와 항목 B가 같이 포함될 확률이다
+          - P(A /cap B) / P(A)
       - 향상도(Lift)
           - A 가 구매되지 않았을 때의 품목 B 구매확률에 비해 A가 구매됬을 때의 품목 B의 증가 비이다
           - 연관규칙 A -\> B는 품목 A와 품목 B의 구매가 서로 관련이 없는 경우에 향상도가 1이 된다
+          - P(A /cap B) / \[P(A)P(B)\]
   - 절차
       - 최소 지지도 설정 -\> 품목 중 최소 지지도를 넘는 품목 분류 -\> 2가지 품목 집합 생성 -\> 반복적으로
         수행해 빈발품목 집합을 찾음
@@ -236,6 +322,7 @@ Part 5 Summary
       - 거래량이 적은 품목은 당연히 포함된 거래수가 적을 것이고, 규칙 발견 시 제외하기가 쉽다
   - 순차패턴(Sequence Analysis)
       - 연관성분석에 시간이라는 개념을 포함시켜 순차적으로 구매 가능성이 큰 상품군을 찾아내는 것이다
+      - 원인과 결과의 형태로 해석이 가능
   - 기존 연관성 분석의 이슈
       - 대용량 데이터에 대한 연관성분석이 불가능하다
   - 최근 연관성 분석 동향
