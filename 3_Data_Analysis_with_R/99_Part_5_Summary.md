@@ -3,6 +3,17 @@ Part 5 Summary
 
 # 데이터 마이닝 (Data Mining)
 
+#### 데이터 분할
+
+  - 구축용 (training data, 50%)
+  - 검정용 (validation data, 30%)
+  - 시험용 (test data, 20%)
+  - 데이터의 양이 충분하지 않거나, 입력 변수에 대한 설명이 부족한 경우
+      - 홀드아웃(hold-out) 방법
+          - 데이터를 무작위로 두집단(training, test)으로 분리하여 사용
+      - 교차확인(cross-validation) 방법
+          - k번 반복 측정한 결과를 평균낸 값을 최종값으로 한다
+
 #### 지도학습
 
   - **\[1\] 분류 분석 (Classification Analysis)**
@@ -31,12 +42,15 @@ Part 5 Summary
 
   - **로지스틱 회귀분석 (Logistic Regression)**
       - 반응변수가 범주형인 경우 사용
+      - 하향식 기법
       - 설명변수가 한 개인 경우, (B1 \> 0 이면 S자 모양, B1 \< 0 이면 역 S자 모양)
       - 오즈비 (odds ratio)
           - 오즈: 성공확률 / 실패확률
           - 오즈비: 오즈1 / 오즈2
   - **의사결정나무 (Decision Tree)**
       - 입력값에 대하여 출력값을 예측하는 분류 모형
+      - 하향식 의사결정 흐름이 핵심 공통 개념
+      - 뿌리 마디에서 아래로 내려갈수록 각 마디에서의 불순도는 점차 감소한다
       - 과정
           - 성장(growing)
           - 가지치기(pruning)
