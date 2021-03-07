@@ -36,28 +36,18 @@ http://global.kdata.or.kr/en/kdata/
 
 **Chatper 3. Data Analysis with R**
 
-- Data Analysis Overview
-  - Understanding Data Analysis Technique
-- R Programming Fundamentals
+- R Programming Fundamentals and Data Mart
   - R Basics
-  - Input and Output
-  - Data Structure and Data Frame
-  - Data Transformation
-- Data Mart
-  - Data Change and Summary
+  - Data Mart
   - Data Processing
-  - Basic Analysis and Data Management
+
 - Statistical Analysis
-  - Understanding Statistical Analysis
-  - Introductory Statistical Analysis
-  - Regression Analysis
+  - Regression Analysis 
   - Time Series Analysis
   - Multi-Dimensional Scaling
-  - Principal Component Analysis
+
 - Structured Data Mining
   - Data Mining Outline
   - Classification Analysis
-  - Ensemble Analysis
-  - Artificial Neural Network Analysis
   - Cluster Analysis
   - Association Analysis
