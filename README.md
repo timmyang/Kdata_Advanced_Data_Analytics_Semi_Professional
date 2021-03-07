@@ -20,7 +20,7 @@ http://global.kdata.or.kr/en/kdata/
   - The Future of Big Data
 - Data Science for Value Creation and Strategic Insight
   - Big Data Analytics and Strategic Insight
-  - Competency Needed to Draw Strategic Insights
+  - Competency to Draw Strategic Insights
   - The Future of Big Data and Data Science
 
 **Chapter 2. Data Analysis Planning**
@@ -39,8 +39,25 @@ http://global.kdata.or.kr/en/kdata/
 - Data Analysis Overview
   - Understanding Data Analysis Technique
 - R Programming Fundamentals
-  - R Basics-1
-  - R Basics-2
+  - R Basics
+  - Input and Output
+  - Data Structure and Data Frame
+  - Data Transformation
 - Data Mart
+  - Data Change and Summary
+  - Data Processing
+  - Basic Analysis and Data Management
 - Statistical Analysis
+  - Understanding Statistical Analysis
+  - Introductory Statistical Analysis
+  - Regression Analysis
+  - Time Series Analysis
+  - Multi-Dimensional Scaling
+  - Principal Component Analysis
 - Structured Data Mining
+  - Data Mining Outline
+  - Classification Analysis
+  - Ensemble Analysis
+  - Artificial Neural Network Analysis
+  - Cluster Analysis
+  - Association Analysis
