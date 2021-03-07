@@ -23,6 +23,9 @@ http://global.kdata.or.kr/en/kdata/
   - Competency to Draw Strategic Insights
   - The Future of Big Data and Data Science
 
+
+----------
+
 **Chapter 2. Data Analysis Planning**
 
 - Understanding Data Analysis Planning
@@ -33,6 +36,8 @@ http://global.kdata.or.kr/en/kdata/
 - Data Analysis Master Plan
   - A Framework for Establishing a Master Plan
   - Establishing an Analysis Governance System
+
+---------
 
 **Chatper 3. Data Analysis with R**
 
