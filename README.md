@@ -31,7 +31,7 @@ http://global.kdata.or.kr/en/kdata/
   - Discovering a Subject for Analysis
   - Management Plans for Analysis Projects
 - Data Analysis Master Plan
-  - A Framework for Establishing a Master Plan)
+  - A Framework for Establishing a Master Plan
   - Establishing an Analysis Governance System
 
 **Chatper 3. Data Analysis with R**
