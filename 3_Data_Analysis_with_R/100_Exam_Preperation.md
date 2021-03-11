@@ -132,10 +132,45 @@ Exam Preperation
   - 적절한 유즈케이스
   - 장애요소들에 대한 사전계획 수립
 
+#### 분석 방법론 구성요소
+
+  - 상세한 절차 (Procedure)
+  - 방법 (Methods)
+  - 도구와 기법 (Tools & Techniques)
+  - 템플릿과 산출물 (Templates & Outputs)
+
+#### 분석 방법론 장애요소
+
+  - 고정관념 (Stereotype)
+  - 편향된 생각 (Bias)
+  - 프레이밍효과 (Framing Effect)
+      - 문제의 표현 방식에 따라 동일한 사건이나 상황임에도 불구하고 개인의 판단이나 선택이 달라질 수 있는 현상
+
+#### 분석 방법론
+
+  - KDD (Knowledge Discovery in Database)
+      - 데이터 선택 (Selection)
+      - 데이터 전처리 (Preprocessing)
+      - 데이터 변환 (Transformation)
+      - 데이터 마이닝 (Data Mining)
+      - 데이터 마이닝 결과 평과 (Interpretation/Evaluation)
+  - CRISP-DM (Cross Industry Standard Process for Data Mining)
+      - 총 6단계로 구성되어 있으며, 각 단계는 단방향(폭포수)으로 구성되어 있지 **않고** 단계 간 피드백을 통하여
+        단계별 완성도를 높이게 되어 있다
+      - 업무이해 (Business Understanding)
+      - 데이터 이해 (Data Understanding)
+      - 데이터 준비 (Data Preparation)
+      - 모델링 (Modeling)
+      - 평가 (Evaluation)
+      - 전개 (Deployment)
+
 #### 분석 과제 발굴 방법론
 
   - 하향식 접근법
     
+      - Problem Discovery -\> Problem Definition -\> Solution Search -\>
+        Feasibility Study
+      - Why 관점
       - \[1\] 문제 탐색 (Problem Discovery)
           - 문제를 해결 함으로써 발생하는 가치에 중점
           - 무엇을(What) 어떤 목적으로(Why) 수행해야 하는지에 대한 관점
@@ -155,6 +190,13 @@ Exam Preperation
               - 데이터 존재 여부, 분석 시스템 환경, 그리고 분석 역량이 필요
 
   - 상향식 접근법
+    
+      - What 관점
+
+  - 디자인적 사고
+    
+      - 상향식 접근 방식의 발산단계와 도출된 옵션을 분석하고 검증하는 하향식 접근 방식의 수렴단계를 반복하여 과제를
+        발굴하는 방법
 
   - **\[1\] 문제 탐색 (Problem Discovery)**
     **<span style="color: red;">중요\!\!</span>**
@@ -191,6 +233,14 @@ Exam Preperation
           - 풀어야 할 문제에 대한 상세한 설명 및 해당 문제를 해결했을 때 발생하는 효과를 명시함으로써 향후 데이터
             분석 문제로의 전환 및 적합성 평가에 활용
 
+#### 분석과제 주요 관리 영역 5가지
+
+  - Data Size
+  - Data Complexity
+  - Speed
+  - Analytic Complexity
+  - Accuracy & Precision
+
 #### 프로젝트의 관리 방안
 
   - 주요 관리 항목
@@ -212,6 +262,35 @@ Exam Preperation
 
   - 분석 준비도 (Readiness)
       - 분석 업무, 분석 인력/조직, 분석 기법, 분석 데이터, 분석 문화, 분석 인프라
+      - 분석 업무 파악
+          - 발생한 사실 분석 업무
+          - 예측분석 업무
+          - 시뮬레이션 분석 업무
+          - 최적화 분석 업무
+          - 분석 업무 정기적 개선
+      - 분석 데이터
+          - 분석업무를 위한 데이터 충분성
+          - 분석업무를 위한 데이터 신뢰성
+          - 분석업무를 위한 데이터 적시성
+          - 비구조적 데이터 관리
+          - 외부 데이터 활용 체계
+          - 기준데이터 관리(MDM)
+
+#### 데이터 분석 성숙도
+
+  - 도입
+      - 분석을 시작하여 환경과 시스템을 구축
+  - **활용**
+      - 분석 결과를 실제 업무에 적용
+  - **확산**
+      - 도입되어 지속적인 확산 필요
+  - 최적화
+      - 분석을 진화시켜서 혁신 및 성과 향상에 기여
+
+#### 데이터 거버넌스 체계 수립
+
+  - 데이터 저장소 (Repository) 관리
+      - 데이터 구조 변경에 따른 **사전 영향 평가** 도 수행되어야 효율적인 활용이 가능하다
 
 #### 데이터 조직 및 인력방안 수립
 
@@ -308,15 +387,33 @@ Exam Preperation
 #### 시계열 분석
 
   - 정상성(stationary)
+      - 오차의 분포가 정규분포를 따르는 것
       - 평균이 일정
           - 모든 시점에 대해 일정
           - 일정하지 않을 경우 차분(difference)를 통해 정상화
       - 분산이 일정
           - 시점에 의존 X
           - 일정하지 않을 경우 변환(transformation)을 통해 정상화
+          - 정상성을 만족한다는 것은 분산이 시점에 의존하지 않는다는 것
       - 공분산
           - 시차에만 의존
           - 특정 시점 t, s 에는 의존 X
+
+#### 시계열 모형
+
+  - 자기회기 모형 (Autoregressive(AR) model)
+  - 이동평균 모형(MA 모형, Moving Average model)
+  - 자귀회귀누적이동평균 모형 (ARIMA(p, d, q) 모형, Auto-Regressive Integrated Moving
+    Average model)
+  - 분해 시계열
+      - 경향(추세) 요인: 자료가 오르거나 내리는 추세, 선형, 이차식 형태, 지수적 형태 등
+      - 계절요인: 요일, 월, 사계절 각 분기에 의한 변화 등 고정된 주기에 따라 자료가 변하는 경우
+      - 순환요인: 경제적이나 자연적인 이유 없이 알려지지 않은 주기를 가지고 변화하는 자료
+      - 불규칙요인: 위의 세 가지 요인으로 설명할 수 없는 오차에 해당하는 요인
+
+#### 다차원 척도법
+
+  - 여러 대상 간의 거리가 주어져 있을 때, 대상들을 동일한 상대적 거리를 가진 실수 공간의 점들로 배치시키는 방법
 
 #### 데이터 마이닝
 
@@ -330,16 +427,20 @@ Exam Preperation
           - 랜덤 포레스트(random forest)
       - 인공신경망 분석 (Artificial Neural Network Analysis)
   - 군집분석 (Cluster Analysis)
-      - 거리
+      - 거리(연속형)
           - 유클리디안 거리(Euclidean distance)
               - sqrt{ (A1 - B1)^2 + (A2 - B2)^2 }
           - 표준화 거리(Statistical distance)
           - 마할라노비스(Mahalanobis) 거리
+      - 거리(범주형)
+          - 자카드 거리/계수
+          - 코사인 거리/계수
       - 계층적
           - 최단 연결법 (single linkage, nearest neighbor)
           - 최장 연결법 (complete linkage, farthest neighbor)
           - 평균 연결법 (average linkage)
           - 와드 연결법 (ward linkage)
+              - 군집내의 오차제곱합(SST) 에 기초하여 군집을 수행한다
       - 비계층적
           - k-평균 군집분석(k-means clustering)
       - 혼합 분포 군집 (mixture distribution clustering)
@@ -351,11 +452,32 @@ Exam Preperation
           - <img src="https://render.githubusercontent.com/render/math?math=$P(A \cap B) / P(A) = support /P(A)$">
       - 향상도(lift)
           - <img src="https://render.githubusercontent.com/render/math?math=$P(B|A)/P(B) = P(A \cap B) / (P(A)P(B)) = confidence/P(B)$">
+          - 연관규칙의 측정 지표 중 도출된 규칙의 우수성을 평가하는 기준
+          - 두 품목의 상관관계를 기준으로 도출된 규칙의 예측력을 평가하는 지표
       - 순차 분석 (Sequence Analysis)
+
+#### 분류분석 (Classification)
+
+  - 의사결정 나무
+      - 정지규칙
+          - 더 이상 분기가 되지 않고 현재의 마디가 끝마디가 되도록 하는 규칙
+      - <장점>
+          - 결과를 누구에게나 설명하기 용이하다
+          - 모형을 만드는 방법이 계산적으로 복잡하지 않다
+          - 대용량 데이터에서도 빠르게 만들 수 있다
+          - 비정상 잡음 데이터에 대해서도 민감함이 없이 분류할 수 있다
+          - 한 변수와 상관성이 높은 다른 불필요한 변수가 있어도 크게 영향을 받지 않는다
+          - 설명변수나 목표변수에 수치형변수와 범주형변수를 모두 사용 가능하다
+          - 모형 분류 정확도가 높다
+      - <단점>
+          - 새로운 자료에 대한 과대적합이 발생할 가능성이 높다
+          - 분류 경계선 부근의 자료값에 대해서 오차가 크다
+          - 설명변수 간의 중요도를 판단하기 쉽지 않다
 
 #### 군집분석 (Cluster Analysis)
 
   - 계층적
+      - 군집 개수를 미리 지정하지 않아도 되며 탐색적 분석에 사용됨
       - 동일한 계산법 적용 시, 항상 동일한 결과가 나옴
   - 비계층적(k-means)
       - 한 개체가 처음 속한 군집에서 다른 군집으로 이동 및 재배 가능
@@ -371,6 +493,15 @@ Exam Preperation
           - 잡음이나 이상값의 영향을 많이 받음
           - 볼록한 형태가 아닌 (non-convex) 군집이 (예를 들어 U형태의 군집) 존재할 경우에는 성능이 떨어짐
           - 초기 군집수 결정에 어려움 있음
+
+#### 데이터 마이닝을 위한 데이터 분할
+
+  - 홀드아웃(hold-out) 방법
+      - 주어진 데이터를 랜덤하게 두 개의 데이터로 구분하여 사용하는 방법으로 주로 학습용(training data)과
+        시험용(test data)로 분리하여 사용한다
+  - 교차확인(cross-validation) 방법
+      - 주어진 데이터를 k개의 하부집단으로 구분하여, k - 1개의 집단을 학습용으로 나머지는 하부집단으로 검증용으로
+        설정하여 학습한다
 
 #### 데이터 마이닝 성과 분석
 
